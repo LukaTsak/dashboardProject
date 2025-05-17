@@ -1,0 +1,193 @@
+main {
+  width: 100%;
+  height: 100vh;
+  background-color: #171821;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .loginPage {
+    width: 588px;
+    height: 610px;
+    border-radius: 13px;
+    padding: 24px 30px;
+    background-color: #21222d;
+    .loginContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: start;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+
+      h3 {
+        height: 37px;
+        color: white;
+        font-size: 32px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h6 {
+        height: 32px;
+        font-size: 20px;
+        font-weight: 500;
+        color: rgb(135, 136, 140);
+        width: 100%;
+        text-align: center;
+        a {
+          text-decoration: none;
+          color: rgb(169, 223, 216);
+        }
+      }
+
+      .textInputDiv{
+        display: flex;
+        gap: 4px;
+        flex-direction: column;
+        color: white;
+        width: 100%;
+        height: 79px;
+
+        label {
+          font-weight: 500;
+        }
+        input {
+          color: rgb(210, 210, 210);
+          font-size: 16px;
+          height: 52px;
+          background-color: #1d1e26;
+          border: none;
+          border-radius: 10px;
+          padding: 12px 14px;
+          transition: all 0.3s;
+        }
+        .emailInp:hover {
+          background-color: #171821;
+          transition: all 0.3s;
+        }      
+        input:focus {
+          outline: none;
+        }        
+      }
+
+      .passwordInputDiv {
+
+        .passInput {
+          display: flex;
+          input {
+            width: 496px;
+            height: 52px;
+            border-top-right-radius: 0px !important;
+            border-bottom-right-radius: 0px !important;
+            transition: all 0.3s;
+          }
+          button {
+            width: 44px;
+            height: 52px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border: none;
+            outline: none;
+            background-color: #1d1e26;
+            color: white;
+            transition: all 0.3s;
+            cursor: pointer;
+          }
+        }
+        .passInput:hover input {
+          background-color: #171821 !important;
+          transition: all 0.3s;
+        }
+
+        .passInput:hover button {
+          background-color: #171821 !important;
+          transition: all 0.3s;
+        }
+
+        label {
+          font-weight: 500;
+        }
+      }
+
+      .keepSignedInDiv {
+        label {
+          color: white;
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+
+          input {
+            margin-right: 5px;
+          }
+        }
+      }
+
+      .loginBtn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(169, 223, 216);
+        width: 100%;
+        height: 55px;
+        border-radius: 6px;
+        padding: 10px 16px;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .loginBtn:hover{
+        background-color: rgb(115, 202, 190);
+        transition: all 0.3s;
+      }
+
+      .loginUnderline{
+        color: rgb(135, 136, 140);
+        width: 100%;
+        height: 1px;
+        border: 1px solid rgb(44, 45, 51);
+      }
+
+      .signInOptions{
+        width: 100%;
+        text-align: center;
+        color: white;
+      }
+
+      .googleAndFb{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        // flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        button{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          width: 267px;
+          height: 50px;
+          padding: 10px 16px;
+          border-radius: 6px;
+          border: 1px solid rgba(169, 223, 216, 0.5);
+          background-color: rgba(0, 0, 0, 0);
+          color: white;
+          font-size: 16px;
+          color: rgb(169, 223, 216);
+          cursor: pointer;
+        }
+        button:hover{
+          background-color: rgba(169, 223, 216, 0.04);
+          border: 1px solid rgba(169, 223, 216, 1);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

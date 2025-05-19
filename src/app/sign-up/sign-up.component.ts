@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { log } from 'node:console';
+import { ApiServiceService } from '../services/api-service.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,6 +12,26 @@ import { log } from 'node:console';
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiServiceService
+  ) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      const token = params['token'];
+      console.log('Token:', token);
+      let tokenObj = {
+        token: token,
+      };
+
+      this.apiService.getEmailByToken(tokenObj).subscribe((response: any) => {
+        console.log('Response:', response.email);
+        this.loginEmail = response.email;
+      });
+    });
+  }
+
   passwordType1 = 'password';
   passwordType2 = 'password';
   passInvisible1: boolean = true;
@@ -20,10 +41,12 @@ export class SignUpComponent {
   passwordCondition: boolean = false;
 
   // ------------------------
-  loginName? : string = ''
-  loginEmail? : string = ''
-  loginPassword? : string = ''
-  loginConfirmPassword? : string = ''
+
+  loginName?: string = '';
+  loginEmail?: string = '';
+  loginPassword?: string = '';
+  loginConfirmPassword?: string = '';
+
   // ------------------------
 
   makeVisible(x: number) {
@@ -53,10 +76,15 @@ export class SignUpComponent {
     }
   }
 
-  check(){
-    console.log(this.loginName)
-    console.log(this.loginEmail)
-    console.log(this.loginPassword)
-    console.log(this.loginConfirmPassword)
+  check() {
+    if (this.loginPassword !== this.loginConfirmPassword) {
+      alert('Password and Confirm Password do not match');
+      return;
+    } else {
+      console.log(this.loginEmail);
+      console.log(this.loginName);
+      console.log(this.loginPassword);
+      console.log(this.loginConfirmPassword);
+    }
   }
 }

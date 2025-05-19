@@ -6,6 +6,18 @@
       <h6>Have an account? <a routerLink="/login">Log In</a></h6>
 
       <div class="textInputDiv">
+        <label for="loginEmail">Email</label>
+        <input
+          [(ngModel)]="loginEmail"
+          class="emailInp"
+          type="email"
+          disabled="true"
+          name="loginEmail"
+          id="loginEmail"
+        />
+      </div>
+
+      <div class="textInputDiv">
         <label for="loginName">Name</label>
         <input
           [(ngModel)]="loginName"
@@ -13,17 +25,6 @@
           type="email"
           name="loginEmail"
           id="loginName"
-        />
-      </div>
-
-      <div class="textInputDiv">
-        <label for="loginEmail">Email</label>
-        <input
-          [(ngModel)]="loginEmail"
-          class="emailInp"
-          type="email"
-          name="loginEmail"
-          id="loginEmail"
         />
       </div>
 

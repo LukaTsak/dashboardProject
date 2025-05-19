@@ -7,9 +7,9 @@ main {
   justify-content: center;
   .loginPage {
     width: 588px;
-    height: 787px;
+    height: 610px;
     border-radius: 13px;
-    padding: 24px 30px;
+    padding: 48px 30px;
     background-color: #21222d;
     .loginContainer {
       display: flex;
@@ -175,3 +175,16 @@ main {
     }
   }
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #1D1E26 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+  transition: background-color 9999s ease-out, color 9999s ease-out !important;
+}
+
+
+

@@ -20,12 +20,11 @@
         <label for="userTypeSelectLabel">User type</label>
         <select
           [(ngModel)]="userType"
-          (ngModelChange)="onUserTypeChange($event)"
           class="userTypeSelect"
           name="loginEmail"
           id="userTypeSelect">
-        <option value="">User</option>
-        <option value="">Ambassador</option>
+        <option selected value="User">User</option>
+        <option value="Ambassador">Ambassador</option>
       </select>
       </div>      
 

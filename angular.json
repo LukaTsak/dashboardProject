@@ -28,12 +28,14 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "node_modules/font-awesome/fonts",
+                "output": "assets/fonts"
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "src/assets/font-awesome/css/font-awesome.min.css"
+              "node_modules/font-awesome/css/font-awesome.css",
+              "src/styles.scss"
+              
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -97,8 +99,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/font-awesome/css/font-awesome.min.css"
+              "node_modules/font-awesome/css/font-awesome.css",
+              "src/styles.scss"
             ],
             "scripts": []
           }

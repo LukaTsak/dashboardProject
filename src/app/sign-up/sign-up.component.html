@@ -28,11 +28,10 @@
         />
       </div>
 
-      <div class="textInputDiv passwordInputDiv">
-        <label for="loginPassword">Password <i class="fa-solid fa-circle-info"></i> </label>
-
+      <div class="textInputDiv passwordInputDiv reverseCollumn">
         <div class="passInput">
           <input
+            (input)="passwordCheck()"
             [(ngModel)]="loginPassword"
             type="{{ passwordType1 }}"
             name="loginPassword"
@@ -76,6 +75,26 @@
             </svg>
           </button>
         </div>
+
+        <label class="infoIconContainer" for="loginPassword"
+          >Password
+          <svg
+            class="infoIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              [style.fill]="passwordCheckColor"
+              d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
+            />
+          </svg>
+          <div class="passwordRequirements">
+            <p [style.color]="atLeast8">At least 8 characters</p>
+            <p [style.color]="oneUpperCase">At least one uppercase letter (A–Z)</p>
+            <p [style.color]="oneDigit">At least one digit (0–9)</p>
+            <p [style.color]="oneSymbol">At least one symbol (!#$%^&*_-?)</p>
+          </div>
+        </label>
       </div>
 
       <div class="textInputDiv passwordInputDiv">

@@ -12,6 +12,7 @@ main {
     padding: 24px 30px;
     background-color: #21222d;
     .loginContainer {
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -71,6 +72,27 @@ main {
         }
       }
 
+      .passwordRequirements {
+        position: absolute;
+        display: none;
+        align-items: start;
+        justify-content: center;
+        gap: 5px;
+        flex-direction: column;
+        background-color: #171821;
+        top: 25%;
+        left: 17%;
+        border-radius: 15px;
+        width: fit-content;
+        height: fit-content;
+        padding: 20px;
+        transition: all 1s;
+
+        p {
+          color: white;
+        }
+      }
+
       .passwordInputDiv {
         .passInput {
           display: flex;
@@ -107,6 +129,16 @@ main {
         label {
           font-weight: 500;
         }
+
+        .passInput:focus-within ~ label .infoIcon {
+          display: flex;
+          cursor: pointer;
+          transition: all 1s;
+        }
+      }
+      .reverseCollumn {
+        display: flex;
+        flex-flow: column-reverse;
       }
 
       .keepSignedInDiv {
@@ -138,7 +170,7 @@ main {
         font-weight: 500;
         transition: all 0.3s;
       }
-      
+
       .loginBtn:hover {
         background-color: rgb(115, 202, 190);
         transition: all 0.3s;
@@ -201,6 +233,34 @@ main {
           cursor: pointer;
         }
       }
+
+      .infoIconContainer {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        .infoIcon {
+          display: none;
+          width: 18px;
+          height: 18px;
+          cursor: pointer;
+        }
+        .infoIcon:hover + .passwordRequirements {
+          display: flex;
+          cursor: pointer;
+          transition: all 1s;
+        }
+      }
     }
   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #1D1E26 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+  transition: background-color 9999s ease-out, color 9999s ease-out !important;
 }

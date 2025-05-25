@@ -93,12 +93,9 @@ export class SignUpComponent {
     if (this.loginPassword !== this.loginConfirmPassword) {
       alert('Password and Confirm Password do not match');
       return;
-    } 
-    else if(!this.paswordElligable) {
+    } else if (!this.paswordElligable) {
       alert('Password does not meet the requirements');
-    }
-    
-    else {
+    } else {
       console.log(this.loginEmail);
       console.log(this.loginName);
       console.log(this.loginPassword);
@@ -109,50 +106,23 @@ export class SignUpComponent {
 
   passwordCheck() {
     const password = this.loginPassword ?? '';
-    const length = password.length;
 
-    if (length >= 8) {
-      this.atLeast8 = 'green';
-      this.isLongEnough = true;
-    } else {
-      this.atLeast8 = 'white';
-      this.isLongEnough = false;
-    }
+    this.isLongEnough = password.length >= 8;
+    this.hasUppercase = /[A-Z]/.test(password);
+    this.hasNumber = /\d/.test(password);
+    this.hasSymbol = /[!@#$%^&*(),.?":{}|<>_]/.test(password);
 
-    if (/[A-Z]/.test(password)) {
-      this.oneUpperCase = 'green';
-      this.hasUppercase = true;
-    } else {
-      this.oneUpperCase = 'white';
-      this.hasUppercase = false;
-    }
+    this.atLeast8 = this.isLongEnough ? 'green' : 'white';
+    this.oneUpperCase = this.hasUppercase ? 'green' : 'white';
+    this.oneDigit = this.hasNumber ? 'green' : 'white';
+    this.oneSymbol = this.hasSymbol ? 'green' : 'white';
 
-    if (/\d/.test(password)) {
-      this.oneDigit = 'green';
-      this.hasNumber = true;
-    } else {
-      this.oneDigit = 'white';
-      this.hasNumber = false;
-    }
-
-    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      this.oneSymbol = 'green';
-      this.hasSymbol = true;
-    } else {
-      this.oneSymbol = 'white';
-      this.hasSymbol = false;
-    }
-
-    if (
+    this.paswordElligable =
       this.isLongEnough &&
       this.hasUppercase &&
       this.hasNumber &&
-      this.hasSymbol
-    ) {
-      this.passwordCheckColor = 'green';
-      this.paswordElligable = true;
-    } else {
-      this.passwordCheckColor = 'red';
-    }
+      this.hasSymbol;
+
+    this.passwordCheckColor = this.paswordElligable ? 'green' : 'red';
   }
 }

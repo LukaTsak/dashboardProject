@@ -243,11 +243,10 @@ main {
           display: none;
           width: 18px;
           height: 18px;
-          cursor: pointer;
+          cursor: none;
         }
         .infoIcon:hover + .passwordRequirements {
           display: flex;
-          cursor: pointer;
           transition: all 1s;
         }
       }

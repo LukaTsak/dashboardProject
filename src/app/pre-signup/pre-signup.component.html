@@ -31,7 +31,10 @@
         </select>
       </div>
 
-      <button (click)="check()" class="loginBtn">Send Email</button>
+      <button id="sendBtn" (click)="check()" class="loginBtn">
+        <span class="btn-text">Send Email</span>
+        <span class="spinner hidden"></span>
+      </button>
 
       <p class="termsOfService">
         By creating account, you agree to our <a href="">Terms of Service</a>

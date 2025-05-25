@@ -6,11 +6,12 @@ main {
   align-items: center;
   justify-content: center;
   .loginPage {
-    width: 588px;
-    height: 610px;
+    width: fit-content;
+    height: fit-content;
     border-radius: 13px;
-    padding: 24px 30px;
+    padding: 34px 30px;
     background-color: #21222d;
+    min-width: 100px;
     .loginContainer {
       display: flex;
       flex-direction: column;
@@ -137,6 +138,8 @@ main {
         }
       }
 
+      // ------------------------
+
       .keepSignedInDiv {
         label {
           color: white;
@@ -144,12 +147,54 @@ main {
           font-weight: 500;
           font-size: 16px;
           line-height: 24px;
+          position: relative;
+          padding-left: 25px;
 
           input {
             margin-right: 5px;
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+          }
+          .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 18px;
+            width: 18px;
+            background-color: #eee;
+            border-radius: 4px;
+            // border: 1px solid white;
+            background-color: #87888c;
+          }
+          .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
           }
         }
       }
+      .keepSignedInDiv input:checked ~ .checkmark {
+        background-color: rgb(169, 223, 216);
+      }
+      .keepSignedInDiv input:checked ~ .checkmark:after {
+        display: block;
+      }
+      .keepSignedInDiv .checkmark:after {
+        left: 5px;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      // ------------------------
 
       .loginBtn {
         display: flex;
@@ -170,6 +215,8 @@ main {
         background-color: rgb(169, 223, 216);
         transition: all 0.3s;
       }
+
+      // ------------------------
 
       .loginUnderline {
         color: rgb(135, 136, 140);

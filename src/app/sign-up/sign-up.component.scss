@@ -7,7 +7,7 @@ main {
   justify-content: center;
   .loginPage {
     width: 588px;
-    height: 787px;
+    height: fit-content;
     border-radius: 13px;
     padding: 24px 30px;
     background-color: #21222d;
@@ -20,6 +20,19 @@ main {
       justify-content: center;
       width: 100%;
       height: 100%;
+
+      .user-message {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: rgb(115, 202, 190);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        animation: fadeinout 3s forwards;
+      }
 
       h3 {
         height: 37px;
@@ -258,8 +271,18 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #1D1E26 inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #1d1e26 inset !important;
   -webkit-text-fill-color: #ffffff !important;
   caret-color: #ffffff !important;
   transition: background-color 9999s ease-out, color 9999s ease-out !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

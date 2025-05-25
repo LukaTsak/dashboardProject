@@ -17,6 +17,15 @@ export class PreSignupComponent {
   userType?: string = '';
   loginEmail?: string = '';
 
+  userMessage: string | null = null;
+
+  showMessage(msg: string) {
+    this.userMessage = msg;
+    setTimeout(() => {
+      this.userMessage = null; // hide after 3 seconds
+    }, 3000);
+  }
+
   check() {
     const obj = {
       email: this.loginEmail,
@@ -29,9 +38,10 @@ export class PreSignupComponent {
     this.apiService.sendEmail(obj).subscribe(
       (response: any) => {
         console.log('Response:', response);
-        alert(response.message);
+        this.showMessage(response.message);
       },
       (error) => {
+        this.showMessage(error.error.message);
         console.error('Error:', error);
       }
     );

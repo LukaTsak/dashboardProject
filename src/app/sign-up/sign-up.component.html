@@ -3,6 +3,8 @@
     <div class="loginContainer">
       <h3>Create New Account</h3>
 
+      <div *ngIf="userMessage" class="user-message">{{ userMessage }}</div>
+
       <h6>Have an account? <a routerLink="/login">Log In</a></h6>
 
       <div class="textInputDiv">
@@ -18,11 +20,22 @@
       </div>
 
       <div class="textInputDiv">
-        <label for="loginName">Name</label>
+        <label for="loginName">Name & Surname</label>
         <input
-          [(ngModel)]="loginName"
+          [(ngModel)]="loginNameSurname"
           class="emailInp"
           type="email"
+          name="loginEmail"
+          id="loginName"
+        />
+      </div>
+
+      <div class="textInputDiv">
+        <label for="loginNumber">Number</label>
+        <input
+          [(ngModel)]="loginNumber"
+          class="emailInp"
+          type="number"
           name="loginEmail"
           id="loginName"
         />

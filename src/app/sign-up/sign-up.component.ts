@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 
 @Component({
@@ -13,7 +13,8 @@ import { ApiServiceService } from '../services/api-service.service';
 export class SignUpComponent {
   constructor(
     private route: ActivatedRoute,
-    private apiService: ApiServiceService
+    private apiService: ApiServiceService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -23,6 +24,7 @@ export class SignUpComponent {
       let tokenObj = {
         token: token,
       };
+      this.token = token;
 
       this.apiService.getEmailByToken(tokenObj).subscribe((response: any) => {
         console.log('Response:', response.email);
@@ -55,12 +57,23 @@ export class SignUpComponent {
 
   // ------------------------
 
-  loginName?: string = '';
+  loginNameSurname?: string = '';
+  loginNumber?: string = '';
   loginEmail?: string = '';
   loginPassword?: string = '';
   loginConfirmPassword?: string = '';
+  token?: string = '';
 
   // ------------------------
+
+  userMessage: string | null = null;
+
+  showMessage(msg: string) {
+    this.userMessage = msg;
+    setTimeout(() => {
+      this.userMessage = null; // hide after 3 seconds
+    }, 3000);
+  }
 
   makeVisible(x: number) {
     if (x == 1) {
@@ -91,16 +104,49 @@ export class SignUpComponent {
 
   check() {
     if (this.loginPassword !== this.loginConfirmPassword) {
-      alert('Password and Confirm Password do not match');
+      this.showMessage('Password and Confirm Password do not match');
       return;
     } else if (!this.paswordElligable) {
-      alert('Password does not meet the requirements');
+      this.showMessage('Password does not meet the requirements');
     } else {
-      console.log(this.loginEmail);
-      console.log(this.loginName);
-      console.log(this.loginPassword);
-      console.log(this.loginConfirmPassword);
-      alert('Account Created');
+      // ------------------------
+
+      const parts = (this.loginNameSurname ?? '').trim().split(' ');
+      const name = parts[0];
+      const surname = parts.slice(1).join(' ');
+
+      // ------------------------
+      const userObj = {
+        name: name,
+        surname: surname,
+        phone: this.loginNumber?.toString() || '',
+        password: this.loginPassword,
+        password_confirmation: this.loginConfirmPassword,
+        token: this.token,
+      };
+
+      console.log('email: ' + this.loginEmail);
+      console.log('name: ' + name);
+      console.log('surname: ' + surname);
+      console.log('number: ' + this.loginNumber);
+      console.log('password: ' + this.loginPassword);
+      console.log('confirmpass: ' + this.loginConfirmPassword);
+      console.log('token: ' + this.token);
+      console.log('userObj:', userObj);
+
+      this.apiService.createNewAccount(userObj).subscribe(
+        (response: any) => {
+          console.log('Response:', response);
+          this.showMessage(response.message);
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
+        },
+        (error) => {
+          console.error('Error:', error);
+          this.showMessage('please check your information and try again');
+        }
+      );
     }
   }
 
@@ -110,7 +156,7 @@ export class SignUpComponent {
     this.isLongEnough = password.length >= 8;
     this.hasUppercase = /[A-Z]/.test(password);
     this.hasNumber = /\d/.test(password);
-    this.hasSymbol = /[!@#$%^&*(),.?":{}|<>_]/.test(password);
+    this.hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
     this.atLeast8 = this.isLongEnough ? 'green' : 'white';
     this.oneUpperCase = this.hasUppercase ? 'green' : 'white';

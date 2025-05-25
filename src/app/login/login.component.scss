@@ -20,6 +20,34 @@ main {
       width: 100%;
       height: 100%;
 
+      .user-message {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: rgb(115, 202, 190);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        animation: fadeinout 3s forwards;
+      }
+
+      @keyframes fadeinout {
+        0% {
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
       h3 {
         height: 37px;
         color: white;
@@ -41,7 +69,7 @@ main {
         }
       }
 
-      .textInputDiv{
+      .textInputDiv {
         display: flex;
         gap: 4px;
         flex-direction: column;
@@ -65,14 +93,13 @@ main {
         .emailInp:hover {
           background-color: #171821;
           transition: all 0.3s;
-        }      
+        }
         input:focus {
           outline: none;
-        }        
+        }
       }
 
       .passwordInputDiv {
-
         .passInput {
           display: flex;
           input {
@@ -124,11 +151,11 @@ main {
         }
       }
 
-      .loginBtn{
+      .loginBtn {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: rgb(169, 223, 216);
+        background-color: rgb(115, 202, 190);
         width: 100%;
         height: 55px;
         border-radius: 6px;
@@ -139,25 +166,25 @@ main {
         font-weight: 500;
         transition: all 0.3s;
       }
-      .loginBtn:hover{
-        background-color: rgb(115, 202, 190);
+      .loginBtn:hover {
+        background-color: rgb(169, 223, 216);
         transition: all 0.3s;
       }
 
-      .loginUnderline{
+      .loginUnderline {
         color: rgb(135, 136, 140);
         width: 100%;
         height: 1px;
         border: 1px solid rgb(44, 45, 51);
       }
 
-      .signInOptions{
+      .signInOptions {
         width: 100%;
         text-align: center;
         color: white;
       }
 
-      .googleAndFb{
+      .googleAndFb {
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -166,7 +193,7 @@ main {
         justify-content: center;
         gap: 10px;
 
-        button{
+        button {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -182,7 +209,7 @@ main {
           color: rgb(169, 223, 216);
           cursor: pointer;
         }
-        button:hover{
+        button:hover {
           background-color: rgba(169, 223, 216, 0.04);
           border: 1px solid rgba(169, 223, 216, 1);
           cursor: pointer;
@@ -196,7 +223,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #1D1E26 inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #1d1e26 inset !important;
   -webkit-text-fill-color: #ffffff !important;
   caret-color: #ffffff !important;
   transition: background-color 9999s ease-out, color 9999s ease-out !important;

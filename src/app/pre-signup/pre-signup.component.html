@@ -3,6 +3,8 @@
     <div class="loginContainer">
       <h3>Create New Account</h3>
 
+      <div *ngIf="userMessage" class="user-message">{{ userMessage }}</div>
+
       <h6>Have an account? <a routerLink="/login">Log In</a></h6>
 
       <div class="textInputDiv">
@@ -22,11 +24,12 @@
           [(ngModel)]="userType"
           class="userTypeSelect"
           name="loginEmail"
-          id="userTypeSelect">
-        <option selected value="User">User</option>
-        <option value="Ambassador">Ambassador</option>
-      </select>
-      </div>      
+          id="userTypeSelect"
+        >
+          <option selected value="User">User</option>
+          <option value="Ambassador">Ambassador</option>
+        </select>
+      </div>
 
       <button (click)="check()" class="loginBtn">Send Email</button>
 

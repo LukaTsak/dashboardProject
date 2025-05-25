@@ -1,8 +1,4 @@
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpClientModule,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Injectable } from '@angular/core';
 
 @Injectable({
@@ -16,6 +12,23 @@ export class ApiServiceService {
   }
 
   getEmailByToken(token: any) {
-    return this.http.post('http://127.0.0.1:8000/api/checkRegistrationToken', token)
+    return this.http.post(
+      'http://127.0.0.1:8000/api/checkRegistrationToken',
+      token
+    );
+  }
+
+  createNewAccount(obj: any) {
+    return this.http.post(
+      'http://127.0.0.1:8000/api/complete-user-registration',
+      obj,
+    );
+  }
+
+  Login(obj: any) {
+    return this.http.post(
+      'http://127.0.0.1:8000/api/login',
+      obj,
+    );    
   }
 }

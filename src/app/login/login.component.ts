@@ -15,22 +15,12 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(private apiService: ApiServiceService, private router: Router) {}
 
+  // ------------------------ password visibility/functionality
+
   passwordType = 'password';
   passInvisible: boolean = true;
   passVisible?: boolean;
   passwordCondition: boolean = false;
-
-  email?: string = '';
-  password?: string = '';
-
-  userMessage: string | null = null;
-
-  showMessage(msg: string) {
-    this.userMessage = msg;
-    setTimeout(() => {
-      this.userMessage = null; // hide after 3 seconds
-    }, 3000);
-  }
 
   makeVisible() {
     if (this.passwordType === 'password') {
@@ -44,6 +34,24 @@ export class LoginComponent {
       this.passVisible = false;
     }
   }
+
+  // ------------------------ user login data
+
+  email?: string = '';
+  password?: string = '';
+
+  // ------------------------ message handling
+
+  userMessage: string | null = null;
+
+  showMessage(msg: string) {
+    this.userMessage = msg;
+    setTimeout(() => {
+      this.userMessage = null; // hide after 3 seconds
+    }, 3000);
+  }
+
+  // ------------------------ login function
 
   loginButton() {
     const obj = {
@@ -71,4 +79,7 @@ export class LoginComponent {
     }
   }
 
+    try(){
+    console.log('dasdasd')
+  }
 }

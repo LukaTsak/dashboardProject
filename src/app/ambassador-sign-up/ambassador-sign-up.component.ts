@@ -36,6 +36,8 @@ export class AmbassadorSignUpComponent {
     });
   }
 
+  // ------------------------ password visibility
+
   passwordType1 = 'password';
   passwordType2 = 'password';
   passInvisible1: boolean = true;
@@ -44,7 +46,7 @@ export class AmbassadorSignUpComponent {
   passVisible2?: boolean;
   passwordCondition: boolean = false;
 
-  // ------------------------
+  // ------------------------ password requirements
 
   passwordCheckColor: string = 'red';
   paswordElligable: boolean = false;
@@ -58,7 +60,7 @@ export class AmbassadorSignUpComponent {
   hasNumber: boolean = false;
   hasSymbol: boolean = false;
 
-  // ------------------------
+  // ------------------------ user information
 
   loginNameSurname?: string = '';
   loginNumber?: string = '';
@@ -70,10 +72,10 @@ export class AmbassadorSignUpComponent {
   personalNumber?: string = '';
   token?: string = '';
 
-  // ------------------------
-
   userMessage: string | null = null;
   userMessageArray: string[] = [];
+
+  // ------------------------ dynamic countries dropdown
 
   countries = [{ country: 'USA' }, { country: 'Georgia' }];
   languages = ['English', 'Georgian'];
@@ -87,6 +89,8 @@ export class AmbassadorSignUpComponent {
     USA: ['New York', 'Los Angeles', 'Chicago'],
   };
 
+  // ------------------------ for countries and cities dropdown
+
   getCities(country: string) {
     this.cities = this.citiesByCountry[country] || [];
     console.log('Selected country:', country);
@@ -98,6 +102,30 @@ export class AmbassadorSignUpComponent {
     setTimeout(() => {
       this.userMessageArray = [];
     }, 3000);
+  }
+
+  // ------------------------ validation and password checks
+
+  passwordCheck() {
+    const password = this.loginPassword ?? '';
+
+    this.isLongEnough = password.length >= 8;
+    this.hasUppercase = /[A-Z]/.test(password);
+    this.hasNumber = /\d/.test(password);
+    this.hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    this.atLeast8 = this.isLongEnough ? 'green' : 'white';
+    this.oneUpperCase = this.hasUppercase ? 'green' : 'white';
+    this.oneDigit = this.hasNumber ? 'green' : 'white';
+    this.oneSymbol = this.hasSymbol ? 'green' : 'white';
+
+    this.paswordElligable =
+      this.isLongEnough &&
+      this.hasUppercase &&
+      this.hasNumber &&
+      this.hasSymbol;
+
+    this.passwordCheckColor = this.paswordElligable ? 'green' : 'red';
   }
 
   makeVisible(x: number) {
@@ -140,7 +168,9 @@ export class AmbassadorSignUpComponent {
     return age;
   }
 
-  check() {
+  // ------------------------ create account
+
+  createAccount() {
     if (this.loginPassword !== this.loginConfirmPassword) {
       this.showMessage('Password and Confirm Password do not match');
       return;
@@ -202,27 +232,5 @@ export class AmbassadorSignUpComponent {
     if (age < 18) {
       this.showMessage('User must be over 18');
     }
-  }
-
-  passwordCheck() {
-    const password = this.loginPassword ?? '';
-
-    this.isLongEnough = password.length >= 8;
-    this.hasUppercase = /[A-Z]/.test(password);
-    this.hasNumber = /\d/.test(password);
-    this.hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    this.atLeast8 = this.isLongEnough ? 'green' : 'white';
-    this.oneUpperCase = this.hasUppercase ? 'green' : 'white';
-    this.oneDigit = this.hasNumber ? 'green' : 'white';
-    this.oneSymbol = this.hasSymbol ? 'green' : 'white';
-
-    this.paswordElligable =
-      this.isLongEnough &&
-      this.hasUppercase &&
-      this.hasNumber &&
-      this.hasSymbol;
-
-    this.passwordCheckColor = this.paswordElligable ? 'green' : 'red';
   }
 }

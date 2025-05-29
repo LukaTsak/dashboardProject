@@ -37,21 +37,6 @@ main {
         animation: fadeinout 3s forwards;
       }
 
-      @keyframes fadeinout {
-        0% {
-          opacity: 0;
-        }
-        10% {
-          opacity: 1;
-        }
-        90% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-
       h3 {
         height: 37px;
         color: white;
@@ -93,13 +78,14 @@ main {
           border-radius: 10px;
           padding: 12px 14px;
           transition: all 0.3s;
+
+          &:focus {
+            outline: none;
+          }
         }
         .emailInp:hover {
           background-color: #171821;
           transition: all 0.3s;
-        }
-        input:focus {
-          outline: none;
         }
       }
 
@@ -179,23 +165,24 @@ main {
             display: none;
           }
         }
-      }
-      .keepSignedInDiv input:checked ~ .checkmark {
-        background-color: rgb(169, 223, 216);
-      }
-      .keepSignedInDiv input:checked ~ .checkmark:after {
-        display: block;
-      }
-      .keepSignedInDiv .checkmark:after {
-        left: 5px;
-        top: 2px;
-        width: 4px;
-        height: 8px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
+
+        input:checked ~ .checkmark {
+          background-color: rgb(115, 202, 190);
+        }
+        input:checked ~ .checkmark:after {
+          display: block;
+        }
+        .checkmark:after {
+          left: 5px;
+          top: 2px;
+          width: 4px;
+          height: 8px;
+          border: solid white;
+          border-width: 0 3px 3px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+        }
       }
 
       // ------------------------
@@ -214,10 +201,11 @@ main {
         font-size: 20px;
         font-weight: 500;
         transition: all 0.3s;
-      }
-      .loginBtn:hover {
-        background-color: rgb(169, 223, 216);
-        transition: all 0.3s;
+
+        &:hover {
+          background-color: rgb(169, 223, 216);
+          transition: all 0.3s;
+        }
       }
 
       // ------------------------
@@ -259,11 +247,12 @@ main {
           font-size: 16px;
           color: rgb(169, 223, 216);
           cursor: pointer;
-        }
-        button:hover {
-          background-color: rgba(169, 223, 216, 0.04);
-          border: 1px solid rgba(169, 223, 216, 1);
-          cursor: pointer;
+
+          &:hover {
+            background-color: rgba(169, 223, 216, 0.04);
+            border: 1px solid rgba(169, 223, 216, 1);
+            cursor: pointer;
+          }
         }
       }
     }
@@ -280,11 +269,26 @@ input:-webkit-autofill:active {
   transition: background-color 9999s ease-out, color 9999s ease-out !important;
 }
 
+@keyframes fadeinout {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 500px) {
   .loginContainer {
     gap: 10px !important;
   }
-    h3 {
+  h3 {
     font-size: 30px !important;
   }
 

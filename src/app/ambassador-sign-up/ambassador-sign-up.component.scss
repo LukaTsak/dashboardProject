@@ -187,21 +187,7 @@ main {
         flex-flow: column-reverse;
       }
 
-      .keepSignedInDiv {
-        label {
-          color: white;
-          cursor: pointer;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
-
-          input {
-            margin-right: 5px;
-          }
-        }
-      }
-
-      .divSelect {
+      .countriesSelect {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -256,11 +242,11 @@ main {
         font-size: 20px;
         font-weight: 500;
         transition: all 0.3s;
-      }
 
-      .loginBtn:hover {
-        background-color: rgb(115, 202, 190);
-        transition: all 0.3s;
+        &:hover {
+          background-color: rgb(115, 202, 190);
+          transition: all 0.3s;
+        }
       }
 
       .termsOfService {

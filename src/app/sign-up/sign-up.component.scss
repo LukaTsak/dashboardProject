@@ -158,6 +158,7 @@ main {
           transition: all 1s;
         }
       }
+      
       .reverseCollumn {
         display: flex;
         flex-flow: column-reverse;
@@ -191,11 +192,11 @@ main {
         font-size: 20px;
         font-weight: 500;
         transition: all 0.3s;
-      }
 
-      .loginBtn:hover {
-        background-color: rgb(115, 202, 190);
-        transition: all 0.3s;
+        &:hover {
+          background-color: rgb(115, 202, 190);
+          transition: all 0.3s;
+        }
       }
 
       .termsOfService {

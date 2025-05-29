@@ -14,12 +14,16 @@ import { ApiServiceService } from '../services/api-service.service';
 export class PreSignupComponent {
   constructor(private apiService: ApiServiceService) {}
 
+  // ------------------------ user info
+
   userType?: string = '';
   loginEmail?: string = '';
 
-  userMessage: string | null = null;
-
   loading = false;
+
+  // ------------------------ message handling
+
+  userMessage: string | null = null;
 
   showMessage(msg: string) {
     this.userMessage = msg;
@@ -28,7 +32,7 @@ export class PreSignupComponent {
     }, 3000);
   }
 
-  check() {
+  sendEmail() {
     const obj = {
       email: this.loginEmail,
       user_type: this.userType,
@@ -36,6 +40,8 @@ export class PreSignupComponent {
     };
 
     console.log('Sending email:', obj);
+
+    // ------------------------ api service call
 
     this.apiService.sendEmail(obj).subscribe(
       (response: any) => {
@@ -48,7 +54,7 @@ export class PreSignupComponent {
       }
     );
 
-    // ------------------------
+    // ------------------------ spinner functionality
 
     const btn = document.getElementById('sendBtn') as HTMLButtonElement | null;
     if (!btn) return;
@@ -66,6 +72,5 @@ export class PreSignupComponent {
       spinner.classList.add('hidden');
       text.textContent = 'Send Email';
     }, 3000);
-    
   }
 }

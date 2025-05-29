@@ -102,12 +102,12 @@ main {
         option {
           cursor: pointer;
         }
-      }
 
-      .userTypeSelect:focus {
-        outline: none;
-        border: none;
-        transition: all 0.3s;
+        &:focus {
+          outline: none;
+          border: none;
+          transition: all 0.3s;
+        }
       }
 
       .loginBtn {
@@ -115,7 +115,8 @@ main {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background-color: rgb(169, 223, 216);
+
+        background-color: rgb(115, 202, 190);
         width: 100%;
         height: 55px;
         border-radius: 6px;
@@ -144,11 +145,11 @@ main {
         .hidden {
           display: none;
         }
-      }
 
-      .loginBtn:hover {
-        background-color: rgb(115, 202, 190);
-        transition: all 0.3s;
+        &:hover {
+          background-color: rgb(169, 223, 216);
+          transition: all 0.3s;
+        }
       }
 
       .termsOfService {

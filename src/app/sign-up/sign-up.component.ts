@@ -33,6 +33,8 @@ export class SignUpComponent {
     });
   }
 
+  // ------------------------ password visibility
+
   passwordType1 = 'password';
   passwordType2 = 'password';
   passInvisible1: boolean = true;
@@ -41,7 +43,7 @@ export class SignUpComponent {
   passVisible2?: boolean;
   passwordCondition: boolean = false;
 
-  // ------------------------
+  // ------------------------ password requirements/handling
 
   passwordCheckColor: string = 'red';
   paswordElligable: boolean = false;
@@ -54,27 +56,6 @@ export class SignUpComponent {
   hasUppercase: boolean = false;
   hasNumber: boolean = false;
   hasSymbol: boolean = false;
-
-  // ------------------------
-
-  loginNameSurname?: string = '';
-  loginNumber?: string = '';
-  loginEmail?: string = '';
-  loginPassword?: string = '';
-  loginConfirmPassword?: string = '';
-  token?: string = '';
-
-  // ------------------------
-
-  userMessage: string | null = null;
-  userMessageArray: string[] = [];
-
-  showMessage(msg: string) {
-    this.userMessageArray.push(msg);
-    setTimeout(() => {
-      this.userMessageArray = []; // hide after 3 seconds
-    }, 3000);
-  }
 
   makeVisible(x: number) {
     if (x == 1) {
@@ -103,7 +84,50 @@ export class SignUpComponent {
     }
   }
 
-  check() {
+  passwordCheck() {
+    const password = this.loginPassword ?? '';
+
+    this.isLongEnough = password.length >= 8;
+    this.hasUppercase = /[A-Z]/.test(password);
+    this.hasNumber = /\d/.test(password);
+    this.hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    this.atLeast8 = this.isLongEnough ? 'green' : 'white';
+    this.oneUpperCase = this.hasUppercase ? 'green' : 'white';
+    this.oneDigit = this.hasNumber ? 'green' : 'white';
+    this.oneSymbol = this.hasSymbol ? 'green' : 'white';
+
+    this.paswordElligable =
+      this.isLongEnough &&
+      this.hasUppercase &&
+      this.hasNumber &&
+      this.hasSymbol;
+
+    this.passwordCheckColor = this.paswordElligable ? 'green' : 'red';
+  }
+
+  // ------------------------ user info
+
+  loginNameSurname?: string = '';
+  loginNumber?: string = '';
+  loginEmail?: string = '';
+  loginPassword?: string = '';
+  loginConfirmPassword?: string = '';
+  token?: string = '';
+
+  // ------------------------ message handling
+
+  userMessage: string | null = null;
+  userMessageArray: string[] = [];
+
+  showMessage(msg: string) {
+    this.userMessageArray.push(msg);
+    setTimeout(() => {
+      this.userMessageArray = []; // hide after 3 seconds
+    }, 3000);
+  }
+
+  signUp() {
     if (this.loginPassword !== this.loginConfirmPassword) {
       this.showMessage('Password and Confirm Password do not match');
       return;
@@ -150,31 +174,9 @@ export class SignUpComponent {
       );
     }
 
-    if(!this.loginNameSurname?.includes(' ')) {
+    if (!this.loginNameSurname?.includes(' ')) {
       this.showMessage('Please enter both name and surname');
       return;
     }
-  }
-
-  passwordCheck() {
-    const password = this.loginPassword ?? '';
-
-    this.isLongEnough = password.length >= 8;
-    this.hasUppercase = /[A-Z]/.test(password);
-    this.hasNumber = /\d/.test(password);
-    this.hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    this.atLeast8 = this.isLongEnough ? 'green' : 'white';
-    this.oneUpperCase = this.hasUppercase ? 'green' : 'white';
-    this.oneDigit = this.hasNumber ? 'green' : 'white';
-    this.oneSymbol = this.hasSymbol ? 'green' : 'white';
-
-    this.paswordElligable =
-      this.isLongEnough &&
-      this.hasUppercase &&
-      this.hasNumber &&
-      this.hasSymbol;
-
-    this.passwordCheckColor = this.paswordElligable ? 'green' : 'red';
   }
 }

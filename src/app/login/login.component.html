@@ -26,7 +26,8 @@
             [(ngModel)]="password"
             type="{{ passwordType }}"
             name="loginPassword"
-            id="loginPassword"
+            id="loginPassword" 
+            (keydown.enter)="try()"
           />
           <button (click)="makeVisible()">
             <svg

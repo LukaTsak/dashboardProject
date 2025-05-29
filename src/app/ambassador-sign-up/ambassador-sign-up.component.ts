@@ -75,15 +75,28 @@ export class AmbassadorSignUpComponent {
   userMessage: string | null = null;
   userMessageArray: string[] = [];
 
-  // countries = Country.getAllCountries();
-  // states = State.getAllStates();
-  // cities = City.getAllCities();
-  
+  countries = [{ country: 'USA' }, { country: 'Georgia' }];
+  languages = ['English', 'Georgian'];
+
+  selectedCountry: string = '';
+  selectedCity: string = '';
+  cities: string[] = [];
+
+  citiesByCountry: { [key: string]: string[] } = {
+    Georgia: ['Tbilisi', 'Batumi', 'Kutaisi'],
+    USA: ['New York', 'Los Angeles', 'Chicago'],
+  };
+
+  getCities(country: string) {
+    this.cities = this.citiesByCountry[country] || [];
+    console.log('Selected country:', country);
+    console.log('Cities:', this.cities);
+  }
 
   showMessage(msg: string) {
     this.userMessageArray.push(msg);
     setTimeout(() => {
-      this.userMessageArray = []; // hide after 3 seconds
+      this.userMessageArray = [];
     }, 3000);
   }
 
@@ -161,10 +174,6 @@ export class AmbassadorSignUpComponent {
       console.log('personalNumber: ' + this.personalNumber);
       console.log('token: ' + this.token);
       console.log('userObj:', userObj);
-
-      // console.log(Country.getAllCountries());
-      // console.log(State.getAllStates());
-      // console.log(City.getAllCities());
 
       this.apiService.createNewAccount(userObj).subscribe(
         (response: any) => {

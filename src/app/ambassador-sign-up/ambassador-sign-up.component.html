@@ -199,25 +199,31 @@
         />
       </div>
 
-      <!-- <div class="selectDiv">
-        <select class="CountriesSelect select" [(ngModel)]="countries">
-          <option *ngFor="let country of countries" [value]="country.isoCode">
-            {{ country.name }}
-          </option>
-        </select>
+      <div class="divSelect">
+        <div class="country place">
+          <!-- <label for="">Country</label> -->
+          <select
+            class="select"
+            [(ngModel)]="selectedCountry"
+            (change)="getCities(selectedCountry)"
+          >
+            <option value="">Select Country</option>
+            <option *ngFor="let country of countries" [value]="country.country">
+              {{ country.country }}
+            </option>
+          </select>
+        </div>
 
-        <select class="StatesSelect select" [(ngModel)]="states">
-          <option *ngFor="let state of states" [value]="state.isoCode">
-            {{ state.name }}
-          </option>
-        </select>
-
-        <select class="CitiesSelect select" [(ngModel)]="cities">
-          <option *ngFor="let city of countries" [value]="city.isoCode">
-            {{ city.name }}
-          </option>
-        </select>
-      </div> -->
+        <div class="city place">
+          <!-- <label for="">City</label> -->
+          <select class="select" [(ngModel)]="selectedCity">
+            <option [disabled]="!selectedCountry" value="">Select City</option>
+            <option *ngFor="let city of cities" [value]="city">
+              {{ city }}
+            </option>
+          </select>
+        </div>
+      </div>
 
       <button (click)="check()" class="loginBtn">Sign Up</button>
 

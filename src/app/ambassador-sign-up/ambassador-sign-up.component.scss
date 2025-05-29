@@ -201,9 +201,12 @@ main {
         }
       }
 
-      .selectDiv {
+      .divSelect {
         display: flex;
+        flex-direction: row;
         flex-wrap: wrap;
+        color: white;
+        gap: 10px;
 
         .select {
           background-color: #1d1e26;
@@ -224,6 +227,17 @@ main {
             background-color: #171821;
             transition: all 0.3s;
           }
+        }
+
+        .place{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-align: start;
+        }
+
+        label {
+          padding-left: 10px;
         }
 
       }

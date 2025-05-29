@@ -1,15 +1,18 @@
 main {
   width: 100%;
-  height: 100vh;
+  min-width: fit-content;
+  height: fit-content;
+  min-height: 100vh;
   background-color: #171821;
   display: flex;
   align-items: center;
   justify-content: center;
   .loginPage {
-    width: 588px;
-    height: 610px;
+    width: fit-content;
+    height: fit-content;
     border-radius: 13px;
-    padding: 48px 30px;
+    padding: 34px 30px;
+    margin: 15px;
     background-color: #21222d;
     .loginContainer {
       display: flex;
@@ -178,7 +181,7 @@ main {
         width: 100%;
         display: flex;
         flex-direction: row;
-        // flex-wrap: wrap;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
         gap: 10px;
@@ -217,4 +220,21 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #ffffff !important;
   caret-color: #ffffff !important;
   transition: background-color 9999s ease-out, color 9999s ease-out !important;
+}
+
+@media (max-width: 500px) {
+  .loginContainer {
+    gap: 10px !important;
+  }
+  h3 {
+    font-size: 27px !important;
+  }
+
+  h6 {
+    font-size: 18px !important;
+    a {
+      text-decoration: none;
+      color: rgb(169, 223, 216);
+    }
+  }
 }

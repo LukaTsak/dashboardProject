@@ -1,6 +1,8 @@
 main {
   width: 100%;
-  height: 100vh;
+  min-width: fit-content;
+  height: fit-content;
+  min-height: 100vh;
   background-color: #171821;
   display: flex;
   align-items: center;
@@ -10,6 +12,7 @@ main {
     height: fit-content;
     border-radius: 13px;
     padding: 34px 30px;
+    margin: 15px;
     background-color: #21222d;
     min-width: 100px;
     .loginContainer {
@@ -104,7 +107,7 @@ main {
         .passInput {
           display: flex;
           input {
-            width: 496px;
+            width: 100%;
             height: 52px;
             border-top-right-radius: 0px !important;
             border-bottom-right-radius: 0px !important;
@@ -112,6 +115,7 @@ main {
           }
           button {
             width: 44px;
+            min-width: fit-content;
             height: 52px;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -235,7 +239,7 @@ main {
         width: 100%;
         display: flex;
         flex-direction: row;
-        // flex-wrap: wrap;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
         gap: 10px;
@@ -274,4 +278,21 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #ffffff !important;
   caret-color: #ffffff !important;
   transition: background-color 9999s ease-out, color 9999s ease-out !important;
+}
+
+@media (max-width: 500px) {
+  .loginContainer {
+    gap: 10px !important;
+  }
+    h3 {
+    font-size: 30px !important;
+  }
+
+  h6 {
+    font-size: 18px !important;
+    a {
+      text-decoration: none;
+      color: rgb(169, 223, 216);
+    }
+  }
 }

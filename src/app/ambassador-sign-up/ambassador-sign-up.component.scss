@@ -89,8 +89,32 @@ main {
           background-color: #171821;
           transition: all 0.3s;
         }
+        .AdressInp:hover {
+          background-color: #171821;
+          transition: all 0.3s;
+        }
+        .DateOfBirthInp:hover {
+          background-color: #171821;
+          transition: all 0.3s;
+        }
+        .personalNumberInp:hover {
+          background-color: #171821;
+          transition: all 0.3s;
+        }
         input:focus {
           outline: none;
+        }
+
+        .DateOfBirthInp {
+          padding: 10px;
+          color-scheme: dark;
+
+          &::-webkit-calendar-picker-indicator {
+            filter: brightness(0) saturate(100%) invert(60%) sepia(0%)
+              saturate(0%) hue-rotate(180deg);
+            opacity: 1;
+            cursor: pointer;
+          }
         }
       }
 
@@ -175,6 +199,33 @@ main {
             margin-right: 5px;
           }
         }
+      }
+
+      .selectDiv {
+        display: flex;
+        flex-wrap: wrap;
+
+        .select {
+          background-color: #1d1e26;
+          height: fit-content;
+          width: 150px;
+          border-radius: 8px;
+          border: none;
+          color: white;
+          padding: 10px;
+
+          &:focus {
+            outline: none;
+            border: none;
+            transition: all 0.3s;
+          }
+
+          &:hover {
+            background-color: #171821;
+            transition: all 0.3s;
+          }
+        }
+
       }
 
       .loginBtn {

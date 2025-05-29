@@ -1,16 +1,19 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { Country, State, City } from 'country-state-city';
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'app-ambassador-sign-up',
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.scss',
+  templateUrl: './ambassador-sign-up.component.html',
+  styleUrl: './ambassador-sign-up.component.scss',
 })
-export class SignUpComponent {
+export class AmbassadorSignUpComponent {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiServiceService,
@@ -62,12 +65,20 @@ export class SignUpComponent {
   loginEmail?: string = '';
   loginPassword?: string = '';
   loginConfirmPassword?: string = '';
+  DateOfBirth?: string = '';
+  Adress?: string = '';
+  personalNumber?: string = '';
   token?: string = '';
 
   // ------------------------
 
   userMessage: string | null = null;
   userMessageArray: string[] = [];
+
+  // countries = Country.getAllCountries();
+  // states = State.getAllStates();
+  // cities = City.getAllCities();
+  
 
   showMessage(msg: string) {
     this.userMessageArray.push(msg);
@@ -103,6 +114,19 @@ export class SignUpComponent {
     }
   }
 
+  getAge(dateString: string): number {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--; // birthday hasn't happened yet this year
+    }
+
+    return age;
+  }
+
   check() {
     if (this.loginPassword !== this.loginConfirmPassword) {
       this.showMessage('Password and Confirm Password do not match');
@@ -132,8 +156,15 @@ export class SignUpComponent {
       console.log('number: ' + this.loginNumber);
       console.log('password: ' + this.loginPassword);
       console.log('confirmpass: ' + this.loginConfirmPassword);
+      console.log('DateOfBirth: ' + this.DateOfBirth);
+      console.log('Adress: ' + this.Adress);
+      console.log('personalNumber: ' + this.personalNumber);
       console.log('token: ' + this.token);
       console.log('userObj:', userObj);
+
+      // console.log(Country.getAllCountries());
+      // console.log(State.getAllStates());
+      // console.log(City.getAllCities());
 
       this.apiService.createNewAccount(userObj).subscribe(
         (response: any) => {
@@ -150,9 +181,17 @@ export class SignUpComponent {
       );
     }
 
-    if(!this.loginNameSurname?.includes(' ')) {
+    if (!this.loginNameSurname?.includes(' ')) {
       this.showMessage('Please enter both name and surname');
       return;
+    }
+
+    if (!this.DateOfBirth) return;
+
+    const age = this.getAge(this.DateOfBirth);
+
+    if (age < 18) {
+      this.showMessage('User must be over 18');
     }
   }
 

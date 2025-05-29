@@ -166,6 +166,59 @@
         </div>
       </div>
 
+      <div class="textInputDiv">
+        <label for="DateOfBirth">Date of birth</label>
+        <input
+          [(ngModel)]="DateOfBirth"
+          class="DateOfBirthInp"
+          type="date"
+          name="DateOfBirth"
+          id="DateOfBirth"
+        />
+      </div>
+
+      <div class="textInputDiv">
+        <label for="Adress">Adress</label>
+        <input
+          [(ngModel)]="Adress"
+          class="AdressInp"
+          type="text"
+          name="Adress"
+          id="Adress"
+        />
+      </div>
+
+      <div class="textInputDiv">
+        <label for="personalNumber">Personal Number</label>
+        <input
+          [(ngModel)]="personalNumber"
+          class="personalNumberInp"
+          type="text"
+          name="Adress"
+          id="personalNumber"
+        />
+      </div>
+
+      <!-- <div class="selectDiv">
+        <select class="CountriesSelect select" [(ngModel)]="countries">
+          <option *ngFor="let country of countries" [value]="country.isoCode">
+            {{ country.name }}
+          </option>
+        </select>
+
+        <select class="StatesSelect select" [(ngModel)]="states">
+          <option *ngFor="let state of states" [value]="state.isoCode">
+            {{ state.name }}
+          </option>
+        </select>
+
+        <select class="CitiesSelect select" [(ngModel)]="cities">
+          <option *ngFor="let city of countries" [value]="city.isoCode">
+            {{ city.name }}
+          </option>
+        </select>
+      </div> -->
+
       <button (click)="check()" class="loginBtn">Sign Up</button>
 
       <p class="termsOfService">

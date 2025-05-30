@@ -6,6 +6,7 @@ import { ApiServiceService } from '../services/api-service.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Country, State, City } from 'country-state-city';
+import country from 'country-state-city/lib/country';
 
 @Component({
   selector: 'app-ambassador-sign-up',
@@ -33,6 +34,14 @@ export class AmbassadorSignUpComponent {
         console.log('Response:', response.email);
         this.loginEmail = response.email;
       });
+    });
+
+    this.apiService.getCountries().subscribe((countries: any) => {
+      this.countries = (countries.countries || []).map((country: any) => ({
+        name: country.name,
+        id: country.id,
+      }));
+      console.log('Countries:', this.countries);
     });
   }
 
@@ -77,30 +86,44 @@ export class AmbassadorSignUpComponent {
 
   // ------------------------ dynamic countries dropdown
 
-  countries = [{ country: 'USA' }, { country: 'Georgia' }];
-  languages = ['English', 'Georgian'];
+  getCities(country: any) {
+    let selectedCountryid = this.countries.find((c) => c.name === country);
+    if (selectedCountryid) {
+      this.selectedCountryId = selectedCountryid.id;
+    }
+
+    this.cities = this.citiesByCountry[country] || [];
+    console.log('Selected country:', country);
+    console.log('Cities:', this.cities);
+    console.log('Selected country ID:', this.selectedCountryId);
+  }
+
+  countries: {
+    id: any;
+    name: string;
+    code: string;
+  }[] = [];
+  cities: string[] = [];
+  languages = [];
 
   selectedCountry: string = '';
   selectedCity: string = '';
-  cities: string[] = [];
+  selectedCountryId: string = '';
 
   citiesByCountry: { [key: string]: string[] } = {
     Georgia: ['Tbilisi', 'Batumi', 'Kutaisi'],
-    USA: ['New York', 'Los Angeles', 'Chicago'],
+    'United States': ['New York', 'Los Angeles', 'Chicago'],
   };
 
   // ------------------------ for countries and cities dropdown
 
-  getCities(country: string) {
-    this.cities = this.citiesByCountry[country] || [];
-    console.log('Selected country:', country);
-    console.log('Cities:', this.cities);
-  }
-
   showMessage(msg: string) {
+    if (this.userMessageArray.includes(msg)) return;
+
     this.userMessageArray.push(msg);
+
     setTimeout(() => {
-      this.userMessageArray = [];
+      this.userMessageArray = this.userMessageArray.filter((m) => m !== msg);
     }, 3000);
   }
 
@@ -158,11 +181,17 @@ export class AmbassadorSignUpComponent {
   getAge(dateString: string): number {
     const today = new Date();
     const birthDate = new Date(dateString);
+
+    if (birthDate.getFullYear() > today.getFullYear()) {
+      this.showMessage('Birth year cannot be in the future');
+      return -1;
+    }
+
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
 
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--; // birthday hasn't happened yet this year
+      age--;
     }
 
     return age;
@@ -171,6 +200,18 @@ export class AmbassadorSignUpComponent {
   // ------------------------ create account
 
   createAccount() {
+    // ------------------------ validation checks
+
+    if (!this.loginNameSurname?.includes(' ')) {
+      this.showMessage('Please enter both name and surname');
+      return;
+    }
+
+    if (!this.loginNumber || this.loginNumber.toString().length != 9) {
+      this.showMessage('Please enter a valid phone number');
+      return;
+    }
+
     if (this.loginPassword !== this.loginConfirmPassword) {
       this.showMessage('Password and Confirm Password do not match');
       return;
@@ -190,6 +231,11 @@ export class AmbassadorSignUpComponent {
         phone: this.loginNumber?.toString() || '',
         password: this.loginPassword,
         password_confirmation: this.loginConfirmPassword,
+        date_of_birth: this.DateOfBirth,
+        address: this.Adress,
+        personal_number: this.personalNumber,
+        City: this.selectedCity,
+        Country_id: this.selectedCountryId,
         token: this.token,
       };
 
@@ -202,10 +248,12 @@ export class AmbassadorSignUpComponent {
       console.log('DateOfBirth: ' + this.DateOfBirth);
       console.log('Adress: ' + this.Adress);
       console.log('personalNumber: ' + this.personalNumber);
+      console.log('selectedCity: ' + this.selectedCity);
+      console.log('selectedCountryId: ' + this.selectedCountryId);
       console.log('token: ' + this.token);
       console.log('userObj:', userObj);
 
-      this.apiService.createNewAccount(userObj).subscribe(
+      this.apiService.createNewAmbassador(userObj).subscribe(
         (response: any) => {
           console.log('Response:', response);
           this.showMessage(response.message);
@@ -220,17 +268,28 @@ export class AmbassadorSignUpComponent {
       );
     }
 
-    if (!this.loginNameSurname?.includes(' ')) {
-      this.showMessage('Please enter both name and surname');
+    // ------------------------ age
+
+    if (!this.DateOfBirth) {
+      this.showMessage('Please enter your date of birth');
       return;
     }
-
-    if (!this.DateOfBirth) return;
-
     const age = this.getAge(this.DateOfBirth);
 
     if (age < 18) {
       this.showMessage('User must be over 18');
+    }
+
+    // ------------------------
+
+    if (!this.Adress || !this.selectedCity || !this.selectedCountryId) {
+      this.showMessage('Please fill in all fields');
+      return;
+    }
+
+    if (!this.personalNumber || this.personalNumber.toString().length != 10) {
+      this.showMessage('Please enter a valid personal number');
+      return;
     }
   }
 }

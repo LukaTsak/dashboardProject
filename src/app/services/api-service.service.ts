@@ -25,10 +25,23 @@ export class ApiServiceService {
     );
   }
 
+    createNewAmbassador(obj: any) {
+    return this.http.post(
+      'http://127.0.0.1:8000/api/complete-ambassador-registration',
+      obj,
+    );
+  }
+
   Login(obj: any) {
     return this.http.post(
       'http://127.0.0.1:8000/api/login',
       obj,
+    );    
+  }
+
+    getCountries() {
+    return this.http.get(
+      'http://127.0.0.1:8000/api/complete-ambassador-registration/formData'
     );    
   }
 }

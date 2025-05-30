@@ -193,7 +193,7 @@
         <input
           [(ngModel)]="personalNumber"
           class="personalNumberInp"
-          type="text"
+          type="number"
           name="Adress"
           id="personalNumber"
         />
@@ -207,18 +207,25 @@
             [(ngModel)]="selectedCountry"
             (change)="getCities(selectedCountry)"
           >
-            <option value="">Select Country</option>
-            <option *ngFor="let country of countries" [value]="country.country">
-              {{ country.country }}
+            <!-- <option value="">Select Country</option> -->
+
+            <option *ngFor="let country of countries" [value]="country.name" >
+              {{ country.name }}
             </option>
+
           </select>
         </div>
 
         <div class="city place">
           <!-- <label for="">City</label> -->
           <select class="select" [(ngModel)]="selectedCity">
-            <option [disabled]="!selectedCountry" value="">Select City</option>
-            <option *ngFor="let city of cities" [value]="city">
+            <!-- <option  >Select City</option> -->
+            <option
+              [disabled]="!selectedCountry"
+              value=""
+              *ngFor="let city of cities"
+              [value]="city"
+            >
               {{ city }}
             </option>
           </select>

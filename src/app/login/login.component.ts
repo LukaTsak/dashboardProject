@@ -3,7 +3,6 @@ import { Component, NgModule } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
-// import { Router } from 'express';
 import { Router } from '@angular/router';
 
 @Component({
@@ -40,46 +39,52 @@ export class LoginComponent {
   email?: string = '';
   password?: string = '';
 
+  userMessageArray: string[] = [];
+
   // ------------------------ message handling
 
   userMessage: string | null = null;
 
   showMessage(msg: string) {
-    this.userMessage = msg;
+    if (this.userMessageArray.includes(msg)) return;
+
+    this.userMessageArray.push(msg);
+
     setTimeout(() => {
-      this.userMessage = null; // hide after 3 seconds
+      this.userMessageArray = this.userMessageArray.filter((m) => m !== msg);
     }, 3000);
   }
 
   // ------------------------ login function
 
   loginButton() {
-    const obj = {
-      email: this.email,
-      password: this.password,
-    };
-    console.log('Sending login data:', obj);
-    if (this.email && this.password) {
-      this.apiService.Login(obj).subscribe({
-        next: (response: any) => {
-          console.log('Response:', response);
-          this.showMessage('Login successful!');
-          setTimeout(() => {
-            this.router.navigate(['/dashboard']);
-          }, 3000);
-        },
-        error: (error) => {
-          console.error('Login failed:', error);
-          this.showMessage(
-            'Login failed: ' + (error.error?.message || 'Something went wrong')
-          );
-          return;
-        },
-      });
+    if (!this.email || !this.password) {
+      this.showMessage('Please fill in all fields.');
+    } else {
+      const obj = {
+        email: this.email,
+        password: this.password,
+      };
+      console.log('Sending login data:', obj);
+      if (this.email && this.password) {
+        this.apiService.Login(obj).subscribe({
+          next: (response: any) => {
+            console.log('Response:', response);
+            this.showMessage('Login successful!');
+            setTimeout(() => {
+              this.router.navigate(['/dashboard']);
+            }, 3000);
+          },
+          error: (error) => {
+            console.error('Login failed:', error);
+            this.showMessage(
+              'Login failed: ' +
+                (error.error?.message || 'Something went wrong')
+            );
+            return;
+          },
+        });
+      }
     }
-  }
-
-    try(){
-    console.log('dasdasd')
   }
 }

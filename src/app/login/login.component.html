@@ -3,7 +3,11 @@
     <div class="loginContainer">
       <h3>Log In</h3>
 
-      <div *ngIf="userMessage" class="user-message">{{ userMessage }}</div>
+      <div *ngIf="userMessageArray.length > 0" class="user-message">
+        <div *ngFor="let error of userMessageArray" class="littleMessage">
+          {{ error }}
+        </div>
+      </div>
 
       <h6>Don't have an account? <a routerLink="/presignup">Sign up</a></h6>
 
@@ -27,7 +31,6 @@
             type="{{ passwordType }}"
             name="loginPassword"
             id="loginPassword" 
-            (keydown.enter)="try()"
           />
           <button (click)="makeVisible()">
             <svg
@@ -76,7 +79,7 @@
           Keep me signed in
         </label>
 
-        <span routerLink="/dashboard">Forgot password?</span>
+        <span routerLink="/forgotPassword">Forgot password?</span>
       </div>
 
       <button (click)="loginButton()" class="loginBtn">Log In</button>

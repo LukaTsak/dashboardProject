@@ -3,7 +3,11 @@
     <div class="loginContainer">
       <h3>Create New Account</h3>
 
-      <div *ngIf="userMessage" class="user-message">{{ userMessage }}</div>
+      <div *ngIf="userMessageArray.length > 0" class="user-message">
+        <div *ngFor="let error of userMessageArray" class="littleMessage">
+          {{ error }}
+        </div>
+      </div>
 
       <h6>Have an account? <a routerLink="/login">Log In</a></h6>
 

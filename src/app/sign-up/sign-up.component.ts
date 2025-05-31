@@ -57,30 +57,42 @@ export class SignUpComponent {
   hasNumber: boolean = false;
   hasSymbol: boolean = false;
 
+  // ------------------------ user info
+
+  loginNameSurname?: string = '';
+  loginNumber?: string = '';
+  loginEmail?: string = '';
+  loginPassword?: string = '';
+  loginConfirmPassword?: string = '';
+  token?: string = '';
+
+  // ------------------------ message handling
+
+  userMessage: string | null = null;
+  userMessageArray: string[] = [];
+
+  showMessage(msg: string) {
+    this.userMessageArray.push(msg);
+    setTimeout(() => {
+      this.userMessageArray = []; // hide after 3 seconds
+    }, 3000);
+  }
+
+  // ------------------------ password visibility/functionality
+
   makeVisible(x: number) {
-    if (x == 1) {
-      if (this.passwordType1 === 'password') {
-        this.passwordType1 = 'text';
-        this.passInvisible1 = false;
-        this.passVisible1 = true;
-      } else {
-        this.passwordType1 === 'text';
-        this.passwordType1 = 'password';
-        this.passInvisible1 = true;
-        this.passVisible1 = false;
-      }
-    }
-    if (x == 2) {
-      if (this.passwordType2 === 'password') {
-        this.passwordType2 = 'text';
-        this.passInvisible2 = false;
-        this.passVisible2 = true;
-      } else {
-        this.passwordType2 === 'text';
-        this.passwordType2 = 'password';
-        this.passInvisible2 = true;
-        this.passVisible2 = false;
-      }
+    const typeKey = `passwordType${x}` as keyof this;
+    const invisibleKey = `passInvisible${x}` as keyof this;
+    const visibleKey = `passVisible${x}` as keyof this;
+
+    if (this[typeKey] === 'password') {
+      (this as any)[typeKey] = 'text';
+      (this as any)[invisibleKey] = false;
+      (this as any)[visibleKey] = true;
+    } else {
+      (this as any)[typeKey] = 'password';
+      (this as any)[invisibleKey] = true;
+      (this as any)[visibleKey] = false;
     }
   }
 
@@ -106,77 +118,72 @@ export class SignUpComponent {
     this.passwordCheckColor = this.paswordElligable ? 'green' : 'red';
   }
 
-  // ------------------------ user info
-
-  loginNameSurname?: string = '';
-  loginNumber?: string = '';
-  loginEmail?: string = '';
-  loginPassword?: string = '';
-  loginConfirmPassword?: string = '';
-  token?: string = '';
-
-  // ------------------------ message handling
-
-  userMessage: string | null = null;
-  userMessageArray: string[] = [];
-
-  showMessage(msg: string) {
-    this.userMessageArray.push(msg);
-    setTimeout(() => {
-      this.userMessageArray = []; // hide after 3 seconds
-    }, 3000);
-  }
+  // ------------------------ sign up 
 
   signUp() {
-    if (this.loginPassword !== this.loginConfirmPassword) {
-      this.showMessage('Password and Confirm Password do not match');
-      return;
-    } else if (!this.paswordElligable) {
-      this.showMessage('Password does not meet the requirements');
-    } else {
-      // ------------------------
+    const show = this.showMessage.bind(this);
 
-      const parts = (this.loginNameSurname ?? '').trim().split(' ');
-      const name = parts[0];
-      const surname = parts.slice(1).join(' ');
+    const validators = [
+      {
+        valid: this.loginNameSurname?.includes(' '),
+        msg: 'Please enter both name and surname',
+      },
+      {
+        valid: this.loginNumber?.toString().length === 9,
+        msg: 'Please enter a valid phone number',
+      },
+      {
+        valid: this.loginPassword === this.loginConfirmPassword,
+        msg: 'Password and Confirm Password do not match',
+      },
+      {
+        valid: this.paswordElligable,
+        msg: 'Password does not meet the requirements',
+      },
+    ];
 
-      // ------------------------
-      const userObj = {
-        name: name,
-        surname: surname,
-        phone: this.loginNumber?.toString() || '',
-        password: this.loginPassword,
-        password_confirmation: this.loginConfirmPassword,
-        token: this.token,
-      };
-
-      console.log('email: ' + this.loginEmail);
-      console.log('name: ' + name);
-      console.log('surname: ' + surname);
-      console.log('number: ' + this.loginNumber);
-      console.log('password: ' + this.loginPassword);
-      console.log('confirmpass: ' + this.loginConfirmPassword);
-      console.log('token: ' + this.token);
-      console.log('userObj:', userObj);
-
-      this.apiService.createNewAccount(userObj).subscribe(
-        (response: any) => {
-          console.log('Response:', response);
-          this.showMessage(response.message);
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 3000);
-        },
-        (error) => {
-          console.error('Error:', error);
-          this.showMessage('please check your information and try again');
-        }
-      );
+    for (const { valid, msg } of validators) {
+      if (!valid) {
+        show(msg);
+        return;
+      }
     }
 
-    if (!this.loginNameSurname?.includes(' ')) {
-      this.showMessage('Please enter both name and surname');
-      return;
-    }
+    const [name, ...surnameParts] = (this.loginNameSurname ?? '')
+      .trim()
+      .split(' ');
+    const surname = surnameParts.join(' ');
+
+    const userObj = {
+      name,
+      surname,
+      phone: this.loginNumber?.toString() || '',
+      password: this.loginPassword,
+      password_confirmation: this.loginConfirmPassword,
+      token: this.token,
+    };
+
+    console.log('email:', this.loginEmail);
+    console.log('name:', name);
+    console.log('surname:', surname);
+    console.log('number:', this.loginNumber);
+    console.log('password:', this.loginPassword);
+    console.log('confirmpass:', this.loginConfirmPassword);
+    console.log('token:', this.token);
+    console.log('userObj:', userObj);
+
+    this.apiService.createNewAccount(userObj).subscribe(
+      (response: any) => {
+        console.log('Response:', response);
+        show(response.message);
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 3000);
+      },
+      (error) => {
+        console.error('Error:', error);
+        show('Please check your information and try again');
+      }
+    );
   }
 }

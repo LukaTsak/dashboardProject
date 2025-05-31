@@ -1,92 +1,8 @@
+@import "../common-styles";
+
 main {
-  width: 100%;
-  min-width: fit-content;
-  height: fit-content;
-  min-height: 100vh;
-  background-color: #171821;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   .loginPage {
-    width: fit-content;
-    height: fit-content;
-    border-radius: 13px;
-    padding: 34px 30px;
-    margin: 15px;
-    background-color: #21222d;
     .loginContainer {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: start;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-
-      .user-message {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: rgb(115, 202, 190);
-        color: white;
-        padding: 12px 20px;
-        border-radius: 4px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
-        animation: fadeinout 3s forwards;
-      }
-
-      h3 {
-        height: 37px;
-        color: white;
-        font-size: 32px;
-        width: 100%;
-        text-align: center;
-      }
-
-      h6 {
-        height: 32px;
-        font-size: 20px;
-        font-weight: 500;
-        color: rgb(135, 136, 140);
-        width: 100%;
-        text-align: center;
-        a {
-          text-decoration: none;
-          color: rgb(169, 223, 216);
-        }
-      }
-
-      .textInputDiv {
-        display: flex;
-        gap: 4px;
-        flex-direction: column;
-        color: white;
-        width: 100%;
-        height: 79px;
-
-        label {
-          font-weight: 500;
-        }
-        input {
-          color: rgb(210, 210, 210);
-          font-size: 16px;
-          height: 52px;
-          background-color: #1d1e26;
-          border: none;
-          border-radius: 10px;
-          padding: 12px 14px;
-          transition: all 0.3s;
-        }
-        .emailInp:hover {
-          background-color: #171821;
-          transition: all 0.3s;
-        }
-        input:focus {
-          outline: none;
-        }
-      }
-
       .userTypeSelect {
         cursor: pointer;
         background-color: #1d1e26;
@@ -110,22 +26,20 @@ main {
         }
       }
 
-      .loginBtn {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        background-color: rgb(115, 202, 190);
+      .termsOfService {
         width: 100%;
-        height: 55px;
-        border-radius: 6px;
-        padding: 10px 16px;
-        border: none;
-        cursor: pointer;
-        font-size: 20px;
+        text-align: center;
+        color: rgb(135, 136, 140);
         font-weight: 500;
-        transition: all 0.3s;
+        line-height: 24px;
+        font-size: 16px;
+        a {
+          text-decoration: none;
+          color: rgb(169, 223, 216);
+        }
+      }
+
+      .loginBtn {
 
         .spinner {
           width: 25px;
@@ -151,91 +65,6 @@ main {
           transition: all 0.3s;
         }
       }
-
-      .termsOfService {
-        width: 100%;
-        text-align: center;
-        color: rgb(135, 136, 140);
-        font-weight: 500;
-        line-height: 24px;
-        font-size: 16px;
-        a {
-          text-decoration: none;
-          color: rgb(169, 223, 216);
-        }
-      }
-
-      .loginUnderline {
-        color: rgb(135, 136, 140);
-        width: 100%;
-        height: 1px;
-        border: 1px solid rgb(44, 45, 51);
-      }
-
-      .signInOptions {
-        width: 100%;
-        text-align: center;
-        color: white;
-      }
-
-      .googleAndFb {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-
-        button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 5px;
-          width: 267px;
-          height: 50px;
-          padding: 10px 16px;
-          border-radius: 6px;
-          border: 1px solid rgba(169, 223, 216, 0.5);
-          background-color: rgba(0, 0, 0, 0);
-          color: white;
-          font-size: 16px;
-          color: rgb(169, 223, 216);
-          cursor: pointer;
-        }
-        button:hover {
-          background-color: rgba(169, 223, 216, 0.04);
-          border: 1px solid rgba(169, 223, 216, 1);
-          cursor: pointer;
-        }
-      }
-    }
-  }
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #1d1e26 inset !important;
-  -webkit-text-fill-color: #ffffff !important;
-  caret-color: #ffffff !important;
-  transition: background-color 9999s ease-out, color 9999s ease-out !important;
-}
-
-@media (max-width: 500px) {
-  .loginContainer {
-    gap: 10px !important;
-  }
-  h3 {
-    font-size: 27px !important;
-  }
-
-  h6 {
-    font-size: 18px !important;
-    a {
-      text-decoration: none;
-      color: rgb(169, 223, 216);
     }
   }
 }

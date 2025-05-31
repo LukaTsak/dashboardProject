@@ -45,6 +45,71 @@
         />
       </div>
 
+      <div class="textInputDiv">
+        <label for="personalNumber">Personal Number</label>
+        <input
+          [(ngModel)]="personalNumber"
+          class="personalNumberInp"
+          type="number"
+          name="Adress"
+          id="personalNumber"
+        />
+      </div>
+
+      <div class="countriesSelect">
+        <div class="country place">
+          <label for="">Country</label>
+          <select
+            class="select"
+            [(ngModel)]="selectedCountry"
+            (change)="getCities(selectedCountry)"
+          >
+            <option disabled selected value="">Select Country</option>
+
+            <option *ngFor="let country of countries" [value]="country.name">
+              {{ country.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="city place">
+          <label for="">City</label>
+          <select class="select" [(ngModel)]="selectedCity">
+            <option disabled selected >Select City</option>
+            <option
+              [disabled]="!selectedCountry"
+              value=""
+              *ngFor="let city of cities"
+              [value]="city"
+            >
+              {{ city }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="textInputDiv">
+        <label for="Adress">Adress</label>
+        <input
+          [(ngModel)]="Adress"
+          class="AdressInp"
+          type="text"
+          name="Adress"
+          id="Adress"
+        />
+      </div>
+
+      <div class="textInputDiv">
+        <label for="DateOfBirth">Date of birth</label>
+        <input
+          [(ngModel)]="DateOfBirth"
+          class="DateOfBirthInp"
+          type="date"
+          name="DateOfBirth"
+          id="DateOfBirth"
+        />
+      </div>
+
       <div class="textInputDiv passwordInputDiv reverseCollumn">
         <div class="passInput">
           <input
@@ -163,72 +228,6 @@
               ></path>
             </svg>
           </button>
-        </div>
-      </div>
-
-      <div class="textInputDiv">
-        <label for="DateOfBirth">Date of birth</label>
-        <input
-          [(ngModel)]="DateOfBirth"
-          class="DateOfBirthInp"
-          type="date"
-          name="DateOfBirth"
-          id="DateOfBirth"
-        />
-      </div>
-
-      <div class="textInputDiv">
-        <label for="Adress">Adress</label>
-        <input
-          [(ngModel)]="Adress"
-          class="AdressInp"
-          type="text"
-          name="Adress"
-          id="Adress"
-        />
-      </div>
-
-      <div class="textInputDiv">
-        <label for="personalNumber">Personal Number</label>
-        <input
-          [(ngModel)]="personalNumber"
-          class="personalNumberInp"
-          type="number"
-          name="Adress"
-          id="personalNumber"
-        />
-      </div>
-
-      <div class="countriesSelect">
-        <div class="country place">
-          <!-- <label for="">Country</label> -->
-          <select
-            class="select"
-            [(ngModel)]="selectedCountry"
-            (change)="getCities(selectedCountry)"
-          >
-            <!-- <option value="">Select Country</option> -->
-
-            <option *ngFor="let country of countries" [value]="country.name" >
-              {{ country.name }}
-            </option>
-
-          </select>
-        </div>
-
-        <div class="city place">
-          <!-- <label for="">City</label> -->
-          <select class="select" [(ngModel)]="selectedCity">
-            <!-- <option  >Select City</option> -->
-            <option
-              [disabled]="!selectedCountry"
-              value=""
-              *ngFor="let city of cities"
-              [value]="city"
-            >
-              {{ city }}
-            </option>
-          </select>
         </div>
       </div>
 

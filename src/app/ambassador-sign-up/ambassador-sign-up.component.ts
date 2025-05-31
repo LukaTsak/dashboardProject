@@ -3,11 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Country, State, City } from 'country-state-city';
-import country from 'country-state-city/lib/country';
-import e from 'express';
 
 @Component({
   selector: 'app-ambassador-sign-up',
@@ -116,7 +111,7 @@ export class AmbassadorSignUpComponent {
     'United States': ['New York', 'Los Angeles', 'Chicago'],
   };
 
-  // ------------------------ for countries and cities dropdown
+  // ------------------------ message handling
 
   showMessage(msg: string) {
     if (this.userMessageArray.includes(msg)) return;
@@ -153,29 +148,18 @@ export class AmbassadorSignUpComponent {
   }
 
   makeVisible(x: number) {
-    if (x == 1) {
-      if (this.passwordType1 === 'password') {
-        this.passwordType1 = 'text';
-        this.passInvisible1 = false;
-        this.passVisible1 = true;
-      } else {
-        this.passwordType1 === 'text';
-        this.passwordType1 = 'password';
-        this.passInvisible1 = true;
-        this.passVisible1 = false;
-      }
-    }
-    if (x == 2) {
-      if (this.passwordType2 === 'password') {
-        this.passwordType2 = 'text';
-        this.passInvisible2 = false;
-        this.passVisible2 = true;
-      } else {
-        this.passwordType2 === 'text';
-        this.passwordType2 = 'password';
-        this.passInvisible2 = true;
-        this.passVisible2 = false;
-      }
+    const typeKey = `passwordType${x}` as keyof this;
+    const invisibleKey = `passInvisible${x}` as keyof this;
+    const visibleKey = `passVisible${x}` as keyof this;
+
+    if (this[typeKey] === 'password') {
+      (this as any)[typeKey] = 'text';
+      (this as any)[invisibleKey] = false;
+      (this as any)[visibleKey] = true;
+    } else {
+      (this as any)[typeKey] = 'password';
+      (this as any)[invisibleKey] = true;
+      (this as any)[visibleKey] = false;
     }
   }
 
@@ -195,103 +179,94 @@ export class AmbassadorSignUpComponent {
       age--;
     }
 
-    return age;
+    return Number(age);
   }
 
   // ------------------------ create account
 
   createAccount() {
-    // ------------------------ validation checks
+    const show = this.showMessage.bind(this);
 
-    if (!this.loginNameSurname?.includes(' ')) {
-      this.showMessage('Please enter both name and surname');
-      return;
+    // Validation rules
+    const validators = [
+      {
+        valid: this.loginNameSurname?.includes(' '),
+        msg: 'Please enter both name and surname',
+      },
+      {
+        valid: /^\d{9}$/.test(this.loginNumber?.toString() || ''),
+        msg: 'Please enter a valid 9-digit phone number',
+      },
+      {
+        valid: /^\d{10}$/.test(this.personalNumber?.toString() || ''),
+        msg: 'Please enter a valid 10-digit personal number',
+      },
+      {
+        valid: !!this.selectedCity && !!this.selectedCountryId,
+        msg: 'Please select country and city',
+      },
+      {
+        valid: !!this.Adress,
+        msg: 'Please fill address field',
+      },
+      {
+        valid: !!this.DateOfBirth,
+        msg: 'Please enter your date of birth',
+      },
+      {
+        valid: this.getAge(this.DateOfBirth ?? '') > 18,
+        msg: 'User must be over 18',
+      },
+      {
+        valid: this.loginPassword === this.loginConfirmPassword,
+        msg: 'Password and Confirm Password do not match',
+      },
+      {
+        valid: this.paswordElligable,
+        msg: 'Password does not meet the requirements',
+      },
+    ];
+
+    // Run validation
+    for (const { valid, msg } of validators) {
+      if (!valid) {
+        show(msg);
+        return;
+      }
     }
 
-    if (!this.loginNumber || this.loginNumber.toString().length != 9) {
-      this.showMessage('Please enter a valid phone number');
-      return;
-    }
+    // Proceed if valid
+    const [name, ...surnameParts] = (this.loginNameSurname ?? '')
+      .trim()
+      .split(' ');
+    const surname = surnameParts.join(' ');
 
-    if (this.loginPassword !== this.loginConfirmPassword) {
-      this.showMessage('Password and Confirm Password do not match');
-      return;
-    } else if (!this.paswordElligable) {
-      this.showMessage('Password does not meet the requirements');
-    } else {
-      // ------------------------
+    const userObj = {
+      name,
+      surname,
+      phone: this.loginNumber?.toString() || '',
+      password: this.loginPassword,
+      password_confirmation: this.loginConfirmPassword,
+      date_of_birth: this.DateOfBirth,
+      address: this.Adress,
+      personal_number: this.personalNumber?.toString() || '',
+      city: this.selectedCity,
+      country_id: this.selectedCountryId,
+      token: this.token,
+    };
 
-      const parts = (this.loginNameSurname ?? '').trim().split(' ');
-      const name = parts[0];
-      const surname = parts.slice(1).join(' ');
+    console.log('userObj:', userObj);
 
-      // ------------------------
-      const userObj = {
-        email: this.loginEmail,
-        name: name,
-        surname: surname,
-        phone: this.loginNumber?.toString() || '',
-        password: this.loginPassword,
-        password_confirmation: this.loginConfirmPassword,
-        date_of_birth: this.DateOfBirth,
-        address: this.Adress,
-        personal_number: this.personalNumber?.toString() || '',
-        city: this.selectedCity,
-        country_id: this.selectedCountryId,
-        token: this.token,
-      };
-
-      console.log('email: ' + this.loginEmail);
-      console.log('name: ' + name);
-      console.log('surname: ' + surname);
-      console.log('number: ' + this.loginNumber);
-      console.log('password: ' + this.loginPassword);
-      console.log('confirmpass: ' + this.loginConfirmPassword);
-      console.log('DateOfBirth: ' + this.DateOfBirth);
-      console.log('Adress: ' + this.Adress);
-      console.log('personalNumber: ' + this.personalNumber);
-      console.log('selectedCity: ' + this.selectedCity);
-      console.log('selectedCountryId: ' + this.selectedCountryId);
-      console.log('token: ' + this.token);
-      console.log('userObj:', userObj);
-
-      this.apiService.createNewAmbassador(userObj).subscribe(
-        (response: any) => {
-          console.log('Response:', response);
-          this.showMessage(response.message);
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 3000);
-        },
-        (error) => {
-          console.error('Error:', error);
-          this.showMessage('please check your information and try again');
-        }
-      );
-    }
-
-    // ------------------------ age
-
-    if (!this.DateOfBirth) {
-      this.showMessage('Please enter your date of birth');
-      return;
-    }
-    const age = this.getAge(this.DateOfBirth);
-
-    if (age < 18) {
-      this.showMessage('User must be over 18');
-    }
-
-    // ------------------------
-
-    if (!this.Adress || !this.selectedCity || !this.selectedCountryId) {
-      this.showMessage('Please fill in all fields');
-      return;
-    }
-
-    if (!this.personalNumber || this.personalNumber.toString().length != 10) {
-      this.showMessage('Please enter a valid personal number');
-      return;
-    }
+    this.apiService.createNewAmbassador(userObj).subscribe(
+      (response: any) => {
+        console.log('Response:', response);
+        show(response.message);
+        setTimeout(() => this.router.navigate(['/login']), 3000);
+      },
+      (error) => {
+        console.error('Error:', error);
+        show('Please check your information and try again');
+      }
+    );
   }
 }

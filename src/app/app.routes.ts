@@ -4,6 +4,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { PreSignupComponent } from './pre-signup/pre-signup.component';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { AmbassadorSignUpComponent } from './ambassador-sign-up/ambassador-sign-up.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -14,4 +15,5 @@ export const routes: Routes = [
     {path: 'complete-ambassador-registration', component: AmbassadorSignUpComponent},
     {path: 'presignup', component: PreSignupComponent},
     {path: 'dashboard', component: MainDashboardComponent},
+    {path: 'forgotPassword', component: ForgotPasswordComponent}
 ];

@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Country, State, City } from 'country-state-city';
 import country from 'country-state-city/lib/country';
+import e from 'express';
 
 @Component({
   selector: 'app-ambassador-sign-up',
@@ -226,6 +227,7 @@ export class AmbassadorSignUpComponent {
 
       // ------------------------
       const userObj = {
+        email: this.loginEmail,
         name: name,
         surname: surname,
         phone: this.loginNumber?.toString() || '',
@@ -233,9 +235,9 @@ export class AmbassadorSignUpComponent {
         password_confirmation: this.loginConfirmPassword,
         date_of_birth: this.DateOfBirth,
         address: this.Adress,
-        personal_number: this.personalNumber,
-        City: this.selectedCity,
-        Country_id: this.selectedCountryId,
+        personal_number: this.personalNumber?.toString() || '',
+        city: this.selectedCity,
+        country_id: this.selectedCountryId,
         token: this.token,
       };
 

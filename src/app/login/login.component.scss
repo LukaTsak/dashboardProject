@@ -131,6 +131,12 @@ main {
       // ------------------------
 
       .keepSignedInDiv {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        
         label {
           color: white;
           cursor: pointer;
@@ -164,6 +170,13 @@ main {
             position: absolute;
             display: none;
           }
+        }
+
+        span {
+          color: rgb(169, 223, 216);
+          font-size: 16px;
+          font-weight: 500;
+          cursor: pointer;
         }
 
         input:checked ~ .checkmark {

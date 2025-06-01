@@ -5,6 +5,7 @@ import { PreSignupComponent } from './pre-signup/pre-signup.component';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { AmbassadorSignUpComponent } from './ambassador-sign-up/ambassador-sign-up.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -15,5 +16,10 @@ export const routes: Routes = [
     {path: 'complete-ambassador-registration', component: AmbassadorSignUpComponent},
     {path: 'presignup', component: PreSignupComponent},
     {path: 'dashboard', component: MainDashboardComponent},
-    {path: 'forgotPassword', component: ForgotPasswordComponent}
+    {path: 'forgotPassword', component: ForgotPasswordComponent},
+    {path: 'reset-password', component: ResetPasswordComponent},
+    {path: 'checkPasswordToken', component: ResetPasswordComponent},
+
+
+    {path: '**', redirectTo: 'login'}
 ];

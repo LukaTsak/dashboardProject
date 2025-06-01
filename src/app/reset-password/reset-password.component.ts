@@ -1,22 +1,42 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 
 @Component({
-  selector: 'app-forgot-password',
+  selector: 'app-reset-password',
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.scss'
+  templateUrl: './reset-password.component.html',
+  styleUrl: './reset-password.component.scss',
 })
-export class ForgotPasswordComponent {
-  constructor(private apiService: ApiServiceService) {}
+export class ResetPasswordComponent {
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiServiceService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      const token = params['token'];
+      console.log('Token:', token);
+      let tokenObj = {
+        token: token,
+      };
+      this.token = token;
+
+      this.apiService.getEmailByToken(tokenObj).subscribe((response: any) => {
+        console.log('Response:', response.email);
+        this.loginEmail = response.email;
+      });
+    });
+  }
 
   // ------------------------ user info
 
-
   loginEmail?: string = '';
+  token?: string = '';
 
   loading = false;
   userMessageArray: string[] = [];
@@ -35,10 +55,9 @@ export class ForgotPasswordComponent {
     }, 3000);
   }
 
-  // ------------------------ send email 
+  // ------------------------ send email
 
   sendEmail() {
-    console.log('email:', this.loginEmail);
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     // ------------------------ input validation

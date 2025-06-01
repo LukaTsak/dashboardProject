@@ -44,4 +44,11 @@ export class ApiServiceService {
       'http://127.0.0.1:8000/api/complete-ambassador-registration/formData'
     );    
   }
+
+  forgotPassword(obj: any) {
+    return this.http.post(
+      'http://127.0.0.1:8000/api/forgot-password',
+      obj,
+    );    
+  }
 }

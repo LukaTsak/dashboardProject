@@ -12,6 +12,8 @@ main {
         align-items: center;
 
         label {
+          display: flex;
+          text-align: center;
           color: white;
           cursor: pointer;
           font-weight: 500;
@@ -30,7 +32,7 @@ main {
           }
           .checkmark {
             position: absolute;
-            top: 0;
+            top: 2px;
             left: 0;
             height: 18px;
             width: 18px;

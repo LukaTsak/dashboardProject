@@ -185,5 +185,26 @@ export class SignUpComponent {
         show('Please check your information and try again');
       }
     );
+
+    // ------------------------ spinner functionality
+
+      const btn = document.getElementById(
+        'sendBtn'
+      ) as HTMLButtonElement | null;
+      if (!btn) return;
+
+      const text = btn.querySelector('.btn-text') as HTMLElement | null;
+      const spinner = btn.querySelector('.spinner') as HTMLElement | null;
+      if (!text || !spinner) return;
+
+      btn.disabled = true;
+      spinner.classList.remove('hidden');
+      text.textContent = '';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        spinner.classList.add('hidden');
+        text.textContent = 'Send Email';
+      }, 3000);
   }
 }

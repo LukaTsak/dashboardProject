@@ -70,6 +70,12 @@ export class LoginComponent {
         this.apiService.Login(obj).subscribe({
           next: (response: any) => {
             console.log('Response:', response);
+
+            const token = response.access_token;
+            if (token) {
+              localStorage.setItem('access_token', token);
+            }
+
             this.showMessage('Login successful!');
             setTimeout(() => {
               this.router.navigate(['/dashboard']);
@@ -85,7 +91,7 @@ export class LoginComponent {
           },
         });
       }
-      
+
       // ------------------------ spinner functionality
 
       const btn = document.getElementById(

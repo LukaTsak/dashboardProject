@@ -1,1 +1,129 @@
-<p>main-dashboard works!</p>
+<main>
+  <div class="loginPage">
+    <div class="loginContainer">
+      <h3>You Must Add Company</h3>
+
+      <div *ngIf="userMessageArray.length > 0" class="user-message">
+        <div *ngFor="let error of userMessageArray" class="littleMessage">
+          {{ error }}
+        </div>
+      </div>
+
+      <div class="textInputDiv company-email">
+        <label for="companyEmail">Email</label>
+        <input
+          [(ngModel)]="companyEmail"
+          class="emailInp"
+          type="email"
+          name="companyEmail"
+          id="companyEmail"
+        />
+      </div>
+
+      <div class="textInputDiv company-phone">
+        <label for="companyPhone">Phone</label>
+        <input
+          [(ngModel)]="companyPhone"
+          class="emailInp"
+          type="tel"
+          name="companyPhone"
+          id="companyPhone"
+        />
+      </div>
+
+      <div class="textInputDiv company-zip">
+        <label for="companyZipCode">Zip Code</label>
+        <input
+          [(ngModel)]="companyZipCode"
+          class="emailInp"
+          type="number"
+          name="companyZipCode"
+          id="companyZipCode"
+        />
+      </div>
+
+      <div class="textInputDiv company-subdomain">
+        <label for="companySubdomain">Subdomain</label>
+        <input
+          [(ngModel)]="companySubdomain"
+          class="emailInp"
+          type="text"
+          name="companySubdomain"
+          id="companySubdomain"
+        />
+      </div>
+
+      <div class="countriesSelect">
+        <div class="country place">
+          <label for="">Country</label>
+          <select
+            class="select"
+            [(ngModel)]="selectedCountry"
+            
+          >
+            <option disabled selected value="">Select Country</option>
+
+            <option *ngFor="let country of countries" [value]="country.name">
+              {{ country.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="city place">
+          <label for="">Languages</label>
+          <select class="select" [(ngModel)]="selectedCity">
+            <option disabled selected >Select Language</option>
+            <option
+              [disabled]="!selectedCountry"
+              value=""
+              *ngFor="let languge of languages"
+              [value]="languge.name"
+            >
+              {{ languge.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="city place">
+          <label for="">Default Language</label>
+          <select class="select" [(ngModel)]="selectedCity">
+            <option disabled selected >Select Language</option>
+            <option
+              [disabled]="!selectedCountry"
+              value=""
+              *ngFor="let languge of languages"
+              [value]="languge.name"
+            >
+              {{ languge.name }}
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="textInputDiv company-logo">
+        <div class="logoAndChooseFile">
+          <label for="companyLogo">Logo</label>
+
+          <label class="custom-upload-btn" for="companyLogo">Choose File</label>
+          <input
+            [(ngModel)]="companyLogo"
+            class="logoInp"
+            type="file"
+            name="companyLogo"
+            id="companyLogo"
+            (change)="onLogoSelected($event)"
+          />
+        </div>
+
+        <div *ngIf="logoPreviewUrl" class="imgDiv">
+          <span class="file-name">
+            {{ selectedLogoFileName || "No file chosen" }}
+          </span>
+          <img [src]="logoPreviewUrl" class="logo-preview" />
+          <a (click)="removeImage()" class="imageDelete">X</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -21,41 +21,41 @@ export class ApiServiceService {
   createNewAccount(obj: any) {
     return this.http.post(
       'http://127.0.0.1:8000/api/complete-user-registration',
-      obj,
+      obj
     );
   }
 
-    createNewAmbassador(obj: any) {
+  createNewAmbassador(obj: any) {
     return this.http.post(
       'http://127.0.0.1:8000/api/complete-ambassador-registration',
-      obj,
+      obj
     );
   }
 
   Login(obj: any) {
-    return this.http.post(
-      'http://127.0.0.1:8000/api/login',
-      obj,
-    );    
+    return this.http.post('http://127.0.0.1:8000/api/login', obj);
   }
 
-    getCountries() {
+  getCountries() {
     return this.http.get(
       'http://127.0.0.1:8000/api/complete-ambassador-registration/formData'
-    );    
+    );
   }
 
   forgotPassword(obj: any) {
-    return this.http.post(
-      'http://127.0.0.1:8000/api/forgot-password',
-      obj,
-    );    
+    return this.http.post('http://127.0.0.1:8000/api/forgot-password', obj);
   }
 
   resetPassword(obj: any) {
-    return this.http.post(
-      'http://127.0.0.1:8000/api/reset-password',
-      obj,
-    );    
+    return this.http.post('http://127.0.0.1:8000/api/reset-password', obj);
   }
+
+  company(token: string) {
+  return this.http.get('http://127.0.0.1:8000/api/dashboard/companies/form-data', {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+}
+
 }

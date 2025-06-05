@@ -56,11 +56,7 @@
       <div class="countriesSelect">
         <div class="country place">
           <label for="">Country</label>
-          <select
-            class="select"
-            [(ngModel)]="selectedCountry"
-            
-          >
+          <select class="select" [(ngModel)]="selectedCountry">
             <option disabled selected value="">Select Country</option>
 
             <option *ngFor="let country of countries" [value]="country.name">
@@ -69,36 +65,41 @@
           </select>
         </div>
 
+        <div class="languages place">
+          <label for="lang">Languages</label>
+          <select
+            (change)="addLanguagesToList(selectedLanguage)"
+            class="select"
+            [(ngModel)]="selectedLanguage"
+          >
+            <option disabled [ngValue]="null">Select Language</option>
+            <option *ngFor="let language of languages" [ngValue]="language">
+              {{ language.name }}
+            </option>
+          </select>
+
+          <div class="langDiv">
+            <div *ngFor="let language of selectedLanguages" class="SelLang">
+              {{ language.name }}
+              <span (click)="delLang(language)">X</span>
+            </div>
+          </div>
+        </div>
+
         <div class="city place">
-          <label for="">Languages</label>
-          <select class="select" [(ngModel)]="selectedCity">
-            <option disabled selected >Select Language</option>
+          <label for="defLang">Default Language</label>
+          <select class="select" [(ngModel)]="selectedDefaultLanguage">
+            <option disabled selected>Select Default Language</option>
             <option
-              [disabled]="!selectedCountry"
               value=""
-              *ngFor="let languge of languages"
-              [value]="languge.name"
+              *ngFor="let languge of selectedLanguages"
+              [value]="languge"
+              id="defLang"
             >
               {{ languge.name }}
             </option>
           </select>
         </div>
-
-        <div class="city place">
-          <label for="">Default Language</label>
-          <select class="select" [(ngModel)]="selectedCity">
-            <option disabled selected >Select Language</option>
-            <option
-              [disabled]="!selectedCountry"
-              value=""
-              *ngFor="let languge of languages"
-              [value]="languge.name"
-            >
-              {{ languge.name }}
-            </option>
-          </select>
-        </div>
-
       </div>
 
       <div class="textInputDiv company-logo">

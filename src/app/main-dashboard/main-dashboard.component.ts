@@ -15,26 +15,25 @@ export class MainDashboardComponent {
   constructor(private apiService: ApiServiceService) {}
 
   ngOnInit() {
-  const token = localStorage.getItem('access_token');
-  if (!token) {
-    console.error('No access token found!');
-    return;
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      console.error('No access token found!');
+      return;
+    }
+
+    this.apiService.company(token).subscribe((countries: any) => {
+      this.countries = (countries.countries || []).map((country: any) => ({
+        name: country.name,
+        id: country.id,
+      }));
+      this.languages = (countries.languages || []).map((language: any) => ({
+        name: language.name,
+        id: language.id,
+      }));
+      console.log('Countries:', this.countries);
+      console.log('Languages:', this.languages);
+    });
   }
-
-  this.apiService.company(token).subscribe((countries: any) => {
-    this.countries = (countries.countries || []).map((country: any) => ({
-      name: country.name,
-      id: country.id,
-    }));
-    this.languages = (countries.languages || []).map((language: any) => ({
-      name: language.name,
-      id: language.id,
-    }));
-    console.log('Countries:', this.countries);
-    console.log('Languages:', this.languages);
-  });
-}
-
 
   // ------------------------ company info
 
@@ -100,10 +99,28 @@ export class MainDashboardComponent {
     name: string;
     code: string;
   }[] = [];
+  selectedLanguages: any[] = [];
 
   selectedCountry: string = '';
-  selectedCity: string = '';
+  selectedDefaultLanguage: string = '';
+  selectedLanguage: any = null;
   selectedCountryId: string = '';
+
+  addLanguagesToList(selectedLang: any) {
+    if (
+      selectedLang &&
+      !this.selectedLanguages.some((lang) => lang.id === selectedLang.id)
+    ) {
+      this.selectedLanguages.push(selectedLang);
+    }
+    this.selectedLanguage = null; // Reset selection after adding
+  }
+
+  delLang(langToRemove: any) {
+    this.selectedLanguages = this.selectedLanguages.filter(
+      (lang) => lang.id !== langToRemove.id
+    );
+  }
 
   // sendEmail() {
   //   console.log('email:', this.loginEmail);

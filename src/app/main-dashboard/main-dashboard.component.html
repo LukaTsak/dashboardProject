@@ -62,7 +62,6 @@
       </div>
 
       <div class="countriesSelect">
-
         <div class="country place">
           <label for="">Country</label>
           <select class="select" [(ngModel)]="selectedCountry">
@@ -81,7 +80,7 @@
             class="select"
             [(ngModel)]="selectedLanguage"
           >
-            <option disabled  [ngValue]="null">Select Language</option>
+            <option disabled [ngValue]="null">Select Language</option>
             <option *ngFor="let language of languages" [ngValue]="language">
               {{ language.name }}
             </option>
@@ -96,7 +95,6 @@
         </div>
 
         <div class="city place">
-
           <label for="defLang">Default Language</label>
           <select class="select" [(ngModel)]="selectedDefaultLanguage">
             <option disabled selected>Select Default Language</option>
@@ -112,9 +110,9 @@
         </div>
       </div>
 
-      <div class="textInputDiv company-logo">
-        <div class="logoAndChooseFile">
-          <label for="companyLogo">Logo</label>
+      <div class="textInputDiv logo">
+        <div class="imageSelDiv">
+          <!-- <label for="companyLogo">Logo</label> -->
 
           <label class="custom-upload-btn" for="companyLogo">Choose File</label>
           <input
@@ -134,6 +132,21 @@
           <img [src]="logoPreviewUrl" class="logo-preview" />
           <a (click)="removeImage()" class="imageDelete">X</a>
         </div>
+
+        <label for="companyEmail">Logo</label>
+        <input
+          disabled
+          [(ngModel)]="companyEmail"
+          class="emailInp"
+          type="email"
+          name="companyEmail"
+          id="companyEmail"
+        />
+      </div>
+
+      <div class="buttons">
+        <button class="loginBtn">Previous</button>
+        <button class="loginBtn">Next</button>
       </div>
     </div>
   </div>

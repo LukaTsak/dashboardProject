@@ -70,13 +70,35 @@ export class MainDashboardComponent {
 
   onLogoSelected(event: any): void {
     const file = event.target.files[0];
-    if (file) {
-      this.selectedLogoFileName = file.name;
+    this.logoPreviewUrl = null;
+    this.selectedLogoFileName = '';
+    this.companyLogo = '';
 
+    if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        this.logoPreviewUrl = reader.result;
+      const image = new Image();
+
+      reader.onload = (e: any) => {
+        image.onload = () => {
+          const width = image.width;
+          const height = image.height;
+
+          if (width !== height) {
+            this.showMessage(
+              `Logo must be a square (equal width and height). Uploaded: ${width}x${height}`
+            );
+            return;
+          }
+
+          // ✅ Valid image
+          this.logoPreviewUrl = e.target.result;
+          this.companyLogo = file;
+          this.selectedLogoFileName = file.name;
+        };
+
+        image.src = e.target.result;
       };
+
       reader.readAsDataURL(file);
     }
   }

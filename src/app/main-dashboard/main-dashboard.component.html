@@ -61,6 +61,40 @@
         />
       </div>
 
+      <div class="textInputDiv logo">
+        <div class="imageSelDiv">
+          <!-- <label for="companyLogo">Logo</label> -->
+
+          <label class="custom-upload-btn" for="companyLogo">Choose File</label>
+          <input
+            [(ngModel)]="companyLogo"
+            class="logoInp"
+            type="file"
+            name="companyLogo"
+            id="companyLogo"
+            (change)="onLogoSelected($event)"
+          />
+        </div>
+
+        <div *ngIf="logoPreviewUrl" class="imgDiv">
+          <span class="file-name">
+            {{ selectedLogoFileName || "No file chosen" }}
+          </span>
+          <img [src]="logoPreviewUrl" class="logo-preview" />
+          <a (click)="removeImage()" class="imageDelete">X</a>
+        </div>
+
+        <label for="companyEmail">Logo</label>
+        <input
+          disabled
+          [(ngModel)]="companyEmail"
+          class="emailInp"
+          type="email"
+          name="companyEmail"
+          id="companyEmail"
+        />
+      </div>
+
       <div class="countriesSelect">
         <div class="country place">
           <label for="">Country</label>
@@ -110,39 +144,7 @@
         </div>
       </div>
 
-      <div class="textInputDiv logo">
-        <div class="imageSelDiv">
-          <!-- <label for="companyLogo">Logo</label> -->
-
-          <label class="custom-upload-btn" for="companyLogo">Choose File</label>
-          <input
-            [(ngModel)]="companyLogo"
-            class="logoInp"
-            type="file"
-            name="companyLogo"
-            id="companyLogo"
-            (change)="onLogoSelected($event)"
-          />
-        </div>
-
-        <div *ngIf="logoPreviewUrl" class="imgDiv">
-          <span class="file-name">
-            {{ selectedLogoFileName || "No file chosen" }}
-          </span>
-          <img [src]="logoPreviewUrl" class="logo-preview" />
-          <a (click)="removeImage()" class="imageDelete">X</a>
-        </div>
-
-        <label for="companyEmail">Logo</label>
-        <input
-          disabled
-          [(ngModel)]="companyEmail"
-          class="emailInp"
-          type="email"
-          name="companyEmail"
-          id="companyEmail"
-        />
-      </div>
+      
 
       <div class="buttons">
         <button class="loginBtn">Previous</button>

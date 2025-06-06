@@ -4,85 +4,6 @@ main {
   .loginPage {
     min-width: 90% !important;
     .loginContainer {
-      .company-logo {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        color: #fff;
-        height: fit-content;
-
-        .logoAndChooseFile {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-        }
-
-        .logoInp {
-          display: none; // დამალე ნამდვილი file input
-        }
-
-        .custom-upload-btn {
-          background-color: rgb(115, 202, 190);
-          color: white;
-          padding: 10px 16px;
-          border-radius: 8px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: fit-content;
-          height: 52px;
-          transition: all 0.3s;
-
-          &:hover {
-            background-color: rgb(169, 223, 216);
-            transition: all 0.3s;
-          }
-        }
-
-        .file-name {
-          font-size: 14px;
-          color: #ccc;
-        }
-
-        .imgDiv {
-          display: flex;
-          gap: 5px;
-          flex-direction: column;
-          align-items: center;
-          height: fit-content;
-          position: relative;
-          width: fit-content;
-          //   border: 1px solid red;
-          .logo-preview {
-            max-width: fit-content;
-            max-height: 100px;
-            border-radius: 8px;
-            object-fit: fill;
-            transition: all 0.3s;
-          }
-          .imageDelete {
-            opacity: 0;
-            color: rgb(115, 202, 190);
-            position: absolute;
-            top: 23px;
-            right: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-          }
-
-          &:hover .imageDelete {
-            opacity: 1;
-            cursor: pointer;
-            transition: all 0.3s;
-          }
-
-          &:hover .logo-preview {
-            opacity: 0.5;
-            transition: all 0.3s;
-          }
-        }
-      }
 
       .steps {
         display: flex;
@@ -101,6 +22,7 @@ main {
           height: 70px;
           border-radius: 50%;
           border: 1px solid gray;
+          font-size: 20px;
           // background-color: red;
         }
         .first {

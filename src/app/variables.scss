@@ -1,0 +1,105 @@
+// -------------------- COLORS --------------------
+
+$color-bg-main: #171821;
+$color-bg-card: #21222d;
+$color-bg-input: #1d1e26;
+$color-bg-hover: #171821;
+$color-accent: rgb(115, 202, 190);
+$color-accent-light: rgb(169, 223, 216);
+$color-muted: rgb(135, 136, 140);
+$color-light-gray: rgb(210, 210, 210);
+$color-mid-gray: #87888c;
+$color-white: #ffffff;
+$color-black: #000000;
+
+// -------------------- DIMENSIONS --------------------
+
+$border-radius-sm: 4px;
+$border-radius-md: 6px;
+$border-radius-lg: 10px;
+$border-radius-xl: 13px;
+
+$input-height: 52px;
+$login-btn-height: 55px;
+$spinner-size: 25px;
+
+$container-padding: 34px 30px;
+$container-margin: 15px;
+$gap-default: 20px;
+$gap-small: 10px;
+$input-padding: 12px 14px;
+
+// -------------------- FONT SIZES --------------------
+
+$font-size-h3: 32px;
+$font-size-h6: 20px;
+$font-size-link: 16px;
+$font-size-button: 20px;
+$font-size-small: 13px;
+$font-size-medium: 16px;
+$font-size-large: 27px;
+
+// -------------------- FONT WEIGHTS --------------------
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// -------------------- MIXINS --------------------
+
+@mixin flex($direction: row, $justify: center, $align: center, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin transition($time: 0.3s) {
+  transition: all $time ease;
+}
+
+@mixin center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin hover-bg($bg-color) {
+  &:hover {
+    background-color: $bg-color;
+    @include transition();
+  }
+}
+
+@mixin input-reset {
+  border: none;
+  outline: none;
+  background-color: $color-bg-input;
+  color: $color-light-gray;
+  font-size: $font-size-medium;
+  height: $input-height;
+  padding: $input-padding;
+  border-radius: $border-radius-lg;
+  @include transition();
+}
+
+@mixin autofill-style($bg: $color-bg-input, $color: $color-white) {
+  -webkit-box-shadow: 0 0 0 1000px $bg inset !important;
+  -webkit-text-fill-color: $color !important;
+  caret-color: $color !important;
+  transition: background-color 9999s ease-out, color 9999s ease-out !important;
+}
+
+@mixin checkmark-style {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid $color-white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}

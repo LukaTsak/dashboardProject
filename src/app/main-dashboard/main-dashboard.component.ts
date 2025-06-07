@@ -49,6 +49,13 @@ export class MainDashboardComponent {
   loading = false;
   userMessageArray: string[] = [];
 
+  // ------------------------ page info
+
+    isFirstStepSliding = false;
+    
+
+  currentPage = 1
+
   // ------------------------ message handling
 
   userMessage: string | null = null;
@@ -63,7 +70,7 @@ export class MainDashboardComponent {
     }, 3000);
   }
 
-  // ------------------------ send email
+  // ------------------------ logo handling
 
   selectedLogoFileName: string = '';
   logoPreviewUrl: string | ArrayBuffer | null = null;
@@ -109,7 +116,7 @@ export class MainDashboardComponent {
     this.companyLogo = '';
   }
 
-  // ------------------------ dynamic countries dropdown
+  // ------------------------ languages handling
 
   countries: {
     id: any;
@@ -143,6 +150,8 @@ export class MainDashboardComponent {
       (lang) => lang.id !== langToRemove.id
     );
   }
+
+  // ------------------------ buttons
 
   // sendEmail() {
   //   console.log('email:', this.loginEmail);
@@ -196,4 +205,19 @@ export class MainDashboardComponent {
   //     }, 3000);
   //   }
   // }
+
+  Previous(){
+    console.log('hi')
+  }
+
+  next() {
+    this.isFirstStepSliding = true;
+
+    // არჩევითად, შეგიძლია დაგვიანებით შეცვალო გვერდი
+    setTimeout(() => {
+      // განაახლე currentPage ან გააკეთე სხვა ლოგიკა
+      this.currentPage++;
+      this.isFirstStepSliding = false; // თუ გინდა ხელახლა გამოჩნდეს
+    }, 500); // შეესაბამება ანიმაციის ხანგრძლივობას
+  }
 }

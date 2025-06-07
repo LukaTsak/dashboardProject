@@ -3,8 +3,9 @@
 main {
   .loginPage {
     min-width: 90% !important;
-    .loginContainer {
+      overflow: hidden;
 
+    .loginContainer {
       .steps {
         display: flex;
         align-items: center;
@@ -37,236 +38,254 @@ main {
         }
       }
 
-      .countriesSelect {
-        width: 100%;
+      .firstStep {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        color: white;
+        flex-direction: column;
         gap: 20px;
-
-        .select {
-          background-color: #1d1e26;
-          height: fit-content;
-          border-radius: 8px;
-          border: none;
+        width: 100%;
+        // border: 1px solid red;
+        .countriesSelect {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
           color: white;
-          padding: 10px;
-          height: 52px;
-          border-right: 10px solid #1d1e26;
+          gap: 20px;
 
-          &:focus {
-            outline: none;
-            background-color: #171821;
-            border-right: 10px solid #171821;
-            transition: all 0.3s;
+          .select {
+            background-color: #1d1e26;
+            height: fit-content;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            padding: 10px;
+            height: 52px;
+            border-right: 10px solid #1d1e26;
+
+            &:focus {
+              outline: none;
+              background-color: #171821;
+              border-right: 10px solid #171821;
+              transition: all 0.3s;
+            }
+
+            &:hover {
+              background-color: #171821;
+              transition: all 0.3s;
+              border-right: 10px solid #171821;
+            }
           }
 
-          &:hover {
-            background-color: #171821;
-            transition: all 0.3s;
-            border-right: 10px solid #171821;
+          .place {
+            width: 31.7%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-align: start;
+            // min-width: 250px;
+          }
+
+          // .languages, .city{
+          //   padding-top: 10px;
+
+          // }
+
+          .languages {
+            position: relative;
+
+            .langDiv {
+              position: absolute;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: row;
+              gap: 10px;
+              top: 24px;
+              left: 8px;
+              width: fit-content;
+              height: 50px;
+              border-radius: 8px;
+              transition: all 0.3s;
+              // background-color: #1d1e26;
+              padding: 0px 6px;
+              // border: 1px solid red;
+              // background-color: rgb(115, 202, 190);
+
+              .SelLang {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                padding: 18px 28px 18px 17px;
+                width: fit-content;
+                height: 30px;
+                //   background-color: rgb(115, 202, 190);
+                background-color: #171821;
+                border: 1px solid grey;
+                border-radius: 8px;
+                transition: all 0.3s;
+
+                span {
+                  position: absolute;
+                  opacity: 0;
+                  right: 8px;
+                  top: 9px;
+                  color: rgb(115, 202, 190);
+                }
+
+                &:hover span {
+                  opacity: 1;
+                  transition: all 0.3s;
+                  cursor: pointer;
+                }
+
+                &:hover {
+                  // background-color: #a9dfd8;
+                  transition: all 0.3s;
+                  cursor: default;
+                }
+                &:hover {
+                  border: 1px solid white;
+                }
+              }
+            }
           }
         }
 
-        .place {
-          width: 31.7%;
+        .logo {
+          position: relative;
+          // border: 1px solid red;
           display: flex;
           flex-direction: column;
-          gap: 5px;
-          text-align: start;
-          // min-width: 250px;
-        }
+          gap: 10px;
+          color: #fff;
+          height: fit-content;
 
-        // .languages, .city{
-        //   padding-top: 10px;
+          .logoAndChooseFile {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+          }
 
-        // }
+          .logoInp {
+            display: none; // დამალე ნამდვილი file input
+          }
 
-        .languages {
-          position: relative;
-
-          .langDiv {
+          .imageSelDiv {
+            // border: 1px solid red;
             position: absolute;
+            top: 38px;
+            left: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: row;
-            gap: 10px;
-            top: 24px;
-            left: 8px;
+            flex-direction: row-reverse;
             width: fit-content;
-            height: 50px;
-            border-radius: 8px;
-            transition: all 0.3s;
-            // background-color: #1d1e26;
-            padding: 0px 6px;
-            // border: 1px solid red;
-            // background-color: rgb(115, 202, 190);
+            gap: 20px;
 
-            .SelLang {
-              position: relative;
+            .custom-upload-btn {
+              // background-color: rgb(115, 202, 190);
+              color: white;
+              padding: 10px 16px;
+              // border-radius: 8px;
+              cursor: pointer;
               display: flex;
               align-items: center;
-              justify-content: start;
-              padding: 18px 28px 18px 17px;
+              justify-content: center;
               width: fit-content;
-              height: 30px;
-              //   background-color: rgb(115, 202, 190);
+              height: 32px;
+              transition: all 0.3s;
               background-color: #171821;
               border: 1px solid grey;
               border-radius: 8px;
               transition: all 0.3s;
 
-              span {
-                position: absolute;
-                opacity: 0;
-                right: 8px;
-                top: 9px;
-                color: rgb(115, 202, 190);
-              }
-
-              &:hover span {
-                opacity: 1;
-                transition: all 0.3s;
-                cursor: pointer;
-              }
-
-              &:hover {
-                // background-color: #a9dfd8;
-                transition: all 0.3s;
-                cursor: default;
-              }
               &:hover {
                 border: 1px solid white;
+                transition: all 0.3s;
               }
             }
           }
-        }
-      }
-
-      .logo {
-        position: relative;
-        // border: 1px solid red;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        color: #fff;
-        height: fit-content;
-
-        .logoAndChooseFile {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-        }
-
-        .logoInp {
-          display: none; // დამალე ნამდვილი file input
-        }
-
-        .imageSelDiv {
-          // border: 1px solid red;
-          position: absolute;
-          top: 38px;
-          left: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: row-reverse;
-          width: fit-content;
-          gap: 20px;
-
-          .custom-upload-btn {
-            // background-color: rgb(115, 202, 190);
-            color: white;
-            padding: 10px 16px;
-            // border-radius: 8px;
-            cursor: pointer;
+          .imgDiv {
+            position: absolute;
+            bottom: 12px;
+            left: 150px;
             display: flex;
+            gap: 5px;
+            flex-direction: column-reverse;
             align-items: center;
-            justify-content: center;
+            height: fit-content;
             width: fit-content;
-            height: 32px;
-            transition: all 0.3s;
-            background-color: #171821;
-            border: 1px solid grey;
+            padding: 5px 30px 5px 15px;
             border-radius: 8px;
+            border: 1px solid gray;
+            overflow: hidden;
+            height: 28px;
+            cursor: default;
             transition: all 0.3s;
+
+            .logo-preview {
+              // position: absolute;
+              max-width: fit-content;
+              max-height: 100px;
+              border-radius: 8px;
+              object-fit: fill;
+              transition: all 0.3s;
+            }
+            .imageDelete {
+              opacity: 0;
+              color: rgb(115, 202, 190);
+              position: absolute;
+              top: 6px;
+              right: 7px;
+              cursor: pointer;
+              transition: all 0.3s;
+            }
 
             &:hover {
               border: 1px solid white;
+              height: 140px;
+              background-color: #1d1e26;
+              transition: all 0.3s;
+            }
+
+            &:hover .imageDelete {
+              opacity: 1;
+              cursor: pointer;
+              transition: all 0.3s;
+            }
+
+            &:hover .logo-preview {
               transition: all 0.3s;
             }
           }
-        }
-        .imgDiv {
-          position: absolute;
-          bottom: 12px;
-          left: 150px;
-          display: flex;
-          gap: 5px;
-          flex-direction: column-reverse;
-          align-items: center;
-          height: fit-content;
-          width: fit-content;
-          padding: 5px 30px 5px 15px;
-          border-radius: 8px;
-          border: 1px solid gray;
-          overflow: hidden;
-          height: 28px;
-          cursor: default;
-          transition: all 0.3s;
 
-          .logo-preview {
-            // position: absolute;
-            max-width: fit-content;
-            max-height: 100px;
-            border-radius: 8px;
-            object-fit: fill;
-            transition: all 0.3s;
+          .file-name {
+            font-size: 14px;
+            color: #ccc;
           }
-          .imageDelete {
-            opacity: 0;
-            color: rgb(115, 202, 190);
-            position: absolute;
-            top: 6px;
-            right: 7px;
-            cursor: pointer;
-            transition: all 0.3s;
-          }
-
-          &:hover {
-            border: 1px solid white;
-            height: 140px;
-            background-color: #1d1e26;
-            transition: all 0.3s;
-          }
-
-          &:hover .imageDelete {
-            opacity: 1;
-            cursor: pointer;
-            transition: all 0.3s;
-          }
-
-          &:hover .logo-preview {
-            transition: all 0.3s;
-          }
-        }
-
-        .file-name {
-          font-size: 14px;
-          color: #ccc;
         }
       }
 
-      .buttons{
+      .buttons {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        .loginBtn{
+        .loginBtn {
           width: 49% !important;
+        }
+        .prev {
+          border: 1px solid rgb(115, 202, 190);
+          color: rgb(115, 202, 190);
+          background-color: #171821;
+          transition: all 0.3s;
+
+          &:hover {
+            border: 2px solid rgb(115, 202, 190);
+            transition: all 0.3s;
+          }
         }
       }
     }
@@ -296,3 +315,24 @@ main {
     }
   }
 }
+
+@keyframes slideLeftOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-150%);
+  }
+}
+
+.firstStep {
+  transition: all 1s ease-in-out;
+
+  &.slide-left {
+    animation: slideLeftOut 0.5s forwards;
+  }
+}
+
+

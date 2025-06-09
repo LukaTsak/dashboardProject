@@ -3,7 +3,7 @@
 main {
   .loginPage {
     min-width: 90% !important;
-      overflow: hidden;
+    overflow: hidden;
 
     .loginContainer {
       .steps {
@@ -215,14 +215,24 @@ main {
             flex-direction: column-reverse;
             align-items: center;
             height: fit-content;
-            width: fit-content;
-            padding: 5px 30px 5px 15px;
+            width: 32%;
+            max-width: fit-content;
+            // padding: 5px 30px 5px 15px;
+            text-align: center;
+            padding: 5px;
             border-radius: 8px;
             border: 1px solid gray;
             overflow: hidden;
             height: 28px;
             cursor: default;
             transition: all 0.3s;
+
+            .file-name {
+              white-space: nowrap;
+              // overflow: hidden;
+              text-overflow: ellipsis;
+              max-width: 100%;
+            }
 
             .logo-preview {
               // position: absolute;
@@ -334,5 +344,3 @@ main {
     animation: slideLeftOut 0.5s forwards;
   }
 }
-
-

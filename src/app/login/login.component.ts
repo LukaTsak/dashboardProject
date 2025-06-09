@@ -72,7 +72,7 @@ export class LoginComponent {
             console.log('Response:', response);
 
             const token = response.access_token;
-            if (token) {
+            if (typeof window !== 'undefined' && token) {
               localStorage.setItem('access_token', token);
             }
 

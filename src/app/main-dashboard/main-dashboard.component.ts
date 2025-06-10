@@ -208,16 +208,18 @@ export class MainDashboardComponent {
 
   Previous(){
     console.log('hi')
+    this.isFirstStepSliding = false;
   }
 
   next() {
     this.isFirstStepSliding = true;
+    this.currentPage++
 
     // არჩევითად, შეგიძლია დაგვიანებით შეცვალო გვერდი
-    setTimeout(() => {
-      // განაახლე currentPage ან გააკეთე სხვა ლოგიკა
-      this.currentPage++;
-      this.isFirstStepSliding = false; // თუ გინდა ხელახლა გამოჩნდეს
-    }, 500); // შეესაბამება ანიმაციის ხანგრძლივობას
+    // setTimeout(() => {
+    //   // განაახლე currentPage ან გააკეთე სხვა ლოგიკა
+    //   this.currentPage++;
+    //   this.isFirstStepSliding = false; // თუ გინდა ხელახლა გამოჩნდეს
+    // }, 500); // შეესაბამება ანიმაციის ხანგრძლივობას
   }
 }

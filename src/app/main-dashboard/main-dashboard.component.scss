@@ -93,20 +93,24 @@ main {
           .languages {
             position: relative;
 
+            .select{
+              position: relative;
+            }
+
             .langDiv {
               position: absolute;
               display: flex;
               align-items: center;
-              justify-content: center;
+              justify-content: start;
               flex-direction: row;
               gap: 10px;
               top: 24px;
               left: 8px;
-              width: fit-content;
+              width: 80%;
               height: 50px;
               border-radius: 8px;
               transition: all 0.3s;
-              // background-color: #1d1e26;
+              background-color: #1d1e26;
               padding: 0px 6px;
               // border: 1px solid red;
               // background-color: rgb(115, 202, 190);
@@ -117,7 +121,9 @@ main {
                 align-items: center;
                 justify-content: start;
                 padding: 18px 28px 18px 17px;
-                width: fit-content;
+                width: 50%;
+                max-width: fit-content;
+                overflow: hidden;
                 height: 30px;
                 //   background-color: rgb(115, 202, 190);
                 background-color: #171821;
@@ -148,7 +154,11 @@ main {
                   border: 1px solid white;
                 }
               }
+              &:hover ~ .langDiv{
+              background-color: #171821;
             }
+            }
+            
           }
         }
 

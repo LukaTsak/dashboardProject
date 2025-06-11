@@ -17,133 +17,138 @@
         </div>
       </div>
 
-      <div class="firstStep" [ngClass]="{ 'slide-left': isFirstStepSliding }">
-        <div class="textInputDiv company-email">
-          <label for="companyEmail">Email</label>
-          <input
-            [(ngModel)]="companyEmail"
-            class="emailInp"
-            type="email"
-            name="companyEmail"
-            id="companyEmail"
-          />
-        </div>
-
-        <div class="textInputDiv company-phone">
-          <label for="companyPhone">Phone</label>
-          <input
-            [(ngModel)]="companyPhone"
-            class="emailInp"
-            type="tel"
-            name="companyPhone"
-            id="companyPhone"
-          />
-        </div>
-
-        <div class="textInputDiv company-zip">
-          <label for="companyZipCode">Zip Code</label>
-          <input
-            [(ngModel)]="companyZipCode"
-            class="emailInp"
-            type="number"
-            name="companyZipCode"
-            id="companyZipCode"
-          />
-        </div>
-
-        <div class="textInputDiv company-subdomain">
-          <label for="companySubdomain">Subdomain</label>
-          <input
-            [(ngModel)]="companySubdomain"
-            class="emailInp"
-            type="text"
-            name="companySubdomain"
-            id="companySubdomain"
-          />
-        </div>
-
-        <div class="textInputDiv logo">
-          <div class="imageSelDiv">
-            <!-- <label for="companyLogo">Logo</label> -->
-
-            <label class="custom-upload-btn" for="companyLogo"
-              >Choose File</label
-            >
+      <div class="pageSteps">
+        <div class="firstStep">
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Email</label>
             <input
-              [(ngModel)]="companyLogo"
-              class="logoInp"
-              type="file"
-              name="companyLogo"
-              id="companyLogo"
-              (change)="onLogoSelected($event)"
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
             />
           </div>
 
-          <div *ngIf="logoPreviewUrl" class="imgDiv">
-            <span class="file-name">
-              {{ selectedLogoFileName || "No file chosen" }}
-            </span>
-            <img [src]="logoPreviewUrl" class="logo-preview" />
-            <a (click)="removeImage()" class="imageDelete">X</a>
+          <div class="textInputDiv company-phone">
+            <label for="companyPhone">Phone</label>
+            <input
+              [(ngModel)]="companyPhone"
+              class="emailInp"
+              type="tel"
+              name="companyPhone"
+              id="companyPhone"
+            />
           </div>
 
-          <label for="companyLogo">Logo</label>
-          <input
-            [(ngModel)]="companyEmail"
-            class="emailInp"
-            type="email"
-            autocomplete="off"
-            name="companyEmail"
-            id="companyEmail"
-          />
-        </div>
-
-        <div class="countriesSelect">
-          <div class="country place">
-            <label for="">Country</label>
-            <select class="select" [(ngModel)]="selectedCountry">
-              <option disabled selected value="">Select Country</option>
-
-              <option *ngFor="let country of countries" [value]="country.name">
-                {{ country.name }}
-              </option>
-            </select>
+          <div class="textInputDiv company-zip">
+            <label for="companyZipCode">Zip Code</label>
+            <input
+              [(ngModel)]="companyZipCode"
+              class="emailInp"
+              type="number"
+              name="companyZipCode"
+              id="companyZipCode"
+            />
           </div>
 
-          <div class="languages place">
-            <label for="lang">Languages</label>
-            <select
-              (change)="addLanguagesToList(selectedLanguage)"
-              class="select"
-              [(ngModel)]="selectedLanguage"
-            >
-              <!-- <option disabled [ngValue]="null">Select Language</option> -->
-              <option *ngFor="let language of languages" [ngValue]="language">
-                {{ language.name }}
-              </option>
-            </select>
+          <div class="textInputDiv company-subdomain">
+            <label for="companySubdomain">Subdomain</label>
+            <input
+              [(ngModel)]="companySubdomain"
+              class="emailInp"
+              type="text"
+              name="companySubdomain"
+              id="companySubdomain"
+            />
+          </div>
 
-            <div class="langDiv">
-              <div *ngFor="let language of selectedLanguages" class="SelLang">
-                {{ language.name }}
-                <span (click)="delLang(language)">Remove</span>
+          <div class="textInputDiv logo">
+            <div class="imageSelDiv">
+              <!-- <label for="companyLogo">Logo</label> -->
+
+              <label class="custom-upload-btn" for="companyLogo"
+                >Choose File</label
+              >
+              <input
+                [(ngModel)]="companyLogo"
+                class="logoInp"
+                type="file"
+                name="companyLogo"
+                id="companyLogo"
+                (change)="onLogoSelected($event)"
+              />
+            </div>
+
+            <div *ngIf="logoPreviewUrl" class="imgDiv">
+              <span class="file-name">
+                {{ selectedLogoFileName || "No file chosen" }}
+              </span>
+              <img [src]="logoPreviewUrl" class="logo-preview" />
+              <a (click)="removeImage()" class="imageDelete">X</a>
+            </div>
+
+            <label for="companyLogo">Logo</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              autocomplete="off"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="countriesSelect">
+            <div class="country place">
+              <label for="">Country</label>
+              <select class="select" [(ngModel)]="selectedCountry">
+                <option disabled selected value="">Select Country</option>
+
+                <option
+                  *ngFor="let country of countries"
+                  [value]="country.name"
+                >
+                  {{ country.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="languages place">
+              <label for="lang">Languages</label>
+              <select
+                (change)="addLanguagesToList(selectedLanguage)"
+                class="select"
+                [(ngModel)]="selectedLanguage"
+              >
+                <!-- <option disabled [ngValue]="null">Select Language</option> -->
+                <option *ngFor="let language of languages" [ngValue]="language">
+                  {{ language.name }}
+                </option>
+              </select>
+
+              <div class="langDiv">
+                <div *ngFor="let language of selectedLanguages" class="SelLang">
+                  {{ language.name }}
+                  <span (click)="delLang(language)">Remove</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="city place">
-            <label for="defLang">Default Language</label>
-            <select class="select" [(ngModel)]="selectedDefaultLanguage">
-              <option disabled selected>Select Default Language</option>
-              <option
-                value=""
-                *ngFor="let languge of selectedLanguages"
-                [value]="languge"
-                id="defLang"
-              >
-                {{ languge.name }}
-              </option>
-            </select>
+            <div class="city place">
+              <label for="defLang">Default Language</label>
+              <select class="select" [(ngModel)]="selectedDefaultLanguage">
+                <option disabled selected>Select Default Language</option>
+                <option
+                  value=""
+                  *ngFor="let languge of selectedLanguages"
+                  [value]="languge"
+                  id="defLang"
+                >
+                  {{ languge.name }}
+                </option>
+              </select>
+            </div>
           </div>
         </div>
       </div>

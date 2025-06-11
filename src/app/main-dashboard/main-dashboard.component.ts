@@ -51,7 +51,6 @@ export class MainDashboardComponent {
 
   // ------------------------ page info
 
-  isFirstStepSliding = false;
 
   currentPage = 1;
 
@@ -215,14 +214,13 @@ export class MainDashboardComponent {
   next() {
     if (this.currentPage < 3) {
       this.currentPage++;
-      // this.isFirstStepSliding = true;
     }
   }
 
   Previous() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      // this.isFirstStepSliding = false;
+
     }
   }
 }

@@ -51,10 +51,9 @@ export class MainDashboardComponent {
 
   // ------------------------ page info
 
-    isFirstStepSliding = false;
-    
+  isFirstStepSliding = false;
 
-  currentPage = 1
+  currentPage = 1;
 
   // ------------------------ message handling
 
@@ -206,20 +205,24 @@ export class MainDashboardComponent {
   //   }
   // }
 
-  Previous(){
-    console.log('hi')
-    this.isFirstStepSliding = false;
+  get canGoNext() {
+    return this.currentPage < 3;
+  }
+  get canGoPrevious() {
+    return this.currentPage > 1;
   }
 
   next() {
-    this.isFirstStepSliding = true;
-    this.currentPage++
+    if (this.currentPage < 3) {
+      this.currentPage++;
+      // this.isFirstStepSliding = true;
+    }
+  }
 
-    // არჩევითად, შეგიძლია დაგვიანებით შეცვალო გვერდი
-    // setTimeout(() => {
-    //   // განაახლე currentPage ან გააკეთე სხვა ლოგიკა
-    //   this.currentPage++;
-    //   this.isFirstStepSliding = false; // თუ გინდა ხელახლა გამოჩნდეს
-    // }, 500); // შეესაბამება ანიმაციის ხანგრძლივობას
+  Previous() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      // this.isFirstStepSliding = false;
+    }
   }
 }

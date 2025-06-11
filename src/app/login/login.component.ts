@@ -14,6 +14,15 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(private apiService: ApiServiceService, private router: Router) {}
 
+  ngOnInit() {
+  const token = localStorage.getItem('access_token');
+  if (token) {
+    // Ideally verify token or call a /me or /profile endpoint
+    this.router.navigate(['/dashboard']);
+  }
+}
+
+
   // ------------------------ password visibility/functionality
 
   passwordType = 'password';

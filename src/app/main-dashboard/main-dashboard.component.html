@@ -4,11 +4,11 @@
       <h3>You Must Add Company</h3>
 
       <div class="steps">
-        <div class="circle first">1</div>
-        <div class="line line1" ></div>
-        <div class="circle second">2</div>
-        <div class="line line2"></div>
-        <div class="circle third">3</div>
+        <div class="circle first" [class.active]="currentPage >= 1">1</div>
+        <div class="line line1" [class.active]="currentPage >= 2"></div>
+        <div class="circle second" [class.active]="currentPage >= 2">2</div>
+        <div class="line line2" [class.active]="currentPage >= 3"></div>
+        <div class="circle third" [class.active]="currentPage >= 3">3</div>
       </div>
 
       <div *ngIf="userMessageArray.length > 0" class="user-message">
@@ -87,12 +87,12 @@
             <a (click)="removeImage()" class="imageDelete">X</a>
           </div>
 
-          <label for="companyEmail">Logo</label>
+          <label for="companyLogo">Logo</label>
           <input
-            disabled
             [(ngModel)]="companyEmail"
             class="emailInp"
             type="email"
+            autocomplete="off"
             name="companyEmail"
             id="companyEmail"
           />
@@ -150,13 +150,16 @@
 
       <div class="buttons">
         <button
+          [disabled]="!canGoPrevious"
           (click)="Previous()"
           [disabled]="currentPage < 2"
           class="loginBtn prev"
         >
           Previous
         </button>
-        <button (click)="next()" class="loginBtn next">Next</button>
+        <button [disabled]="!canGoNext" (click)="next()" class="loginBtn next">
+          Next
+        </button>
       </div>
     </div>
   </div>

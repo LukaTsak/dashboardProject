@@ -18,7 +18,14 @@
       </div>
 
       <div class="pageSteps">
-        <div class="firstStep">
+        <div
+          class="firstStep"
+          [ngClass]="{
+            'flex-displayFirst':
+              currentPage === 1 && previousPage > currentPage,
+            hidden: currentPage !== 1
+          }"
+        >
           <div class="textInputDiv company-email">
             <label for="companyEmail">Email</label>
             <input
@@ -90,12 +97,13 @@
 
             <label for="companyLogo">Logo</label>
             <input
-              [(ngModel)]="companyEmail"
+              disabled
+              [(ngModel)]="companyLogo"
               class="emailInp"
               type="email"
               autocomplete="off"
               name="companyEmail"
-              id="companyEmail"
+              id="companyLogoo"
             />
           </div>
 
@@ -149,6 +157,153 @@
                 </option>
               </select>
             </div>
+          </div>
+        </div>
+        <div
+          class="secondStep"
+          [ngClass]="{
+            'flex-display': currentPage === 2 && previousPage < currentPage, 'flex-displaySecond':
+              currentPage === 2 && previousPage > currentPage,
+            hidden: currentPage !== 2
+          }"
+        >
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Name</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Description</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">State</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">City</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Address</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+        </div>
+        <div
+          class="thirdStep"
+          [ngClass]="{
+            'flex-display': currentPage === 3 && previousPage < currentPage,
+            hidden: currentPage !== 3
+          }"
+        >
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Facebook</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Twitter</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Instagram</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">LinkedIn</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Tiktok</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Latitude</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
+          </div>
+
+          <div class="textInputDiv company-email">
+            <label for="companyEmail">Longitude</label>
+            <input
+              [(ngModel)]="companyEmail"
+              class="emailInp"
+              type="email"
+              name="companyEmail"
+              id="companyEmail"
+            />
           </div>
         </div>
       </div>

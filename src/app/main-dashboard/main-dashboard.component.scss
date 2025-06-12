@@ -4,9 +4,12 @@ main {
   .loginPage {
     min-width: 90%;
     // max-width: 700px !important;
-    overflow: hidden;
+    // overflow: hidden;
 
     .loginContainer {
+      overflow: hidden;
+      width: 100%;
+      height: fit-content;
       .steps {
         display: flex;
         align-items: center;
@@ -70,21 +73,26 @@ main {
       }
 
       .pageSteps {
+        position: relative;
         display: flex;
-        flex-direction: column;
+        width: 300%; /* 3 steps */
+        transition: transform 0.3s ease;
+        flex-direction: row;
         gap: 20px;
         align-items: start;
         justify-content: center;
         width: fit-content;
         height: 100%;
         min-width: 100%;
-        border: 1px solid red;
+        // border: 1px solid red;
+        min-height: fit-content;
+        transition: height 0.3s;
         .firstStep {
           display: flex;
           flex-direction: column;
           gap: 20px;
           width: 100%;
-          border: 1px solid yellow;
+          // border: 1px solid yellow;
           .countriesSelect {
             width: 100%;
             display: flex;
@@ -335,6 +343,44 @@ main {
             }
           }
         }
+        .secondStep {
+          // position: absolute;
+          display: none;
+          gap: 20px;
+          flex-direction: column;
+          width: 100%;
+          height: 100%;
+          // border: 1px solid green;
+        }
+        .thirdStep {
+          // position: absolute;
+          display: none;
+          gap: 20px;
+          flex-direction: column;
+          width: 100%;
+          height: 100%;
+          // border: 1px solid pink;
+        }
+
+        .flex-displayFirst {
+          display: flex;
+          animation: slideInFromLeft 0.5s;
+        }
+
+        .flex-displaySecond{
+          display: flex;
+          animation: slideInFromLeft 0.5s;
+        }
+
+        .flex-display {
+          display: flex;
+          animation: fadeInSlide 0.5s ease forwards;
+        }
+
+        .hidden {
+          display: none;
+        }
+        
       }
 
       .buttons {
@@ -384,3 +430,26 @@ main {
     }
   }
 }
+
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(100%); /* slide from right */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%); // Start offscreen left
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%); // End at normal position
+  }
+}
+

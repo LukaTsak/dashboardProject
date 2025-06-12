@@ -53,6 +53,7 @@ export class MainDashboardComponent {
 
 
   currentPage = 1;
+  previousPage = 1
 
   // ------------------------ message handling
 
@@ -205,22 +206,25 @@ export class MainDashboardComponent {
   // }
 
   get canGoNext() {
-    return this.currentPage < 3;
-  }
-  get canGoPrevious() {
-    return this.currentPage > 1;
-  }
+  return this.currentPage < 3;
+}
 
-  next() {
-    if (this.currentPage < 3) {
-      this.currentPage++;
-    }
-  }
+get canGoPrevious() {
+  return this.currentPage > 1;
+}
 
-  Previous() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-
-    }
+next() {
+  if (this.canGoNext) {
+    this.previousPage = this.currentPage;
+    this.currentPage++;
   }
+}
+
+Previous() {
+  if (this.canGoPrevious) {
+    this.previousPage = this.currentPage;
+    this.currentPage--;
+  }
+}
+
 }

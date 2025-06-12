@@ -1,104 +1,83 @@
+@use './variables' as *;
+
 main {
   width: 100%;
   min-width: fit-content;
   height: fit-content;
   min-height: 100vh;
-  background-color: #171821;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: $color-bg-main;
+  @include flex-center;
+
   .loginPage {
     width: fit-content;
     height: fit-content;
-    border-radius: 13px;
+    border-radius: $border-radius-xl;
     padding: 34px 30px;
     margin: 15px;
-    background-color: #21222d;
+    background-color: $color-bg-login;
     min-width: 100px;
+
     .loginContainer {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      @include flex-column(20px);
       align-items: start;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
 
       .user-message {
         height: fit-content;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+        @include flex-column(10px);
         position: fixed;
         top: 20px;
         right: 20px;
         z-index: 1000;
-        transition: all 1s;
+        transition: $transition-slow;
 
         .littleMessage {
-          background-color: rgb(115, 202, 190);
-          color: white;
-          padding: 12px 20px;
-          border-radius: 4px;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-          animation: slideInFromRight 0.6s ease-out forwards;
-          transition: all 1s;
+          @include message-toast;
         }
       }
 
       h3 {
         height: 37px;
-        color: white;
-        font-size: 32px;
+        color: $color-white;
+        font-size: $font-size-h3;
         width: 100%;
         text-align: center;
       }
 
       h6 {
         height: 32px;
-        font-size: 20px;
+        font-size: $font-size-h6;
         font-weight: 500;
-        color: rgb(135, 136, 140);
+        color: $color-secondary;
         width: 100%;
         text-align: center;
+
         a {
           text-decoration: none;
-          color: rgb(169, 223, 216);
+          color: $color-primary-light;
         }
       }
 
       .textInputDiv {
-        display: flex;
-        gap: 4px;
-        flex-direction: column;
-        color: white;
+        @include flex-column(4px);
+        color: $color-white;
         width: 100%;
         height: 79px;
 
         label {
           font-weight: 500;
         }
+
         input[type="number"] {
-          // For Chrome, Safari, Edge, Opera
           &::-webkit-outer-spin-button,
           &::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
           }
-
-          // For Firefox
           -moz-appearance: textfield;
         }
 
         input {
-          color: rgb(210, 210, 210);
-          font-size: 16px;
-          height: 52px;
-          background-color: #1d1e26;
-          border: none;
-          border-radius: 10px;
-          padding: 12px 14px;
-          transition: all 0.3s;
+          @include input-field;
 
           &:focus {
             outline: none;
@@ -106,8 +85,8 @@ main {
         }
 
         .emailInp:hover {
-          background-color: #171821;
-          transition: all 0.3s;
+          background-color: $color-bg-hover;
+          transition: $transition-fast;
         }
       }
 
@@ -117,30 +96,21 @@ main {
 
           input {
             width: 100%;
-            height: 52px;
-            border-top-right-radius: 0px !important;
-            border-bottom-right-radius: 0px !important;
-            transition: all 0.3s;
+            height: $input-height;
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            transition: $transition-fast;
           }
 
           button {
-            width: 44px;
-            height: 52px;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-            border: none;
-            outline: none;
-            background-color: #1d1e26;
-            color: white;
-            transition: all 0.3s;
-            cursor: pointer;
+            @include password-toggle-btn;
           }
         }
 
         .passInput:hover input,
         .passInput:hover button {
-          background-color: #171821 !important;
-          transition: all 0.3s;
+          background-color: $color-bg-hover !important;
+          transition: $transition-fast;
         }
 
         label {
@@ -148,20 +118,17 @@ main {
         }
       }
 
-      // ------------------------
-
       .keepSignedInDiv {
         width: 100%;
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
         align-items: center;
 
         label {
-          color: white;
+          color: $color-white;
           cursor: pointer;
           font-weight: 500;
-          font-size: 16px;
+          font-size: $font-size-link;
           line-height: 24px;
           position: relative;
           padding-left: 25px;
@@ -174,17 +141,11 @@ main {
             height: 0;
             width: 0;
           }
+
           .checkmark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 18px;
-            width: 18px;
-            background-color: #eee;
-            border-radius: 4px;
-            // border: 1px solid white;
-            background-color: #87888c;
+            @include checkbox-base;
           }
+
           .checkmark:after {
             content: "";
             position: absolute;
@@ -193,47 +154,27 @@ main {
         }
 
         span {
-          color: rgb(169, 223, 216);
-          font-size: 16px;
+          color: $color-primary-light;
+          font-size: $font-size-link;
           font-weight: 500;
           cursor: pointer;
         }
 
         input:checked ~ .checkmark {
-          background-color: rgb(115, 202, 190);
+          background-color: $color-primary;
         }
+
         input:checked ~ .checkmark:after {
           display: block;
         }
+
         .checkmark:after {
-          left: 5px;
-          top: 2px;
-          width: 4px;
-          height: 8px;
-          border: solid white;
-          border-width: 0 3px 3px 0;
-          -webkit-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
-          transform: rotate(45deg);
+          @include checkmark-icon;
         }
       }
 
-      // ------------------------
-
       .loginBtn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgb(115, 202, 190);
-        width: 100%;
-        height: 55px;
-        border-radius: 6px;
-        padding: 10px 16px;
-        border: none;
-        cursor: pointer;
-        font-size: 20px;
-        font-weight: 500;
-        transition: all 0.3s;
+        @include primary-button;
 
         .spinner {
           width: 25px;
@@ -244,64 +185,38 @@ main {
           animation: spin 0.6s linear infinite;
         }
 
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
         .hidden {
           display: none;
         }
 
         &:hover {
-          background-color: rgb(169, 223, 216);
-          transition: all 0.3s;
+          background-color: $color-primary-light;
         }
       }
 
       .loginUnderline {
-        color: rgb(135, 136, 140);
+        color: $color-secondary;
         width: 100%;
         height: 1px;
-        border: 1px solid rgb(44, 45, 51);
+        border: 1px solid $color-border;
       }
 
       .signInOptions {
         width: 100%;
         text-align: center;
-        color: white;
+        color: $color-white;
       }
 
       .googleAndFb {
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
+        @include flex-center-wrap(10px);
 
         button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 5px;
-          width: 267px;
-          height: 50px;
-          padding: 10px 16px;
-          border-radius: 6px;
-          border: 1px solid rgba(169, 223, 216, 0.5);
-          background-color: rgba(0, 0, 0, 0);
-          color: white;
-          font-size: 16px;
-          color: rgb(169, 223, 216);
-          cursor: pointer;
+          @include social-btn;
 
           &:hover {
-            background-color: rgba(169, 223, 216, 0.04);
-            border: 1px solid rgba(169, 223, 216, 1);
-            cursor: pointer;
+            background-color: rgba($color-primary-light, 0.04);
+            border: 1px solid $color-primary-light;
           }
         }
       }
@@ -309,37 +224,29 @@ main {
   }
 }
 
+/* Autofill Fix */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #1d1e26 inset !important;
-  -webkit-text-fill-color: #ffffff !important;
-  caret-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0 1000px $color-bg-input inset !important;
+  -webkit-text-fill-color: $color-white !important;
+  caret-color: $color-white !important;
   transition: background-color 9999s ease-out, color 9999s ease-out !important;
 }
 
 select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px #1d1e26 inset !important;
-  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0 1000px $color-bg-input inset !important;
+  -webkit-text-fill-color: $color-white !important;
   transition: background-color 5000s ease-in-out 0s !important;
 }
 
-
-
+/* Animations */
 @keyframes fadeinout {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @keyframes slideInFromRight {
@@ -353,6 +260,7 @@ select:-webkit-autofill {
   }
 }
 
+/* Responsive */
 @media (max-width: 500px) {
   .loginContainer {
     gap: 10px !important;
@@ -367,11 +275,11 @@ select:-webkit-autofill {
   }
 
   h6 {
-    font-size: 18px !important;
+    font-size: $font-size-h6-sm !important;
 
     a {
       text-decoration: none;
-      color: rgb(169, 223, 216);
+      color: $color-primary-light;
     }
   }
 
@@ -381,4 +289,3 @@ select:-webkit-autofill {
     }
   }
 }
-

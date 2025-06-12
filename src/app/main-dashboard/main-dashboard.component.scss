@@ -378,7 +378,10 @@ main {
         }
 
         .hidden {
+          // animation: slideleft 0.5s;
+          transform: translateX(-100%);
           display: none;
+          
         }
         
       }
@@ -450,6 +453,17 @@ main {
   100% {
     opacity: 1;
     transform: translateX(0%); // End at normal position
+  }
+}
+
+@keyframes slideleft {
+  0% {
+    opacity: 0;
+    transform: translateX(0%); // Start offscreen left
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-100%); // End at normal position
   }
 }
 

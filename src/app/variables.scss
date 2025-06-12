@@ -1,18 +1,21 @@
-// -------------------- COLORS --------------------
-
 $color-bg-main: #171821;
-$color-bg-card: #21222d;
+$color-bg-login: #21222d;
 $color-bg-input: #1d1e26;
 $color-bg-hover: #171821;
-$color-accent: rgb(115, 202, 190);
-$color-accent-light: rgb(169, 223, 216);
-$color-muted: rgb(135, 136, 140);
+$color-primary: rgb(115, 202, 190);
+$color-primary-light: rgb(169, 223, 216);
+$color-secondary: rgb(135, 136, 140);
 $color-light-gray: rgb(210, 210, 210);
-$color-mid-gray: #87888c;
+$color-checkbox-bg: #87888c;
 $color-white: #ffffff;
-$color-black: #000000;
+$color-shadow: rgba(0, 0, 0, 0.3);
+$color-border: rgb(44, 45, 51);
 
-// -------------------- DIMENSIONS --------------------
+$font-size-h3: 32px;
+$font-size-h6: 20px;
+$font-size-h6-sm: 18px;
+$font-size-link: 16px;
+$font-size-button: 20px;
 
 $border-radius-sm: 4px;
 $border-radius-md: 6px;
@@ -20,86 +23,56 @@ $border-radius-lg: 10px;
 $border-radius-xl: 13px;
 
 $input-height: 52px;
-$login-btn-height: 55px;
-$spinner-size: 25px;
+$btn-height: 55px;
 
-$container-padding: 34px 30px;
-$container-margin: 15px;
-$gap-default: 20px;
-$gap-small: 10px;
-$input-padding: 12px 14px;
+$transition-fast: all 0.3s;
+$transition-slow: all 1s;
 
-// -------------------- FONT SIZES --------------------
-
-$font-size-h3: 32px;
-$font-size-h6: 20px;
-$font-size-link: 16px;
-$font-size-button: 20px;
-$font-size-small: 13px;
-$font-size-medium: 16px;
-$font-size-large: 27px;
-
-// -------------------- FONT WEIGHTS --------------------
-
-$font-weight-regular: 400;
-$font-weight-medium: 500;
-$font-weight-bold: 700;
-
-// -------------------- MIXINS --------------------
-
-@mixin flex($direction: row, $justify: center, $align: center, $gap: 0) {
-  display: flex;
-  flex-direction: $direction;
-  justify-content: $justify;
-  align-items: $align;
-  gap: $gap;
-}
-
-@mixin transition($time: 0.3s) {
-  transition: all $time ease;
-}
-
-@mixin center-content {
+// Flex Utilities
+@mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@mixin hover-bg($bg-color) {
-  &:hover {
-    background-color: $bg-color;
-    @include transition();
+@mixin flex-column($gap: 20px, $align: start, $justify: center) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+// Button Base Style
+@mixin button-base($radius: $border-radius-md) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: $transition-fast;
+}
+
+// Input Base Style
+@mixin input-style($padding: 12px 14px) {
+  height: $input-height;
+  background-color: $color-bg-input;
+  border: none;
+  border-radius: $border-radius-lg;
+  padding: $padding;
+  color: $color-light-gray;
+  font-size: 16px;
+  transition: $transition-fast;
+
+  &:focus {
+    outline: none;
   }
 }
 
-@mixin input-reset {
-  border: none;
-  outline: none;
-  background-color: $color-bg-input;
-  color: $color-light-gray;
-  font-size: $font-size-medium;
-  height: $input-height;
-  padding: $input-padding;
-  border-radius: $border-radius-lg;
-  @include transition();
-}
-
-@mixin autofill-style($bg: $color-bg-input, $color: $color-white) {
+// Autofill Fix for Webkit Browsers
+@mixin autofill-fix($color: $color-white, $bg: $color-bg-input) {
   -webkit-box-shadow: 0 0 0 1000px $bg inset !important;
   -webkit-text-fill-color: $color !important;
   caret-color: $color !important;
   transition: background-color 9999s ease-out, color 9999s ease-out !important;
-}
-
-@mixin checkmark-style {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 5px;
-  top: 2px;
-  width: 4px;
-  height: 8px;
-  border: solid $color-white;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
 }

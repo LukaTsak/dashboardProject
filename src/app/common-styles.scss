@@ -6,7 +6,9 @@ main {
   height: fit-content;
   min-height: 100vh;
   background-color: $color-bg-main;
-  @include flex-center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .loginPage {
     width: fit-content;
@@ -18,12 +20,19 @@ main {
     min-width: 100px;
 
     .loginContainer {
-      @include flex-column(20px);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       align-items: start;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
 
       .user-message {
         height: fit-content;
-        @include flex-column(10px);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         position: fixed;
         top: 20px;
         right: 20px;
@@ -31,7 +40,13 @@ main {
         transition: $transition-slow;
 
         .littleMessage {
-          @include message-toast;
+          background-color: $color-primary;
+          color: $color-white;
+          padding: 12px 20px;
+          border-radius: $border-radius-sm;
+          box-shadow: 0 2px 6px $color-shadow;
+          animation: slideInFromRight 0.6s ease-out forwards;
+          transition: $transition-slow;
         }
       }
 
@@ -58,7 +73,9 @@ main {
       }
 
       .textInputDiv {
-        @include flex-column(4px);
+        display: flex;
+        gap: 4px;
+        flex-direction: column;
         color: $color-white;
         width: 100%;
         height: 79px;
@@ -77,7 +94,14 @@ main {
         }
 
         input {
-          @include input-field;
+          color: $color-light-gray;
+          font-size: 16px;
+          height: $input-height;
+          background-color: $color-bg-input;
+          border: none;
+          border-radius: $border-radius-lg;
+          padding: 12px 14px;
+          transition: $transition-fast;
 
           &:focus {
             outline: none;
@@ -103,7 +127,16 @@ main {
           }
 
           button {
-            @include password-toggle-btn;
+            width: 44px;
+            height: $input-height;
+            border-top-right-radius: $border-radius-lg;
+            border-bottom-right-radius: $border-radius-lg;
+            border: none;
+            outline: none;
+            background-color: $color-bg-input;
+            color: $color-white;
+            transition: $transition-fast;
+            cursor: pointer;
           }
         }
 
@@ -143,7 +176,13 @@ main {
           }
 
           .checkmark {
-            @include checkbox-base;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 18px;
+            width: 18px;
+            background-color: $color-checkbox-bg;
+            border-radius: 4px;
           }
 
           .checkmark:after {
@@ -169,12 +208,30 @@ main {
         }
 
         .checkmark:after {
-          @include checkmark-icon;
+          left: 5px;
+          top: 2px;
+          width: 4px;
+          height: 8px;
+          border: solid $color-white;
+          border-width: 0 3px 3px 0;
+          transform: rotate(45deg);
         }
       }
 
       .loginBtn {
-        @include primary-button;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-primary;
+        width: 100%;
+        height: $btn-height;
+        border-radius: $border-radius-md;
+        padding: 10px 16px;
+        border: none;
+        cursor: pointer;
+        font-size: $font-size-button;
+        font-weight: 500;
+        transition: $transition-fast;
 
         .spinner {
           width: 25px;
@@ -209,10 +266,26 @@ main {
 
       .googleAndFb {
         width: 100%;
-        @include flex-center-wrap(10px);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
 
         button {
-          @include social-btn;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          width: 267px;
+          height: 50px;
+          padding: 10px 16px;
+          border-radius: $border-radius-md;
+          border: 1px solid rgba($color-primary-light, 0.5);
+          background-color: transparent;
+          color: $color-primary-light;
+          font-size: $font-size-link;
+          cursor: pointer;
 
           &:hover {
             background-color: rgba($color-primary-light, 0.04);

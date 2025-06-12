@@ -27,46 +27,42 @@
           }"
         >
           <div class="textInputDiv company-email">
-            <label for="companyEmail">Email</label>
+            <label for="companyEmailStep1">Email</label>
             <input
               [(ngModel)]="companyEmail"
-              class="emailInp"
               type="email"
-              name="companyEmail"
-              id="companyEmail"
+              name="companyEmailStep1"
+              id="companyEmailStep1"
             />
           </div>
 
           <div class="textInputDiv company-phone">
-            <label for="companyPhone">Phone</label>
+            <label for="companyPhoneStep1">Phone</label>
             <input
               [(ngModel)]="companyPhone"
-              class="emailInp"
               type="tel"
-              name="companyPhone"
-              id="companyPhone"
+              name="companyPhoneStep1"
+              id="companyPhoneStep1"
             />
           </div>
 
           <div class="textInputDiv company-zip">
-            <label for="companyZipCode">Zip Code</label>
+            <label for="companyZipCodeStep1">Zip Code</label>
             <input
               [(ngModel)]="companyZipCode"
-              class="emailInp"
               type="number"
-              name="companyZipCode"
-              id="companyZipCode"
+              name="companyZipCodeStep1"
+              id="companyZipCodeStep1"
             />
           </div>
 
           <div class="textInputDiv company-subdomain">
-            <label for="companySubdomain">Subdomain</label>
+            <label for="companySubdomainStep1">Subdomain</label>
             <input
               [(ngModel)]="companySubdomain"
-              class="emailInp"
               type="text"
-              name="companySubdomain"
-              id="companySubdomain"
+              name="companySubdomainStep1"
+              id="companySubdomainStep1"
             />
           </div>
 
@@ -74,15 +70,15 @@
             <div class="imageSelDiv">
               <!-- <label for="companyLogo">Logo</label> -->
 
-              <label class="custom-upload-btn" for="companyLogo"
+              <label class="custom-upload-btn" for="companyLogoStep1"
                 >Choose File</label
               >
               <input
                 [(ngModel)]="companyLogo"
                 class="logoInp"
                 type="file"
-                name="companyLogo"
-                id="companyLogo"
+                name="companyLogoStep1"
+                id="companyLogoStep1"
                 (change)="onLogoSelected($event)"
               />
             </div>
@@ -95,22 +91,21 @@
               <a (click)="removeImage()" class="imageDelete">X</a>
             </div>
 
-            <label for="companyLogo">Logo</label>
+            <label for="companyLogoStep1">Logo</label>
             <input
               disabled
               [(ngModel)]="companyLogo"
-              class="emailInp"
               type="email"
               autocomplete="off"
-              name="companyEmail"
-              id="companyLogoo"
+              name="companyLogoDisabledStep1"
+              id="companyLogoDisabledStep1"
             />
           </div>
 
           <div class="countriesSelect">
             <div class="country place">
-              <label for="">Country</label>
-              <select class="select" [(ngModel)]="selectedCountry">
+              <label for="countrySelectStep1">Country</label>
+              <select class="select" [(ngModel)]="selectedCountry" id="countrySelectStep1" name="countrySelectStep1">
                 <option disabled selected value="">Select Country</option>
 
                 <option
@@ -123,13 +118,14 @@
             </div>
 
             <div class="languages place">
-              <label for="lang">Languages</label>
+              <label for="languageSelectStep1">Languages</label>
               <select
                 (change)="addLanguagesToList(selectedLanguage)"
                 class="select"
                 [(ngModel)]="selectedLanguage"
+                id="languageSelectStep1"
+                name="languageSelectStep1"
               >
-                <!-- <option disabled [ngValue]="null">Select Language</option> -->
                 <option *ngFor="let language of languages" [ngValue]="language">
                   {{ language.name }}
                 </option>
@@ -144,14 +140,13 @@
             </div>
 
             <div class="city place">
-              <label for="defLang">Default Language</label>
-              <select class="select" [(ngModel)]="selectedDefaultLanguage">
+              <label for="defaultLanguageSelectStep1">Default Language</label>
+              <select class="select" [(ngModel)]="selectedDefaultLanguage" id="defaultLanguageSelectStep1" name="defaultLanguageSelectStep1">
                 <option disabled selected>Select Default Language</option>
                 <option
-                  value=""
                   *ngFor="let languge of selectedLanguages"
                   [value]="languge"
-                  id="defLang"
+                  id="defLangOptionStep1"
                 >
                   {{ languge.name }}
                 </option>
@@ -167,58 +162,53 @@
             hidden: currentPage !== 2
           }"
         >
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Name</label>
+          <div class="textInputDiv company-name">
+            <label for="companyNameStep2">Name</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyName"
+              type="text"
+              name="companyNameStep2"
+              id="companyNameStep2"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Description</label>
+          <div class="textInputDiv company-description">
+            <label for="companyDescriptionStep2">Description</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyDescription"
+              type="text"
+              name="companyDescriptionStep2"
+              id="companyDescriptionStep2"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">State</label>
+          <div class="textInputDiv company-state">
+            <label for="companyStateStep2">State</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyState"
+              type="text"
+              name="companyStateStep2"
+              id="companyStateStep2"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">City</label>
+          <div class="textInputDiv company-city">
+            <label for="companyCityStep2">City</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyCity"
+              type="text"
+              name="companyCityStep2"
+              id="companyCityStep2"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Address</label>
+          <div class="textInputDiv company-address">
+            <label for="companyAddressStep2">Address</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyAddress"
+              type="text"
+              name="companyAddressStep2"
+              id="companyAddressStep2"
             />
           </div>
         </div>
@@ -229,80 +219,75 @@
             hidden: currentPage !== 3
           }"
         >
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Facebook</label>
+          <div class="textInputDiv company-facebook">
+            <label for="companyFacebookStep3">Facebook</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyFacebook"
+              type="url"
+              name="companyFacebookStep3"
+              id="companyFacebookStep3"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Twitter</label>
+          <div class="textInputDiv company-twitter">
+            <label for="companyTwitterStep3">Twitter</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyTwitter"
+              type="url"
+              name="companyTwitterStep3"
+              id="companyTwitterStep3"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Instagram</label>
+          <div class="textInputDiv company-instagram">
+            <label for="companyInstagramStep3">Instagram</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyInstagram"
+              type="url"
+              name="companyInstagramStep3"
+              id="companyInstagramStep3"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">LinkedIn</label>
+          <div class="textInputDiv company-linkedin">
+            <label for="companyLinkedinStep3">LinkedIn</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyLinkedIn"
+              type="url"
+              name="companyLinkedinStep3"
+              id="companyLinkedinStep3"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Tiktok</label>
+          <div class="textInputDiv company-tiktok">
+            <label for="companyTiktokStep3">Tiktok</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyTiktok"
+              type="url"
+              name="companyTiktokStep3"
+              id="companyTiktokStep3"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Latitude</label>
+          <div class="textInputDiv company-latitude">
+            <label for="companyLatitudeStep3">Latitude</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyLatitude"
+              type="number"
+              step="any"
+              name="companyLatitudeStep3"
+              id="companyLatitudeStep3"
             />
           </div>
 
-          <div class="textInputDiv company-email">
-            <label for="companyEmail">Longitude</label>
+          <div class="textInputDiv company-longitude">
+            <label for="companyLongitudeStep3">Longitude</label>
             <input
-              [(ngModel)]="companyEmail"
-              class="emailInp"
-              type="email"
-              name="companyEmail"
-              id="companyEmail"
+              [(ngModel)]="companyLongitude"
+              type="number"
+              step="any"
+              name="companyLongitudeStep3"
+              id="companyLongitudeStep3"
             />
           </div>
         </div>

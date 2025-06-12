@@ -51,6 +51,25 @@ export class MainDashboardComponent {
 
   // ------------------------ page info
 
+  // Step 2
+companyName?: string = '';
+companyDescription?: string = '';
+companyState?: string = '';
+companyCity?: string = '';
+companyAddress?: string = '';
+
+// Step 3
+companyFacebook?: string = '';
+companyTwitter?: string = '';
+companyInstagram?: string = '';
+companyLinkedIn?: string = '';
+companyTiktok?: string = '';
+companyLatitude?: string = '';
+companyLongitude?: string = '';
+
+
+  
+
 
   currentPage = 1;
   previousPage = 1

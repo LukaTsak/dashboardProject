@@ -351,6 +351,31 @@ main {
           width: 100%;
           height: 100%;
           // border: 1px solid green;
+
+          .company-description{
+            height: fit-content;
+
+            .Description{
+            height: 104px;
+            border: 1 px solid red;
+            border: none;
+            outline: none;
+              background-color: #1d1e26;
+            border-radius: 8px;
+            transition: all 0.3s;
+            resize: none;
+
+
+            &:hover{
+            background-color: #171821;
+            transition: all 0.3s;
+              
+            }
+          }
+
+          }
+
+          
         }
         .thirdStep {
           // position: absolute;

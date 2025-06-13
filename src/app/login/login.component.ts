@@ -47,6 +47,7 @@ export class LoginComponent {
 
   email?: string = '';
   password?: string = '';
+  keepSignedIn :boolean = false
 
   userMessageArray: string[] = [];
 
@@ -81,8 +82,11 @@ export class LoginComponent {
             console.log('Response:', response);
 
             const token = response.access_token;
-            if (typeof window !== 'undefined' && token) {
+            if (typeof window !== 'undefined' && token && this.keepSignedIn == true) {
               localStorage.setItem('access_token', token);
+            }
+            else if(typeof window !== 'undefined' && token && this.keepSignedIn == false){
+              sessionStorage.setItem('access_token', token)
             }
 
             this.showMessage('Login successful!');

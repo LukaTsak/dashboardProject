@@ -37,6 +37,12 @@ export class MainDashboardComponent {
 
   // ------------------------ company info
 
+  loading = false;
+  userMessageArray: string[] = [];
+
+  // ------------------------ page info
+
+  // Step 1
   companyLogo?: string = '';
   companySubdomain?: string = '';
   companyZipCode?: string = '';
@@ -46,33 +52,24 @@ export class MainDashboardComponent {
   companyLanguages?: string = '';
   companyCountry?: string = '';
 
-  loading = false;
-  userMessageArray: string[] = [];
-
-  // ------------------------ page info
-
   // Step 2
-companyName?: string = '';
-companyDescription?: string = '';
-companyState?: string = '';
-companyCity?: string = '';
-companyAddress?: string = '';
+  companyName?: string = '';
+  companyDescription?: string = '';
+  companyState?: string = '';
+  companyCity?: string = '';
+  companyAddress?: string = '';
 
-// Step 3
-companyFacebook?: string = '';
-companyTwitter?: string = '';
-companyInstagram?: string = '';
-companyLinkedIn?: string = '';
-companyTiktok?: string = '';
-companyLatitude?: string = '';
-companyLongitude?: string = '';
-
-
-  
-
+  // Step 3
+  companyFacebook?: string = '';
+  companyTwitter?: string = '';
+  companyInstagram?: string = '';
+  companyLinkedIn?: string = '';
+  companyTiktok?: string = '';
+  companyLatitude?: string = '';
+  companyLongitude?: string = '';
 
   currentPage = 1;
-  previousPage = 1
+  previousPage = 1;
 
   // ------------------------ message handling
 
@@ -225,25 +222,49 @@ companyLongitude?: string = '';
   // }
 
   get canGoNext() {
-  return this.currentPage < 3;
-}
-
-get canGoPrevious() {
-  return this.currentPage > 1;
-}
-
-next() {
-  if (this.canGoNext) {
-    this.previousPage = this.currentPage;
-    this.currentPage++;
+    return this.currentPage < 3;
   }
-}
 
-Previous() {
-  if (this.canGoPrevious) {
-    this.previousPage = this.currentPage;
-    this.currentPage--;
+  get canGoPrevious() {
+    return this.currentPage > 1;
   }
-}
 
+  next() {
+    if (this.canGoNext) {
+      this.previousPage = this.currentPage;
+      this.currentPage++;
+    }
+    console.log('Company Data:', {
+  companyLogo: this.companyLogo,
+  companySubdomain: this.companySubdomain,
+  companyZipCode: this.companyZipCode,
+  companyPhone: this.companyPhone,
+  companyEmail: this.companyEmail,
+  companyDefaultLanguage: this.companyDefaultLanguage,
+  companyLanguages: this.companyLanguages,
+  companyCountry: this.companyCountry,
+
+  companyName: this.companyName,
+  companyDescription: this.companyDescription,
+  companyState: this.companyState,
+  companyCity: this.companyCity,
+  companyAddress: this.companyAddress,
+
+  companyFacebook: this.companyFacebook,
+  companyTwitter: this.companyTwitter,
+  companyInstagram: this.companyInstagram,
+  companyLinkedIn: this.companyLinkedIn,
+  companyTiktok: this.companyTiktok,
+  companyLatitude: this.companyLatitude,
+  companyLongitude: this.companyLongitude
+});
+
+  }
+
+  Previous() {
+    if (this.canGoPrevious) {
+      this.previousPage = this.currentPage;
+      this.currentPage--;
+    }
+  }
 }

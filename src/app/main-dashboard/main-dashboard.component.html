@@ -31,6 +31,7 @@
             <input
               [(ngModel)]="companyEmail"
               type="email"
+              class="emailInp"
               name="companyEmailStep1"
               id="companyEmailStep1"
             />
@@ -41,6 +42,7 @@
             <input
               [(ngModel)]="companyPhone"
               type="tel"
+              class="emailInp"
               name="companyPhoneStep1"
               id="companyPhoneStep1"
             />
@@ -51,6 +53,7 @@
             <input
               [(ngModel)]="companyZipCode"
               type="number"
+              class="emailInp"
               name="companyZipCodeStep1"
               id="companyZipCodeStep1"
             />
@@ -61,6 +64,7 @@
             <input
               [(ngModel)]="companySubdomain"
               type="text"
+              class="emailInp"
               name="companySubdomainStep1"
               id="companySubdomainStep1"
             />
@@ -68,14 +72,12 @@
 
           <div class="textInputDiv logo">
             <div class="imageSelDiv">
-              <!-- <label for="companyLogo">Logo</label> -->
-
               <label class="custom-upload-btn" for="companyLogoStep1"
                 >Choose File</label
               >
               <input
                 [(ngModel)]="companyLogo"
-                class="logoInp"
+                class="emailInp logoInp"
                 type="file"
                 name="companyLogoStep1"
                 id="companyLogoStep1"
@@ -97,6 +99,7 @@
               [(ngModel)]="companyLogo"
               type="email"
               autocomplete="off"
+              class="emailInp"
               name="companyLogoDisabledStep1"
               id="companyLogoDisabledStep1"
             />
@@ -105,9 +108,13 @@
           <div class="countriesSelect">
             <div class="country place">
               <label for="countrySelectStep1">Country</label>
-              <select class="select" [(ngModel)]="selectedCountry" id="countrySelectStep1" name="countrySelectStep1">
+              <select
+                class="select emailInp"
+                [(ngModel)]="selectedCountry"
+                id="countrySelectStep1"
+                name="countrySelectStep1"
+              >
                 <option disabled selected value="">Select Country</option>
-
                 <option
                   *ngFor="let country of countries"
                   [value]="country.name"
@@ -121,7 +128,7 @@
               <label for="languageSelectStep1">Languages</label>
               <select
                 (change)="addLanguagesToList(selectedLanguage)"
-                class="select"
+                class="select emailInp"
                 [(ngModel)]="selectedLanguage"
                 id="languageSelectStep1"
                 name="languageSelectStep1"
@@ -141,7 +148,12 @@
 
             <div class="city place">
               <label for="defaultLanguageSelectStep1">Default Language</label>
-              <select class="select" [(ngModel)]="selectedDefaultLanguage" id="defaultLanguageSelectStep1" name="defaultLanguageSelectStep1">
+              <select
+                class="select emailInp"
+                [(ngModel)]="selectedDefaultLanguage"
+                id="defaultLanguageSelectStep1"
+                name="defaultLanguageSelectStep1"
+              >
                 <option disabled selected>Select Default Language</option>
                 <option
                   *ngFor="let languge of selectedLanguages"
@@ -154,11 +166,12 @@
             </div>
           </div>
         </div>
+
         <div
           class="secondStep"
           [ngClass]="{
-            'flex-display': currentPage === 2 && previousPage < currentPage, 'flex-displaySecond':
-              currentPage === 2 && previousPage > currentPage,
+            'flex-display': currentPage === 2 && previousPage < currentPage,
+            'flex-displaySecond': currentPage === 2 && previousPage > currentPage,
             hidden: currentPage !== 2
           }"
         >
@@ -167,18 +180,9 @@
             <input
               [(ngModel)]="companyName"
               type="text"
+              class="emailInp"
               name="companyNameStep2"
               id="companyNameStep2"
-            />
-          </div>
-
-          <div class="textInputDiv company-description">
-            <label for="companyDescriptionStep2">Description</label>
-            <input
-              [(ngModel)]="companyDescription"
-              type="text"
-              name="companyDescriptionStep2"
-              id="companyDescriptionStep2"
             />
           </div>
 
@@ -187,6 +191,7 @@
             <input
               [(ngModel)]="companyState"
               type="text"
+              class="emailInp"
               name="companyStateStep2"
               id="companyStateStep2"
             />
@@ -197,6 +202,7 @@
             <input
               [(ngModel)]="companyCity"
               type="text"
+              class="emailInp"
               name="companyCityStep2"
               id="companyCityStep2"
             />
@@ -207,11 +213,24 @@
             <input
               [(ngModel)]="companyAddress"
               type="text"
+              class="emailInp"
               name="companyAddressStep2"
               id="companyAddressStep2"
             />
           </div>
+
+          <div class="textInputDiv company-description">
+            <label for="companyDescriptionStep2">Description</label>
+            <textarea
+              [(ngModel)]="companyDescription"
+              type="text"
+              class="emailInp Description"
+              name="companyDescriptionStep2"
+              id="companyDescriptionStep2"
+            ></textarea>
+          </div>
         </div>
+
         <div
           class="thirdStep"
           [ngClass]="{
@@ -224,6 +243,7 @@
             <input
               [(ngModel)]="companyFacebook"
               type="url"
+              class="emailInp"
               name="companyFacebookStep3"
               id="companyFacebookStep3"
             />
@@ -234,6 +254,7 @@
             <input
               [(ngModel)]="companyTwitter"
               type="url"
+              class="emailInp"
               name="companyTwitterStep3"
               id="companyTwitterStep3"
             />
@@ -244,6 +265,7 @@
             <input
               [(ngModel)]="companyInstagram"
               type="url"
+              class="emailInp"
               name="companyInstagramStep3"
               id="companyInstagramStep3"
             />
@@ -254,6 +276,7 @@
             <input
               [(ngModel)]="companyLinkedIn"
               type="url"
+              class="emailInp"
               name="companyLinkedinStep3"
               id="companyLinkedinStep3"
             />
@@ -264,6 +287,7 @@
             <input
               [(ngModel)]="companyTiktok"
               type="url"
+              class="emailInp"
               name="companyTiktokStep3"
               id="companyTiktokStep3"
             />
@@ -275,6 +299,7 @@
               [(ngModel)]="companyLatitude"
               type="number"
               step="any"
+              class="emailInp"
               name="companyLatitudeStep3"
               id="companyLatitudeStep3"
             />
@@ -286,6 +311,7 @@
               [(ngModel)]="companyLongitude"
               type="number"
               step="any"
+              class="emailInp"
               name="companyLongitudeStep3"
               id="companyLongitudeStep3"
             />
@@ -302,7 +328,7 @@
         >
           Previous
         </button>
-        <button [disabled]="!canGoNext" (click)="next()" class="loginBtn next">
+        <button (click)="next()" class="loginBtn next">
           Next
         </button>
       </div>

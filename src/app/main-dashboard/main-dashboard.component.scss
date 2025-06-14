@@ -155,7 +155,7 @@ main {
                 top: 24px;
                 left: 8px;
                 width: 75%;
-              // color: #171821;
+                // color: #171821;
                 // max-width: 65%;
                 height: 50px;
                 border-radius: 8px;
@@ -352,30 +352,28 @@ main {
           height: 100%;
           // border: 1px solid green;
 
-          .company-description{
+          .company-description {
             height: fit-content;
 
-            .Description{
-            height: 104px;
-            border: 1 px solid red;
-            border: none;
-            outline: none;
+            .Description {
+              color: white;
+              padding: 10px;
+              font-size: 16px;
+              height: 104px;
+              border: 1 px solid red;
+              border: none;
+              outline: none;
               background-color: #1d1e26;
-            border-radius: 8px;
-            transition: all 0.3s;
-            resize: none;
+              border-radius: 8px;
+              transition: all 0.3s;
+              resize: none;
 
-
-            &:hover{
-            background-color: #171821;
-            transition: all 0.3s;
-              
+              &:hover {
+                background-color: #171821;
+                transition: all 0.3s;
+              }
             }
           }
-
-          }
-
-          
         }
         .thirdStep {
           // position: absolute;
@@ -392,7 +390,7 @@ main {
           animation: slideInFromLeft 0.5s;
         }
 
-        .flex-displaySecond{
+        .flex-displaySecond {
           display: flex;
           animation: slideInFromLeft 0.5s;
         }
@@ -406,9 +404,7 @@ main {
           // animation: slideleft 0.5s;
           transform: translateX(-100%);
           display: none;
-          
         }
-        
       }
 
       .buttons {
@@ -491,4 +487,3 @@ main {
     transform: translateX(-100%); // End at normal position
   }
 }
-

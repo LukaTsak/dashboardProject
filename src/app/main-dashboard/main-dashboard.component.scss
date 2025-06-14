@@ -374,6 +374,21 @@ main {
               }
             }
           }
+
+          .secLangStyle {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 10px;
+
+            .defLangInp,
+            .secLangInp {
+              display: flex;
+              flex-direction: column;
+              width: 100%;
+              gap: 5px;
+            }
+          }
         }
         .thirdStep {
           // position: absolute;

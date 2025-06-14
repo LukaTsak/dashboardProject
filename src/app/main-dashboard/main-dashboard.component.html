@@ -171,63 +171,129 @@
           class="secondStep"
           [ngClass]="{
             'flex-display': currentPage === 2 && previousPage < currentPage,
-            'flex-displaySecond': currentPage === 2 && previousPage > currentPage,
+            'flex-displaySecond':
+              currentPage === 2 && previousPage > currentPage,
             hidden: currentPage !== 2
           }"
         >
-          <div class="textInputDiv company-name">
-            <label for="companyNameStep2">Name</label>
-            <input
-              [(ngModel)]="companyName"
-              type="text"
-              class="emailInp"
-              name="companyNameStep2"
-              id="companyNameStep2"
-            />
+          <div class="textInputDiv company-name secLangStyle">
+            <div class="defLangInp">
+              <label for="companyNameStep2">Name</label>
+              <input
+                [(ngModel)]="companyName"
+                type="text"
+                class="emailInp"
+                name="companyNameStep2"
+                id="companyNameStep2"
+              />
+            </div>
+
+            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+              <label for="companyNameStep2Trans">Name</label>
+              <input
+                [(ngModel)]="companyNameTrans"
+                type="text"
+                class="emailInp"
+                name="companyNameStep2Trans"
+                id="companyNameStep2Trans"
+              />
+            </div>
           </div>
 
-          <div class="textInputDiv company-state">
-            <label for="companyStateStep2">State</label>
-            <input
-              [(ngModel)]="companyState"
-              type="text"
-              class="emailInp"
-              name="companyStateStep2"
-              id="companyStateStep2"
-            />
+          <div class="textInputDiv company-state secLangStyle">
+            <div class="defLangInp">
+              <label for="companyStateStep2">State</label>
+              <input
+                [(ngModel)]="companyState"
+                type="text"
+                class="emailInp"
+                name="companyNameStep2"
+                id="companyStateStep2"
+              />
+            </div>
+
+            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+              <label for="companyStateStep2Trans">State</label>
+              <input
+                [(ngModel)]="companyStateTrans"
+                type="text"
+                class="emailInp"
+                name="companyNameStep2"
+                id="companyStateStep2Trans"
+              />
+            </div>
           </div>
 
-          <div class="textInputDiv company-city">
-            <label for="companyCityStep2">City</label>
-            <input
-              [(ngModel)]="companyCity"
-              type="text"
-              class="emailInp"
-              name="companyCityStep2"
-              id="companyCityStep2"
-            />
+          <div class="textInputDiv company-city secLangStyle">
+            <div class="defLangInp">
+              <label for="companyCityStep2">City</label>
+              <input
+                [(ngModel)]="companyCity"
+                type="text"
+                class="emailInp"
+                name="companyNameStep2"
+                id="companyCityStep2"
+              />
+            </div>
+
+            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+              <label for="companyCityStep2Trans">City</label>
+              <input
+                [(ngModel)]="companyCityTrans"
+                type="text"
+                class="emailInp"
+                name="companyNameStep2"
+                id="companyCityStep2Trans"
+              />
+            </div>
           </div>
 
-          <div class="textInputDiv company-address">
-            <label for="companyAddressStep2">Address</label>
-            <input
-              [(ngModel)]="companyAddress"
-              type="text"
-              class="emailInp"
-              name="companyAddressStep2"
-              id="companyAddressStep2"
-            />
+          <div class="textInputDiv company-address secLangStyle">
+            <div class="defLangInp">
+              <label for="companyAddressStep2">Address</label>
+              <input
+                [(ngModel)]="companyAddress"
+                type="text"
+                class="emailInp"
+                name="companyNameStep2"
+                id="companyAddressStep2"
+              />
+            </div>
+
+            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+              <label for="companyAddressStep2Trans">Address</label>
+              <input
+                [(ngModel)]="companyAddressTrans"
+                type="text"
+                class="emailInp"
+                name="companyNameStep2"
+                id="companyAddressStep2Trans"
+              />
+            </div>
           </div>
 
-          <div class="textInputDiv company-description">
-            <label for="companyDescriptionStep2">Description</label>
-            <textarea
-              [(ngModel)]="companyDescription"
-              type="text"
-              class="emailInp Description"
-              name="companyDescriptionStep2"
-              id="companyDescriptionStep2"
-            ></textarea>
+          <div class="textInputDiv company-description secLangStyle">
+            <div class="defLangInp">
+              <label for="companyDescriptionStep2">Description</label>
+              <textarea
+                [(ngModel)]="companyDescription"
+                type="text"
+                class="emailInp Description"
+                name="companyDescriptionStep2"
+                id="companyDescriptionStep2"
+              ></textarea>
+            </div>
+
+            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+              <label for="companyDescriptionStep2trans">Description</label>
+              <textarea
+                [(ngModel)]="companyDescriptionTrans"
+                type="text"
+                class="emailInp Description"
+                name="companyDescriptionStep2"
+                id="companyDescriptionStep2trans"
+              ></textarea>
+            </div>
           </div>
         </div>
 
@@ -328,9 +394,7 @@
         >
           Previous
         </button>
-        <button (click)="next()" class="loginBtn next">
-          Next
-        </button>
+        <button (click)="next()" class="loginBtn next">Next</button>
       </div>
     </div>
   </div>

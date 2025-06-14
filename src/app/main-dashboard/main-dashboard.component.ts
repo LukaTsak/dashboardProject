@@ -59,6 +59,12 @@ export class MainDashboardComponent {
   companyCity?: string = '';
   companyAddress?: string = '';
 
+  companyNameTrans?: string = '';
+  companyDescriptionTrans?: string = '';
+  companyStateTrans?: string = '';
+  companyCityTrans?: string = '';
+  companyAddressTrans?: string = '';
+
   // Step 3
   companyFacebook?: string = '';
   companyTwitter?: string = '';

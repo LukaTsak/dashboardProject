@@ -176,6 +176,10 @@
             hidden: currentPage !== 2
           }"
         >
+          <div *ngIf="selectedLanguages.length > 1" class="descFGorLanguage">
+            <div [ngClass]="{'defLangStyle': el.name === companyDefaultLanguage}" *ngFor="let el of selectedLanguages" class="forLang">{{el.name}}</div>
+          </div>
+
           <div class="textInputDiv company-name secLangStyle">
             <div class="defLangInp">
               <label for="companyNameStep2">Name</label>
@@ -188,7 +192,7 @@
               />
             </div>
 
-            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
               <label for="companyNameStep2Trans">Name</label>
               <input
                 [(ngModel)]="companyNameTrans"
@@ -197,7 +201,7 @@
                 name="companyNameStep2Trans"
                 id="companyNameStep2Trans"
               />
-            </div>
+            </div> -->
           </div>
 
           <div class="textInputDiv company-state secLangStyle">
@@ -212,7 +216,7 @@
               />
             </div>
 
-            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
               <label for="companyStateStep2Trans">State</label>
               <input
                 [(ngModel)]="companyStateTrans"
@@ -221,7 +225,7 @@
                 name="companyNameStep2"
                 id="companyStateStep2Trans"
               />
-            </div>
+            </div> -->
           </div>
 
           <div class="textInputDiv company-city secLangStyle">
@@ -236,7 +240,7 @@
               />
             </div>
 
-            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
               <label for="companyCityStep2Trans">City</label>
               <input
                 [(ngModel)]="companyCityTrans"
@@ -245,7 +249,7 @@
                 name="companyNameStep2"
                 id="companyCityStep2Trans"
               />
-            </div>
+            </div> -->
           </div>
 
           <div class="textInputDiv company-address secLangStyle">
@@ -260,7 +264,7 @@
               />
             </div>
 
-            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
               <label for="companyAddressStep2Trans">Address</label>
               <input
                 [(ngModel)]="companyAddressTrans"
@@ -269,7 +273,7 @@
                 name="companyNameStep2"
                 id="companyAddressStep2Trans"
               />
-            </div>
+            </div> -->
           </div>
 
           <div class="textInputDiv company-description secLangStyle">
@@ -284,7 +288,7 @@
               ></textarea>
             </div>
 
-            <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
               <label for="companyDescriptionStep2trans">Description</label>
               <textarea
                 [(ngModel)]="companyDescriptionTrans"
@@ -293,7 +297,7 @@
                 name="companyDescriptionStep2"
                 id="companyDescriptionStep2trans"
               ></textarea>
-            </div>
+            </div> -->
           </div>
         </div>
 

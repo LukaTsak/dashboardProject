@@ -303,6 +303,7 @@ export class MainDashboardComponent {
     };
 
     console.log(singleLanguage);
+    console.log('deflang: ' + this.selectedDefaultLanguage);
   }
 
   Previous() {

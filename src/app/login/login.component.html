@@ -15,6 +15,7 @@
         <label for="loginEmail">Email</label>
         <input
           [(ngModel)]="email"
+          (keydown.enter)="loginButton()"
           class="emailInp"
           type="email"
           name="loginEmail"
@@ -28,6 +29,7 @@
         <div class="passInput">
           <input
             [(ngModel)]="password"
+            (keydown.enter)="loginButton()"
             type="{{ passwordType }}"
             name="loginPassword"
             id="loginPassword" 

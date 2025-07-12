@@ -471,6 +471,14 @@ main {
   }
 }
 
+input:-webkit-autofill {
+    border: 1px solid #1d1e26 !important;
+    border-radius: 8px !important;
+}
+
+
+
+
 @media screen and (max-width: 620px) {
   .loginContainer {
     h3 {

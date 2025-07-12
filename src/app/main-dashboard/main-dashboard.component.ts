@@ -295,6 +295,36 @@ export class MainDashboardComponent {
     };
 
     if (this.canGoNext) {
+      if(this.currentPage === 1) {
+        if (!this.companyEmail) {
+          this.showMessage('Please Enter Email');
+          return;
+        }
+        if (!this.companyPhone) {
+          this.showMessage('Please Enter Phone Number');
+          return;
+        }
+        if (!this.companyZipCode) {
+          this.showMessage('Please Enter zip code');
+          return;
+        }
+        if (!this.companySubdomain) {
+          this.showMessage('Please enter a subdomain.');
+          return;
+        }
+        if (!this.companyLogo) {
+          this.showMessage('Please upload a company logo.');
+          return;
+        }
+        if (!this.selectedCountry) {
+          this.showMessage('Please select a country.');
+          return;
+        }
+        if (!this.selectedDefaultLanguage) {
+          this.showMessage('Please select a default language.');
+          return;
+        }
+      }
       this.previousPage = this.currentPage;
       this.currentPage++;
     }
@@ -306,7 +336,7 @@ export class MainDashboardComponent {
     console.log(multiLanguage);
     console.log('deflang: ' + this.selectedDefaultLanguage);
 
-    
+
   }
 
   Previous() {

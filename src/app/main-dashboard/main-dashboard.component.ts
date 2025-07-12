@@ -236,10 +236,38 @@ export class MainDashboardComponent {
   }
 
   next() {
-    if (this.canGoNext) {
-      this.previousPage = this.currentPage;
-      this.currentPage++;
-    }
+    let multiLanguage = {
+      'step1[country_id]': this.selectedCountry,
+      'step1[default_language_id]': this.selectedDefaultLanguage,
+      'step1[email]': this.companyEmail,
+      'step1[phone]': this.companyPhone,
+      'step1[zip]': this.companyZipCode,
+      'step1[can_edit]': 1,
+      'step1[searchable]': 1,
+      'step1[sub_domain]': this.companySubdomain,
+      'step1[languages][0]': 1,
+      'step1[languages][1]': 2,
+      'step2[translations][0][language_id]': 1,
+      'step2[translations][0][name]': this.companyName,
+      'step2[translations][0][description]': this.companyDescription,
+      'step2[translations][0][state]': this.companyState,
+      'step2[translations][0][city]': this.companyCity,
+      'step2[translations][0][address]': this.companyAddress,
+      'step2[translations][1][language_id]': 2,
+      'step2[translations][1][name]': this.companyNameTrans,
+      'step2[translations][1][description]': this.companyDescriptionTrans,
+      'step2[translations][1][state]': this.companyStateTrans,
+      'step2[translations][1][city]': this.companyCityTrans,
+      'step2[translations][1][address]': this.companyAddressTrans,
+      'step3[facebook]': this.companyFacebook,
+      'step3[twitter]': this.companyTwitter,
+      'step3[instagram]': this.companyInstagram,
+      'step3[linkedIn]': this.companyLinkedIn,
+      'step3[tiktok]': this.companyTiktok,
+      'step3[latitude]': this.companyLatitude,
+      'step3[longitude]': this.companyLongitude,
+    };
+
     let singleLanguage: any = {
       'step1[country_id]': this.selectedCountry,
       'step1[default_language_id]': this.selectedDefaultLanguage,
@@ -266,44 +294,19 @@ export class MainDashboardComponent {
       'step3[longitude]': this.companyLongitude,
     };
 
+    if (this.canGoNext) {
+      this.previousPage = this.currentPage;
+      this.currentPage++;
+    }
+
     if (this.selectedLanguages.length > 1 && this.selectedLanguages[1]?.id) {
       singleLanguage['step1[languages][1]'] = this.selectedLanguages[1].id;
     }
 
-    let multiLanguage = {
-      'step1[country_id]': 1,
-      'step1[default_language_id]': 1,
-      'step1[email]': 'example@company.com',
-      'step1[phone]': '+1234567890',
-      'step1[zip]': '12345',
-      'step1[can_edit]': 1,
-      'step1[searchable]': 1,
-      'step1[sub_domain]': 'my-company127',
-      'step1[languages][0]': 1,
-      'step1[languages][1]': 2,
-      'step2[translations][0][language_id]': 1,
-      'step2[translations][0][name]': 'My Company EN',
-      'step2[translations][0][description]': 'Description in English',
-      'step2[translations][0][state]': 'State EN',
-      'step2[translations][0][city]': 'City EN',
-      'step2[translations][0][address]': 'Address EN',
-      'step2[translations][1][language_id]': 2,
-      'step2[translations][1][name]': 'My Company FR',
-      'step2[translations][1][description]': 'Description in French',
-      'step2[translations][1][state]': 'State FR',
-      'step2[translations][1][city]': 'City FR',
-      'step2[translations][1][address]': 'Address FR',
-      'step3[facebook]': 'https://facebook.com',
-      'step3[twitter]': 'https://twitter.com',
-      'step3[instagram]': 'https://instagram.com',
-      'step3[linkedIn]': 'https://linkedin.com',
-      'step3[tiktok]': 'https://tiktok.com',
-      'step3[latitude]': 40.7128,
-      'step3[longitude]': -74.006,
-    };
-
-    console.log(singleLanguage);
+    console.log(multiLanguage);
     console.log('deflang: ' + this.selectedDefaultLanguage);
+
+    
   }
 
   Previous() {
@@ -311,5 +314,10 @@ export class MainDashboardComponent {
       this.previousPage = this.currentPage;
       this.currentPage--;
     }
+  }
+
+  changeInpLang(langId: any) {
+    console.log('changeInpLang called ' + langId);
+    this.selectedDefaultLanguage = langId;
   }
 }

@@ -157,7 +157,7 @@
                 <option disabled selected>Select Default Language</option>
                 <option
                   *ngFor="let languge of selectedLanguages"
-                  [value]="languge"
+                  [value]="languge.id"
                   id="defLangOptionStep1"
                 >
                   {{ languge.name }}
@@ -177,11 +177,11 @@
           }"
         >
           <div *ngIf="selectedLanguages.length > 1" class="descFGorLanguage">
-            <div [ngClass]="{'defLangStyle': el.name === companyDefaultLanguage}" *ngFor="let el of selectedLanguages" class="forLang">{{el.name}}</div>
+            <div *ngFor="let el of selectedLanguages" [ngClass]="{'defLangStyle': el.id == selectedDefaultLanguage}" (click)="changeInpLang(el.id)" class="forLang">{{el.name}}</div>
           </div>
 
           <div class="textInputDiv company-name secLangStyle">
-            <div class="defLangInp">
+            <div *ngIf="+selectedDefaultLanguage === 1" class="defLangInp">
               <label for="companyNameStep2">Name</label>
               <input
                 [(ngModel)]="companyName"
@@ -189,10 +189,11 @@
                 class="emailInp"
                 name="companyNameStep2"
                 id="companyNameStep2"
+                placeholder="Name in English"
               />
             </div>
 
-            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <div *ngIf="+selectedDefaultLanguage === 2" class="secLangInp">
               <label for="companyNameStep2Trans">Name</label>
               <input
                 [(ngModel)]="companyNameTrans"
@@ -200,12 +201,13 @@
                 class="emailInp"
                 name="companyNameStep2Trans"
                 id="companyNameStep2Trans"
+                placeholder="Name in Georgian"
               />
-            </div> -->
+            </div>
           </div>
 
-          <div class="textInputDiv company-state secLangStyle">
-            <div class="defLangInp">
+          <div  class="textInputDiv company-state secLangStyle">
+            <div *ngIf="+selectedDefaultLanguage === 1" class="defLangInp">
               <label for="companyStateStep2">State</label>
               <input
                 [(ngModel)]="companyState"
@@ -213,10 +215,11 @@
                 class="emailInp"
                 name="companyNameStep2"
                 id="companyStateStep2"
+                placeholder="State in English"
               />
             </div>
 
-            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <div *ngIf="+selectedDefaultLanguage === 2" class="secLangInp">
               <label for="companyStateStep2Trans">State</label>
               <input
                 [(ngModel)]="companyStateTrans"
@@ -224,12 +227,14 @@
                 class="emailInp"
                 name="companyNameStep2"
                 id="companyStateStep2Trans"
+                placeholder="State in Georgian"
+
               />
-            </div> -->
+            </div>
           </div>
 
           <div class="textInputDiv company-city secLangStyle">
-            <div class="defLangInp">
+            <div *ngIf="+selectedDefaultLanguage === 1" class="defLangInp">
               <label for="companyCityStep2">City</label>
               <input
                 [(ngModel)]="companyCity"
@@ -237,10 +242,11 @@
                 class="emailInp"
                 name="companyNameStep2"
                 id="companyCityStep2"
+                placeholder="City in English"
               />
             </div>
 
-            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <div *ngIf="+selectedDefaultLanguage === 2" class="secLangInp">
               <label for="companyCityStep2Trans">City</label>
               <input
                 [(ngModel)]="companyCityTrans"
@@ -248,12 +254,13 @@
                 class="emailInp"
                 name="companyNameStep2"
                 id="companyCityStep2Trans"
+                placeholder="City in Georgian"
               />
-            </div> -->
+            </div>
           </div>
 
           <div class="textInputDiv company-address secLangStyle">
-            <div class="defLangInp">
+            <div *ngIf="+selectedDefaultLanguage === 1" class="defLangInp">
               <label for="companyAddressStep2">Address</label>
               <input
                 [(ngModel)]="companyAddress"
@@ -261,10 +268,11 @@
                 class="emailInp"
                 name="companyNameStep2"
                 id="companyAddressStep2"
+                placeholder="Address in English"
               />
             </div>
 
-            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <div *ngIf="+selectedDefaultLanguage === 2" class="secLangInp">
               <label for="companyAddressStep2Trans">Address</label>
               <input
                 [(ngModel)]="companyAddressTrans"
@@ -272,12 +280,14 @@
                 class="emailInp"
                 name="companyNameStep2"
                 id="companyAddressStep2Trans"
+                placeholder="Address in Georgian"
+
               />
-            </div> -->
+            </div>
           </div>
 
-          <div class="textInputDiv company-description secLangStyle">
-            <div class="defLangInp">
+          <div  class="textInputDiv company-description secLangStyle">
+            <div *ngIf="+selectedDefaultLanguage === 1" class="defLangInp">
               <label for="companyDescriptionStep2">Description</label>
               <textarea
                 [(ngModel)]="companyDescription"
@@ -285,10 +295,11 @@
                 class="emailInp Description"
                 name="companyDescriptionStep2"
                 id="companyDescriptionStep2"
+                placeholder="Description in English"
               ></textarea>
             </div>
 
-            <!-- <div *ngIf="selectedLanguages.length > 1" class="secLangInp">
+            <div *ngIf="+selectedDefaultLanguage === 2" class="secLangInp">
               <label for="companyDescriptionStep2trans">Description</label>
               <textarea
                 [(ngModel)]="companyDescriptionTrans"
@@ -296,8 +307,10 @@
                 class="emailInp Description"
                 name="companyDescriptionStep2"
                 id="companyDescriptionStep2trans"
+                placeholder="Description in Georgian"
+
               ></textarea>
-            </div> -->
+            </div>
           </div>
         </div>
 

@@ -396,8 +396,6 @@ export class MainDashboardComponent {
           return;
         }
       }
-      this.previousPage = this.currentPage;
-      this.currentPage++;
     }
 
     if (
@@ -432,8 +430,6 @@ export class MainDashboardComponent {
           return;
         }
       }
-      this.previousPage = this.currentPage;
-      this.currentPage++;
     }
 
     if (
@@ -475,10 +471,6 @@ export class MainDashboardComponent {
         this.previousPage = 1;
       }
 
-      this.previousPage = this.currentPage;
-      this.currentPage++;
-      console.log('Current Page:', this.currentPage);
-      console.log('Previous Page:', this.previousPage);
     }
 
     if (this.currentPage === 3 && this.canGoNext) {
@@ -506,8 +498,6 @@ export class MainDashboardComponent {
           return;
         }
       }
-      this.previousPage = this.currentPage;
-      this.currentPage++;
     }
 
     if (this.selectedLanguages.length > 1 && this.selectedLanguages[1]?.id) {
@@ -525,6 +515,14 @@ export class MainDashboardComponent {
         this.loading = false;
       });
     }
+    if (this.currentPage === 1) {
+      this.previousPage = 1;
+    }
+    this.previousPage = this.currentPage;
+    this.currentPage++;
+    console.log('Current Page:', this.currentPage);
+      console.log('Previous Page:', this.previousPage);
+    
   }
 
   Previous() {

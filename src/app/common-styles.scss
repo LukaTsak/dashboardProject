@@ -1,4 +1,4 @@
-@use './variables' as *;
+@use "./variables" as *;
 
 main {
   width: 100%;
@@ -101,7 +101,8 @@ main {
           border: none;
           border-radius: $border-radius-lg;
           padding: 12px 14px;
-          transition: $transition-fast;
+          transition: all 0s;
+          // transition: all 5000s ease-in-out 0s;
 
           &:focus {
             outline: none;
@@ -299,28 +300,46 @@ main {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #ffffff;
-    transition: background-color 5000s ease-in-out 0s;
-    box-shadow: inset 0 0 20px 20px $color-bg-input;
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: all 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 10px 1000px $color-bg-input;
+}
+
+input:-webkit-autofill:hover {
+  box-shadow: inset 0 0 10px 1000px $color-bg-hover;
+}
+
+select:-webkit-autofill,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(150, 47, 47, 0.699) inset !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+  border-radius: inherit; /* optional: prevent weird autofill corner shape */
 }
 
 
-select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px $color-bg-input inset !important;
-  -webkit-text-fill-color: white !important;
-  transition: background-color 5000s ease-in-out 0s !important;
+select:-webkit-autofill:hover {
+  -webkit-box-shadow: 0 0 0 1000px $color-bg-hover inset !important;
 }
 
 /* Animations */
 @keyframes fadeinout {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes slideInFromRight {
@@ -358,7 +377,8 @@ select:-webkit-autofill {
   }
 
   .keepSignedInDiv {
-    label, span {
+    label,
+    span {
       font-size: 13px !important;
     }
   }

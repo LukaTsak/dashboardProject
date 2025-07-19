@@ -170,6 +170,8 @@ export class MainDashboardComponent {
     this.selectedLanguages = this.selectedLanguages.filter(
       (lang) => lang.id !== langToRemove.id
     );
+
+    this.selectedLanguage = ''; // Reset selection after removing
   }
 
   // ------------------------ buttons
@@ -237,7 +239,7 @@ export class MainDashboardComponent {
 
   next() {
     let multiLanguage = {
-      'step1[country_id]': this.selectedCountry,
+      "step1[country_id]": Number(this.selectedCountry),
       'step1[default_language_id]': this.selectedDefaultLanguage,
       'step1[email]': this.companyEmail,
       'step1[phone]': this.companyPhone,
@@ -269,7 +271,7 @@ export class MainDashboardComponent {
     };
 
     let singleLanguage: any = {
-      'step1[country_id]': this.selectedCountry,
+      'step1[country_id]': Number(this.selectedCountry),
       'step1[default_language_id]': this.selectedDefaultLanguage,
       'step1[email]': this.companyEmail,
       'step1[phone]': this.companyPhone,
@@ -294,34 +296,133 @@ export class MainDashboardComponent {
       'step3[longitude]': this.companyLongitude,
     };
 
-    if (this.canGoNext) {
-      if(this.currentPage === 1) {
-        if (!this.companyEmail) {
-          this.showMessage('Please Enter Email');
+    if (this.currentPage === 1 && this.canGoNext) {
+      const show = this.showMessage.bind(this);
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      const fieldsFilled =
+        this.companyEmail &&
+        this.companyPhone &&
+        this.companyZipCode &&
+        this.companySubdomain &&
+        this.selectedCountry &&
+        this.selectedDefaultLanguage;
+
+      const validators = [
+        {
+          valid: fieldsFilled,
+          msg: 'Please fill all the fields',
+        },
+        {
+          valid: emailRegex.test(this.companyEmail ?? ''),
+          msg: 'Please enter a valid email address',
+        },
+        {
+          valid: (this.companyPhone ?? '').toString().length >= 9,
+          msg: 'Please enter a valid phone number with at least 9 digits',
+        },
+      ];
+
+      for (const { valid, msg } of validators) {
+        if (!valid) {
+          show(msg);
           return;
         }
-        if (!this.companyPhone) {
-          this.showMessage('Please Enter Phone Number');
+      }
+      this.previousPage = this.currentPage;
+      this.currentPage++;
+    }
+
+    if (
+      this.currentPage === 2 &&
+      this.canGoNext &&
+      this.selectedLanguages.length > 1
+    ) {
+      const show = this.showMessage.bind(this);
+
+      const fieldsFilled =
+        this.companyName &&
+        this.companyDescription &&
+        this.companyState &&
+        this.companyCity &&
+        this.companyAddress &&
+        this.companyNameTrans &&
+        this.companyDescriptionTrans &&
+        this.companyStateTrans &&
+        this.companyCityTrans &&
+        this.companyAddressTrans;
+
+      const validators = [
+        {
+          valid: fieldsFilled,
+          msg: 'Please fill all the fields',
+        },
+      ];
+
+      for (const { valid, msg } of validators) {
+        if (!valid) {
+          show(msg);
           return;
         }
-        if (!this.companyZipCode) {
-          this.showMessage('Please Enter zip code');
+      }
+      this.previousPage = this.currentPage;
+      this.currentPage++;
+    }
+
+    if (
+      this.currentPage === 2 &&
+      this.canGoNext &&
+      this.selectedLanguages.length === 1
+    ) {
+      const show = this.showMessage.bind(this);
+
+      const fieldsFilled =
+        this.companyName &&
+        this.companyDescription &&
+        this.companyState &&
+        this.companyCity &&
+        this.companyAddress;
+
+      const validators = [
+        {
+          valid: fieldsFilled,
+          msg: 'Please fill all the fields',
+        },
+      ];
+
+      for (const { valid, msg } of validators) {
+        if (!valid) {
+          show(msg);
           return;
         }
-        if (!this.companySubdomain) {
-          this.showMessage('Please enter a subdomain.');
-          return;
-        }
-        if (!this.companyLogo) {
-          this.showMessage('Please upload a company logo.');
-          return;
-        }
-        if (!this.selectedCountry) {
-          this.showMessage('Please select a country.');
-          return;
-        }
-        if (!this.selectedDefaultLanguage) {
-          this.showMessage('Please select a default language.');
+      }
+      this.previousPage = this.currentPage;
+      this.currentPage++;
+    }
+
+    if (this.currentPage === 3 && this.canGoNext) {
+      const show = this.showMessage.bind(this);
+
+      const fieldsFilled =
+        this.companyFacebook &&
+        this.companyTwitter &&
+        this.companyInstagram &&
+        this.companyLinkedIn &&
+        this.companyTiktok &&
+        this.companyLatitude &&
+        this.companyLongitude;
+
+      const validators = [
+        {
+          valid: fieldsFilled,
+          msg: 'Please fill all the fields',
+        },
+      ];
+
+      for (const { valid, msg } of validators) {
+        if (!valid) {
+          show(msg);
           return;
         }
       }
@@ -335,8 +436,25 @@ export class MainDashboardComponent {
 
     console.log(multiLanguage);
     console.log('deflang: ' + this.selectedDefaultLanguage);
+    console.log(this.currentPage);
 
-
+    if (this.currentPage === 3 && this.selectedLanguages.length > 1) {
+      this.apiService
+        .createNewCompany(multiLanguage)
+        .subscribe((response: any) => {
+          console.log('Response:', response);
+          this.showMessage(response.message);
+          this.loading = false;
+        });
+    } else if (this.currentPage === 3 && this.selectedLanguages.length === 1) {
+      this.apiService
+        .createNewCompany(singleLanguage)
+        .subscribe((response: any) => {
+          console.log('Response:', response);
+          this.showMessage(response.message);
+          this.loading = false;
+        });
+    }
   }
 
   Previous() {

@@ -41,7 +41,7 @@
             <label for="companyPhoneStep1">Phone</label>
             <input
               [(ngModel)]="companyPhone"
-              type="tel"
+              type="number"
               class="emailInp"
               name="companyPhoneStep1"
               id="companyPhoneStep1"
@@ -114,10 +114,10 @@
                 id="countrySelectStep1"
                 name="countrySelectStep1"
               >
-                <option disabled selected value="">Select Country</option>
+                <!-- <option disabled selected value="">Select Country</option> -->
                 <option
                   *ngFor="let country of countries"
-                  [value]="country.name"
+                  [value]="country.id"
                 >
                   {{ country.name }}
                 </option>

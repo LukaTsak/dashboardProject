@@ -110,6 +110,7 @@ main {
               padding: 10px;
               height: 52px;
               border-right: 10px solid #1d1e26;
+              cursor: pointer;
 
               &:focus {
                 outline: none;
@@ -154,7 +155,8 @@ main {
                 gap: 10px;
                 top: 24px;
                 left: 8px;
-                width: 75%;
+                width: fit-content;
+                min-width: 10%;
                 // color: #171821;
                 // max-width: 65%;
                 height: 50px;
@@ -469,11 +471,6 @@ main {
       }
     }
   }
-}
-
-input:-webkit-autofill {
-    border: 1px solid #1d1e26 !important;
-    border-radius: 8px !important;
 }
 
 

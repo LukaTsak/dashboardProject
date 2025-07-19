@@ -58,4 +58,20 @@ export class ApiServiceService {
   });
 }
 
+createNewCompany(obj: any) {
+  const token = localStorage.getItem('access_token');
+
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+
+  return this.http.post(
+    'http://127.0.0.1:8000/api/dashboard/companies',
+    obj,
+    { headers }
+  );
+}
+
+
+
 }

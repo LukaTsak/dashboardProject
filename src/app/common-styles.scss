@@ -298,20 +298,6 @@ main {
   }
 }
 
-/* Autofill Fix */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus {
-  box-shadow: 0 0 0 1000px $color-bg-input inset !important;
-  -webkit-box-shadow: 0 0 0 1000px $color-bg-input inset !important;
-  -webkit-text-fill-color: white !important;
-  // border-radius: 80px !important; // standard property for compatibility
-  // -webkit-border-radius: 10px !important; // your desired radius
-  // transition: background-color 5000s ease-in-out;
-  // border:2px solid $color-bg-input !important;
-  // -webkit-border:2px solid $color-bg-input !important;
-  // -webkit-border-color: $color-bg-input !important;
-}
 
 
 

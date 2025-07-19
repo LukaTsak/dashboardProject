@@ -238,63 +238,129 @@ export class MainDashboardComponent {
   }
 
   next() {
-    let multiLanguage = {
-      "step1[country_id]": Number(this.selectedCountry),
-      'step1[default_language_id]': this.selectedDefaultLanguage,
-      'step1[email]': this.companyEmail,
-      'step1[phone]': this.companyPhone,
-      'step1[zip]': this.companyZipCode,
-      'step1[can_edit]': 1,
-      'step1[searchable]': 1,
-      'step1[sub_domain]': this.companySubdomain,
-      'step1[languages][0]': 1,
-      'step1[languages][1]': 2,
-      'step2[translations][0][language_id]': 1,
-      'step2[translations][0][name]': this.companyName,
-      'step2[translations][0][description]': this.companyDescription,
-      'step2[translations][0][state]': this.companyState,
-      'step2[translations][0][city]': this.companyCity,
-      'step2[translations][0][address]': this.companyAddress,
-      'step2[translations][1][language_id]': 2,
-      'step2[translations][1][name]': this.companyNameTrans,
-      'step2[translations][1][description]': this.companyDescriptionTrans,
-      'step2[translations][1][state]': this.companyStateTrans,
-      'step2[translations][1][city]': this.companyCityTrans,
-      'step2[translations][1][address]': this.companyAddressTrans,
-      'step3[facebook]': this.companyFacebook,
-      'step3[twitter]': this.companyTwitter,
-      'step3[instagram]': this.companyInstagram,
-      'step3[linkedIn]': this.companyLinkedIn,
-      'step3[tiktok]': this.companyTiktok,
-      'step3[latitude]': this.companyLatitude,
-      'step3[longitude]': this.companyLongitude,
-    };
+    // let multiLanguage = {
+    //   "step1[country_id]": Number(this.selectedCountry),
+    //   'step1[default_language_id]': this.selectedDefaultLanguage,
+    //   'step1[email]': this.companyEmail,
+    //   'step1[phone]': this.companyPhone,
+    //   'step1[zip]': this.companyZipCode,
+    //   'step1[can_edit]': 1,
+    //   'step1[searchable]': 1,
+    //   'step1[sub_domain]': this.companySubdomain,
+    //   'step1[languages][0]': 1,
+    //   'step1[languages][1]': 2,
+    //   'step2[translations][0][language_id]': 1,
+    //   'step2[translations][0][name]': this.companyName,
+    //   'step2[translations][0][description]': this.companyDescription,
+    //   'step2[translations][0][state]': this.companyState,
+    //   'step2[translations][0][city]': this.companyCity,
+    //   'step2[translations][0][address]': this.companyAddress,
+    //   'step2[translations][1][language_id]': 2,
+    //   'step2[translations][1][name]': this.companyNameTrans,
+    //   'step2[translations][1][description]': this.companyDescriptionTrans,
+    //   'step2[translations][1][state]': this.companyStateTrans,
+    //   'step2[translations][1][city]': this.companyCityTrans,
+    //   'step2[translations][1][address]': this.companyAddressTrans,
+    //   'step3[facebook]': this.companyFacebook,
+    //   'step3[twitter]': this.companyTwitter,
+    //   'step3[instagram]': this.companyInstagram,
+    //   'step3[linkedIn]': this.companyLinkedIn,
+    //   'step3[tiktok]': this.companyTiktok,
+    //   'step3[latitude]': this.companyLatitude,
+    //   'step3[longitude]': this.companyLongitude,
+    // };
 
-    let singleLanguage: any = {
-      'step1[country_id]': Number(this.selectedCountry),
-      'step1[default_language_id]': this.selectedDefaultLanguage,
-      'step1[email]': this.companyEmail,
-      'step1[phone]': this.companyPhone,
-      'step1[zip]': this.companyZipCode,
-      'step1[logo]': this.selectedLogoFileName,
-      'step1[can_edit]': 1,
-      'step1[searchable]': 1,
-      'step1[sub_domain]': this.companySubdomain,
-      'step1[languages][0]': this.selectedLanguages[0]?.id,
-      'step2[translations][0][language_id]': this.selectedDefaultLanguage,
-      'step2[translations][0][name]': this.companyName,
-      'step2[translations][0][description]': this.companyDescription,
-      'step2[translations][0][state]': this.companyState,
-      'step2[translations][0][city]': this.companyCity,
-      'step2[translations][0][address]': this.companyAddress,
-      'step3[facebook]': this.companyFacebook,
-      'step3[twitter]': this.companyTwitter,
-      'step3[instagram]': this.companyInstagram,
-      'step3[linkedIn]': this.companyLinkedIn,
-      'step3[tiktok]': this.companyTiktok,
-      'step3[latitude]': this.companyLatitude,
-      'step3[longitude]': this.companyLongitude,
-    };
+    // let singleLanguage: any = {
+    //   'step1[country_id]': Number(this.selectedCountry),
+    //   'step1[default_language_id]': this.selectedDefaultLanguage,
+    //   'step1[email]': this.companyEmail,
+    //   'step1[phone]': this.companyPhone,
+    //   'step1[zip]': this.companyZipCode,
+    //   'step1[logo]': this.selectedLogoFileName,
+    //   'step1[can_edit]': 1,
+    //   'step1[searchable]': 1,
+    //   'step1[sub_domain]': this.companySubdomain,
+    //   'step1[languages][0]': this.selectedLanguages[0]?.id,
+    //   'step2[translations][0][language_id]': this.selectedDefaultLanguage,
+    //   'step2[translations][0][name]': this.companyName,
+    //   'step2[translations][0][description]': this.companyDescription,
+    //   'step2[translations][0][state]': this.companyState,
+    //   'step2[translations][0][city]': this.companyCity,
+    //   'step2[translations][0][address]': this.companyAddress,
+    //   'step3[facebook]': this.companyFacebook,
+    //   'step3[twitter]': this.companyTwitter,
+    //   'step3[instagram]': this.companyInstagram,
+    //   'step3[linkedIn]': this.companyLinkedIn,
+    //   'step3[tiktok]': this.companyTiktok,
+    //   'step3[latitude]': this.companyLatitude,
+    //   'step3[longitude]': this.companyLongitude,
+    // };
+
+    const formData = new FormData();
+
+    // STEP 1
+    formData.append('step1[country_id]', String(this.selectedCountry));
+    formData.append(
+      'step1[default_language_id]',
+      String(this.selectedDefaultLanguage)
+    );
+    formData.append('step1[email]', this.companyEmail || '');
+    formData.append('step1[phone]', this.companyPhone?.toString() || '');
+    formData.append('step1[zip]', this.companyZipCode?.toString() || '');
+    formData.append('step1[can_edit]', '1');
+    formData.append('step1[searchable]', '1');
+    formData.append('step1[sub_domain]', this.companySubdomain || '');
+    formData.append('step1[languages][0]', '1');
+    formData.append('step1[languages][1]', '2');
+
+    // STEP 2 - Translations
+    if (this.companyName) {
+      formData.append('step2[translations][0][language_id]', '1');
+      formData.append('step2[translations][0][name]', this.companyName);
+      formData.append(
+        'step2[translations][0][description]',
+        this.companyDescription || ''
+      );
+      formData.append('step2[translations][0][state]', this.companyState || '');
+      formData.append('step2[translations][0][city]', this.companyCity || '');
+      formData.append(
+        'step2[translations][0][address]',
+        this.companyAddress || ''
+      );
+    }
+
+    if (this.companyNameTrans) {
+      formData.append('step2[translations][1][language_id]', '2');
+      formData.append('step2[translations][1][name]', this.companyNameTrans);
+      formData.append(
+        'step2[translations][1][description]',
+        this.companyDescriptionTrans || ''
+      );
+      formData.append(
+        'step2[translations][1][state]',
+        this.companyStateTrans || ''
+      );
+      formData.append(
+        'step2[translations][1][city]',
+        this.companyCityTrans || ''
+      );
+      formData.append(
+        'step2[translations][1][address]',
+        this.companyAddressTrans || ''
+      );
+    }
+
+    // STEP 3 - Socials
+    formData.append('step3[facebook]', this.companyFacebook || '');
+    formData.append('step3[twitter]', this.companyTwitter || '');
+    formData.append('step3[instagram]', this.companyInstagram || '');
+    formData.append('step3[linkedIn]', this.companyLinkedIn || '');
+    formData.append('step3[tiktok]', this.companyTiktok || '');
+    formData.append('step3[latitude]', this.companyLatitude?.toString() || '');
+    formData.append(
+      'step3[longitude]',
+      this.companyLongitude?.toString() || ''
+    );
 
     if (this.currentPage === 1 && this.canGoNext) {
       const show = this.showMessage.bind(this);
@@ -378,11 +444,16 @@ export class MainDashboardComponent {
       const show = this.showMessage.bind(this);
 
       const fieldsFilled =
-        this.companyName &&
-        this.companyDescription &&
-        this.companyState &&
-        this.companyCity &&
-        this.companyAddress;
+        (this.companyName &&
+          this.companyDescription &&
+          this.companyState &&
+          this.companyCity &&
+          this.companyAddress) ||
+        (this.companyNameTrans &&
+          this.companyDescriptionTrans &&
+          this.companyStateTrans &&
+          this.companyCityTrans &&
+          this.companyAddressTrans);
 
       const validators = [
         {
@@ -397,8 +468,17 @@ export class MainDashboardComponent {
           return;
         }
       }
+
+      if (this.currentPage > 2) {
+        this.currentPage++;
+
+        this.previousPage = 1;
+      }
+
       this.previousPage = this.currentPage;
       this.currentPage++;
+      console.log('Current Page:', this.currentPage);
+      console.log('Previous Page:', this.previousPage);
     }
 
     if (this.currentPage === 3 && this.canGoNext) {
@@ -431,36 +511,32 @@ export class MainDashboardComponent {
     }
 
     if (this.selectedLanguages.length > 1 && this.selectedLanguages[1]?.id) {
-      singleLanguage['step1[languages][1]'] = this.selectedLanguages[1].id;
+      formData.append('step1[languages][1]', this.selectedLanguages[1].id);
     }
 
-    console.log(multiLanguage);
+    console.log(formData);
     console.log('deflang: ' + this.selectedDefaultLanguage);
     console.log(this.currentPage);
 
-    if (this.currentPage === 3 && this.selectedLanguages.length > 1) {
-      this.apiService
-        .createNewCompany(multiLanguage)
-        .subscribe((response: any) => {
-          console.log('Response:', response);
-          this.showMessage(response.message);
-          this.loading = false;
-        });
-    } else if (this.currentPage === 3 && this.selectedLanguages.length === 1) {
-      this.apiService
-        .createNewCompany(singleLanguage)
-        .subscribe((response: any) => {
-          console.log('Response:', response);
-          this.showMessage(response.message);
-          this.loading = false;
-        });
+    if (this.companyLongitude) {
+      this.apiService.createNewCompany(formData).subscribe((response: any) => {
+        console.log('Response:', response);
+        this.showMessage(response.message);
+        this.loading = false;
+      });
     }
   }
 
   Previous() {
     if (this.canGoPrevious) {
+      if (this.currentPage === 1) {
+        this.previousPage = 1;
+      }
+
       this.previousPage = this.currentPage;
       this.currentPage--;
+      console.log('Current Page:', this.currentPage);
+      console.log('Previous Page:', this.previousPage);
     }
   }
 

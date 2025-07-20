@@ -34,6 +34,7 @@
               class="emailInp"
               name="companyEmailStep1"
               id="companyEmailStep1"
+              autocomplete="email"
             />
           </div>
 
@@ -409,10 +410,11 @@
           (click)="Previous()"
           [disabled]="currentPage < 2"
           class="loginBtn prev"
+          [ngClass]="{ 'greyedout': currentPage === 1 }"
         >
           Previous
         </button>
-        <button (click)="next()" class="loginBtn next">Next</button>
+        <button (click)="next()" class="loginBtn next">{{ currentPage === 3 ? 'Finish' : 'Next' }}</button>
       </div>
     </div>
   </div>

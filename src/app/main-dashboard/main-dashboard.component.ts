@@ -136,6 +136,7 @@ export class MainDashboardComponent {
     this.selectedLogoFileName = '';
     this.companyLogo = '';
   }
+  
 
   // ------------------------ languages handling
 
@@ -238,64 +239,7 @@ export class MainDashboardComponent {
   }
 
   next() {
-    // let multiLanguage = {
-    //   "step1[country_id]": Number(this.selectedCountry),
-    //   'step1[default_language_id]': this.selectedDefaultLanguage,
-    //   'step1[email]': this.companyEmail,
-    //   'step1[phone]': this.companyPhone,
-    //   'step1[zip]': this.companyZipCode,
-    //   'step1[can_edit]': 1,
-    //   'step1[searchable]': 1,
-    //   'step1[sub_domain]': this.companySubdomain,
-    //   'step1[languages][0]': 1,
-    //   'step1[languages][1]': 2,
-    //   'step2[translations][0][language_id]': 1,
-    //   'step2[translations][0][name]': this.companyName,
-    //   'step2[translations][0][description]': this.companyDescription,
-    //   'step2[translations][0][state]': this.companyState,
-    //   'step2[translations][0][city]': this.companyCity,
-    //   'step2[translations][0][address]': this.companyAddress,
-    //   'step2[translations][1][language_id]': 2,
-    //   'step2[translations][1][name]': this.companyNameTrans,
-    //   'step2[translations][1][description]': this.companyDescriptionTrans,
-    //   'step2[translations][1][state]': this.companyStateTrans,
-    //   'step2[translations][1][city]': this.companyCityTrans,
-    //   'step2[translations][1][address]': this.companyAddressTrans,
-    //   'step3[facebook]': this.companyFacebook,
-    //   'step3[twitter]': this.companyTwitter,
-    //   'step3[instagram]': this.companyInstagram,
-    //   'step3[linkedIn]': this.companyLinkedIn,
-    //   'step3[tiktok]': this.companyTiktok,
-    //   'step3[latitude]': this.companyLatitude,
-    //   'step3[longitude]': this.companyLongitude,
-    // };
-
-    // let singleLanguage: any = {
-    //   'step1[country_id]': Number(this.selectedCountry),
-    //   'step1[default_language_id]': this.selectedDefaultLanguage,
-    //   'step1[email]': this.companyEmail,
-    //   'step1[phone]': this.companyPhone,
-    //   'step1[zip]': this.companyZipCode,
-    //   'step1[logo]': this.selectedLogoFileName,
-    //   'step1[can_edit]': 1,
-    //   'step1[searchable]': 1,
-    //   'step1[sub_domain]': this.companySubdomain,
-    //   'step1[languages][0]': this.selectedLanguages[0]?.id,
-    //   'step2[translations][0][language_id]': this.selectedDefaultLanguage,
-    //   'step2[translations][0][name]': this.companyName,
-    //   'step2[translations][0][description]': this.companyDescription,
-    //   'step2[translations][0][state]': this.companyState,
-    //   'step2[translations][0][city]': this.companyCity,
-    //   'step2[translations][0][address]': this.companyAddress,
-    //   'step3[facebook]': this.companyFacebook,
-    //   'step3[twitter]': this.companyTwitter,
-    //   'step3[instagram]': this.companyInstagram,
-    //   'step3[linkedIn]': this.companyLinkedIn,
-    //   'step3[tiktok]': this.companyTiktok,
-    //   'step3[latitude]': this.companyLatitude,
-    //   'step3[longitude]': this.companyLongitude,
-    // };
-
+    console.log(this.canGoNext);
     const formData = new FormData();
 
     // STEP 1
@@ -362,11 +306,11 @@ export class MainDashboardComponent {
       this.companyLongitude?.toString() || ''
     );
 
+    const show = this.showMessage.bind(this);
+
+    // ----------------- STEP 1 -----------------
     if (this.currentPage === 1 && this.canGoNext) {
-      const show = this.showMessage.bind(this);
-
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
       const fieldsFilled =
         this.companyEmail &&
         this.companyPhone &&
@@ -376,10 +320,7 @@ export class MainDashboardComponent {
         this.selectedDefaultLanguage;
 
       const validators = [
-        {
-          valid: fieldsFilled,
-          msg: 'Please fill all the fields',
-        },
+        { valid: fieldsFilled, msg: 'Please fill all the fields' },
         {
           valid: emailRegex.test(this.companyEmail ?? ''),
           msg: 'Please enter a valid email address',
@@ -396,15 +337,17 @@ export class MainDashboardComponent {
           return;
         }
       }
+
+      this.previousPage = this.currentPage;
+      this.currentPage++;
     }
 
-    if (
+    // ----------------- STEP 2: Multiple Languages -----------------
+    else if (
       this.currentPage === 2 &&
       this.canGoNext &&
       this.selectedLanguages.length > 1
     ) {
-      const show = this.showMessage.bind(this);
-
       const fieldsFilled =
         this.companyName &&
         this.companyDescription &&
@@ -417,28 +360,23 @@ export class MainDashboardComponent {
         this.companyCityTrans &&
         this.companyAddressTrans;
 
-      const validators = [
-        {
-          valid: fieldsFilled,
-          msg: 'Please fill all the fields',
-        },
-      ];
-
-      for (const { valid, msg } of validators) {
-        if (!valid) {
-          show(msg);
-          return;
-        }
+      if (!fieldsFilled) {
+        show('Please fill all the fields');
+        return;
       }
+
+      this.previousPage = this.currentPage;
+      this.currentPage++;
+      console.log('Current Page:', this.currentPage);
+      console.log('Previous Page:', this.previousPage);
     }
 
-    if (
+    // ----------------- STEP 2: Single Language -----------------
+    else if (
       this.currentPage === 2 &&
       this.canGoNext &&
       this.selectedLanguages.length === 1
     ) {
-      const show = this.showMessage.bind(this);
-
       const fieldsFilled =
         (this.companyName &&
           this.companyDescription &&
@@ -451,31 +389,17 @@ export class MainDashboardComponent {
           this.companyCityTrans &&
           this.companyAddressTrans);
 
-      const validators = [
-        {
-          valid: fieldsFilled,
-          msg: 'Please fill all the fields',
-        },
-      ];
-
-      for (const { valid, msg } of validators) {
-        if (!valid) {
-          show(msg);
-          return;
-        }
+      if (!fieldsFilled) {
+        show('Please fill all the fields');
+        return;
       }
 
-      if (this.currentPage > 2) {
-        this.currentPage++;
-
-        this.previousPage = 1;
-      }
-
+      this.previousPage = this.currentPage;
+      this.currentPage++;
     }
 
-    if (this.currentPage === 3 && this.canGoNext) {
-      const show = this.showMessage.bind(this);
-
+    // ----------------- STEP 3 -----------------
+    else if (this.currentPage === 3) {
       const fieldsFilled =
         this.companyFacebook &&
         this.companyTwitter &&
@@ -485,21 +409,21 @@ export class MainDashboardComponent {
         this.companyLatitude &&
         this.companyLongitude;
 
-      const validators = [
-        {
-          valid: fieldsFilled,
-          msg: 'Please fill all the fields',
-        },
-      ];
-
-      for (const { valid, msg } of validators) {
-        if (!valid) {
-          show(msg);
-          return;
-        }
+      if (!fieldsFilled) {
+        show('Please fill all the fields');
+        return;
       }
+      else if (this.companyLongitude) {
+      this.apiService.createNewCompany(formData).subscribe((response: any) => {
+        console.log('Response:', response);
+        this.showMessage(response.message);
+        this.loading = false;
+      });
     }
+    }
+    
 
+    // Add extra language if present
     if (this.selectedLanguages.length > 1 && this.selectedLanguages[1]?.id) {
       formData.append('step1[languages][1]', this.selectedLanguages[1].id);
     }
@@ -508,21 +432,11 @@ export class MainDashboardComponent {
     console.log('deflang: ' + this.selectedDefaultLanguage);
     console.log(this.currentPage);
 
-    if (this.companyLongitude) {
-      this.apiService.createNewCompany(formData).subscribe((response: any) => {
-        console.log('Response:', response);
-        this.showMessage(response.message);
-        this.loading = false;
-      });
-    }
+    
+
     if (this.currentPage === 1) {
       this.previousPage = 1;
     }
-    this.previousPage = this.currentPage;
-    this.currentPage++;
-    console.log('Current Page:', this.currentPage);
-      console.log('Previous Page:', this.previousPage);
-    
   }
 
   Previous() {

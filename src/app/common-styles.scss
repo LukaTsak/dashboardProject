@@ -315,10 +315,15 @@ input:-webkit-autofill:hover {
 select:-webkit-autofill,
 select:-webkit-autofill:focus,
 select:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px rgba(150, 47, 47, 0.699) inset !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-box-shadow: 0 0 0 1000px $color-bg-input inset !important;
   -webkit-text-fill-color: white !important;
   transition: background-color 5000s ease-in-out 0s !important;
   border-radius: inherit; /* optional: prevent weird autofill corner shape */
+  -webkit-font-size: 30px !important;
+  pointer-events: none;
+  caret-color: white !important;
 }
 
 

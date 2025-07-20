@@ -468,6 +468,18 @@ main {
             box-shadow: 0 0 8px rgba(115, 202, 190, 0.5);
           }
         }
+        .greyedout{
+          border: 1px solid rgba(115, 202, 190, 0.3);
+          color: rgb(115, 202, 190, 0.5);
+          background-color: #171821;
+          transition: box-shadow 0.3s ease, border 0.3s ease;
+
+          &:hover {
+            cursor: default;
+            box-shadow: none;
+
+          }
+        }
       }
     }
   }

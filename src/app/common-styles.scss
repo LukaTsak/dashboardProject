@@ -312,19 +312,19 @@ input:-webkit-autofill:hover {
   box-shadow: inset 0 0 10px 1000px $color-bg-hover;
 }
 
-select:-webkit-autofill,
-select:-webkit-autofill:focus,
-select:-webkit-autofill:active {
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-box-shadow: 0 0 0 1000px $color-bg-input inset !important;
-  -webkit-text-fill-color: white !important;
-  transition: background-color 5000s ease-in-out 0s !important;
-  border-radius: inherit; /* optional: prevent weird autofill corner shape */
-  -webkit-font-size: 30px !important;
-  pointer-events: none;
-  caret-color: white !important;
-}
+// select:-webkit-autofill,
+// select:-webkit-autofill:focus,
+// select:-webkit-autofill:active {
+//   -webkit-background-clip: text !important;
+//   background-clip: text !important;
+//   -webkit-box-shadow: 0 0 0 1000px $color-bg-input inset !important;
+//   -webkit-text-fill-color: white !important;
+//   transition: background-color 5000s ease-in-out 0s !important;
+//   border-radius: inherit; /* optional: prevent weird autofill corner shape */
+//   -webkit-font-size: 30px !important;
+//   pointer-events: none;
+//   caret-color: white !important;
+// }
 
 
 select:-webkit-autofill:hover {

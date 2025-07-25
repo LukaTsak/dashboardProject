@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 import { animationFrameScheduler } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -12,7 +13,10 @@ import { animationFrameScheduler } from 'rxjs';
   styleUrl: './main-dashboard.component.scss',
 })
 export class MainDashboardComponent {
-  constructor(private apiService: ApiServiceService) {}
+  constructor(private apiService: ApiServiceService, private router: Router) {}
+
+
+  hasCompany = false;
 
   ngOnInit() {
     const token = localStorage.getItem('access_token');
@@ -20,6 +24,19 @@ export class MainDashboardComponent {
       console.error('No access token found!');
       return;
     }
+
+    this.apiService.getInfo().subscribe((response: any) => {
+      console.log('Company Info:', response);
+      // this.showMessage('Company created successfully!');
+      if (response.current_company_id === null) {
+        // this.router.navigate(['/dashboard']);
+        console.log('User does not have a company, redirecting to signup...');
+      } else {
+        // this.router.navigate(['/signup']);
+        console.log('User has a company, redirecting to dashboard...');
+        this.hasCompany = true;
+      }
+    });
 
     this.apiService.company(token).subscribe((countries: any) => {
       this.countries = (countries.countries || []).map((country: any) => ({
@@ -36,6 +53,7 @@ export class MainDashboardComponent {
   }
 
   // ------------------------ company info
+
 
   loading = false;
   userMessageArray: string[] = [];
@@ -136,7 +154,6 @@ export class MainDashboardComponent {
     this.selectedLogoFileName = '';
     this.companyLogo = '';
   }
-  
 
   // ------------------------ languages handling
 
@@ -412,16 +429,16 @@ export class MainDashboardComponent {
       if (!fieldsFilled) {
         show('Please fill all the fields');
         return;
+      } else if (this.companyLongitude) {
+        this.apiService
+          .createNewCompany(formData)
+          .subscribe((response: any) => {
+            console.log('Response:', response);
+            this.showMessage(response.message);
+            this.loading = false;
+          });
       }
-      else if (this.companyLongitude) {
-      this.apiService.createNewCompany(formData).subscribe((response: any) => {
-        console.log('Response:', response);
-        this.showMessage(response.message);
-        this.loading = false;
-      });
     }
-    }
-    
 
     // Add extra language if present
     if (this.selectedLanguages.length > 1 && this.selectedLanguages[1]?.id) {
@@ -431,8 +448,6 @@ export class MainDashboardComponent {
     console.log(formData);
     console.log('deflang: ' + this.selectedDefaultLanguage);
     console.log(this.currentPage);
-
-    
 
     if (this.currentPage === 1) {
       this.previousPage = 1;

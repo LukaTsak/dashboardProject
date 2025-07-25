@@ -19,16 +19,11 @@ select:-webkit-autofill:focus {
   caret-color: white;
 }
 
-// select:-webkit-autofill:hover,
-// select:-webkit-autofill:active,
-// select:-webkit-autofill:focus {
-//   transition: background-color 5000s ease-in-out 0s !important;
-//   -webkit-text-fill-color: white !important;
-//   caret-color: white;
-// }
-
-wekbit-select * {
-    transition: background-color 5000s ease-in-out 0s !important;
+select:-webkit-autofill:hover,
+select:-webkit-autofill:active,
+select:-webkit-autofill:focus {
+  transition: background-color 5000s ease-in-out 0s !important;
   -webkit-text-fill-color: white !important;
-  caret-color: white !important;
+  caret-color: white;
 }
+

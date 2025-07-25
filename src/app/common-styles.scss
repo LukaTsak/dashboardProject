@@ -322,14 +322,48 @@ input:-webkit-autofill:hover {
 //   transition: background-color 5000s ease-in-out 0s !important;
 //   border-radius: inherit; /* optional: prevent weird autofill corner shape */
 //   -webkit-font-size: 30px !important;
-//   pointer-events: none;
+//   // pointer-events: none;
 //   caret-color: white !important;
+//   background-color: #333 !important;
+//   -webkit-background-color: #333 !important;/* fallback for browsers that don't support -webkit-autofill */
 // }
 
+// select:-webkit-autofill:hover {
+//   -webkit-box-shadow: 0 0 0 1000px $color-bg-hover inset !important;
+// }
+
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: red;
+  transition: all 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 10px 1000px $color-bg-input;
+  background-color: red($color: #000000);
+}
 
 select:-webkit-autofill:hover {
-  -webkit-box-shadow: 0 0 0 1000px $color-bg-hover inset !important;
+  -webkit-background-clip: text;
+  box-shadow: inset 0 0 10px 1000px $color-bg-hover;
 }
+
+
+// option:-webkit-autofill,
+// option:-webkit-autofill:hover,
+// option:-webkit-autofill:focus,
+// option:-webkit-autofill:active {
+//   -webkit-background-clip: text;
+//   -webkit-text-fill-color: #ffffff;
+//   transition: all 5000s ease-in-out 0s;
+//   box-shadow: inset 0 0 10px 1000px $color-bg-input;
+//   background-color: red($color: #000000);
+// }
+
+// option:-webkit-autofill:hover {
+//   -webkit-background-clip: text;
+//   box-shadow: inset 0 0 10px 1000px $color-bg-hover;
+// }
 
 /* Animations */
 @keyframes fadeinout {

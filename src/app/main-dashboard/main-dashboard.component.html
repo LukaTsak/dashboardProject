@@ -1,5 +1,5 @@
 <main>
-  <div class="loginPage">
+  <div *ngIf="this.hasCompany === false" class="loginPage">
     <div class="loginContainer">
       <h3>You Must Add Company</h3>
 
@@ -119,7 +119,8 @@
                 autocomplete="off"
               >
                 <!-- <option disabled selected value="">Select Country</option> -->
-                <option class="optionClass" *ngFor="let country of countries" [value]="country.id">
+                autocomplete="off"
+                <option  class="optionClass" *ngFor="let country of countries" [value]="country.id">
                   {{ country.name }}
                 </option>
               </select>

@@ -51,27 +51,40 @@ export class ApiServiceService {
   }
 
   company(token: string) {
-  return this.http.get('http://127.0.0.1:8000/api/dashboard/companies/form-data', {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-}
+    return this.http.get(
+      'http://127.0.0.1:8000/api/dashboard/companies/form-data',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
 
-createNewCompany(obj: any) {
-  const token = localStorage.getItem('access_token');
+  createNewCompany(obj: any) {
+    const token = localStorage.getItem('access_token');
 
-  const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`
-  });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
 
-  return this.http.post(
-    'http://127.0.0.1:8000/api/dashboard/companies',
-    obj,
-    { headers }
-  );
-}
+    return this.http.post(
+      'http://127.0.0.1:8000/api/dashboard/companies',
+      obj,
+      { headers }
+    );
+  }
 
+  getInfo() {
+    const token = localStorage.getItem('access_token');
 
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
 
+    return this.http.get(
+      'http://127.0.0.1:8000/api/me',
+      { headers }
+    );
+  }
 }

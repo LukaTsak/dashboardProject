@@ -491,7 +491,26 @@ main {
   }
 }
 
+// select:-webkit-autofill,
+// select:-webkit-autofill:focus,
+// select:-webkit-autofill:active {
+//   -webkit-background-clip: text !important;
+//   background-clip: text !important;
+//   -webkit-box-shadow: 0 0 0 1000px $color-bg-input inset !important;
+//   -webkit-text-fill-color: white !important;
+//   transition: background-color 5000s ease-in-out 0s !important;
+//   border-radius: inherit; /* optional: prevent weird autofill corner shape */
+//   -webkit-font-size: 30px !important;
+//   // pointer-events: none;
+//   caret-color: white !important;
+//   background-color: #333 !important; 
+//   -webkit-background-color: #333 !important;/* fallback for browsers that don't support -webkit-autofill */
+// }
 
+
+// select:-webkit-autofill:hover {
+//   -webkit-box-shadow: 0 0 0 1000px $color-bg-hover inset !important;
+// }
 
 
 @media screen and (max-width: 620px) {

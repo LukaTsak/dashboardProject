@@ -1,5 +1,5 @@
 <main>
-  <div *ngIf="this.hasCompany === false" class="loginPage">
+  <div *ngIf="companyCheckComplete && !hasCompany" class="loginPage">
     <div class="loginContainer">
       <h3>You Must Add Company</h3>
 
@@ -120,7 +120,11 @@
               >
                 <!-- <option disabled selected value="">Select Country</option> -->
                 autocomplete="off"
-                <option  class="optionClass" *ngFor="let country of countries" [value]="country.id">
+                <option
+                  class="optionClass"
+                  *ngFor="let country of countries"
+                  [value]="country.id"
+                >
                   {{ country.name }}
                 </option>
               </select>
@@ -421,6 +425,133 @@
         <button (click)="next()" class="loginBtn next">
           {{ currentPage === 3 ? "Finish" : "Next" }}
         </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="companyCheckComplete && hasCompany" class="dashboardPage">
+    <div  class="sidebar" [class.active]="isActive">
+      <div class="logo"></div>
+      <div class="multiTool">
+        <div
+          class="sideLine"
+          [ngStyle]="{ 'margin-top.px': currentMarginPx }"
+        ></div>
+
+        <div
+          (click)="currentviewCount(1)"
+          class="MuiListItemIcon-root css-150er35 multiToolIcon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--mingcute MuiBox-root css-uwwqev"
+            width="1.3em"
+            height="1.3em"
+            viewBox="0 0 24 24"
+            transition="all 0.3s"
+            [ngStyle]="{
+              color: currentView === 1 ? 'rgb(115, 202, 190)' : 'gray'
+            }"
+          >
+            <g fill="none" fill-rule="evenodd">
+              <path
+                d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+              ></path>
+              <path
+                fill="currentColor"
+                d="M10.8 2.65a2 2 0 0 1 2.4 0l7 5.25a2 2 0 0 1 .8 1.6V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5a2 2 0 0 1 .8-1.6z"
+              ></path>
+            </g>
+          </svg>
+          <span [ngStyle]="{
+              color: currentView === 1 ? 'rgb(115, 202, 190)' : 'gray'
+            }" style="display: none;  transition: all 0.3s;">Home</span>
+        </div>
+
+        <div
+          (click)="currentviewCount(2)"
+          class="MuiListItemIcon-root css-cr91lq multiToolIcon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--clarity MuiBox-root css-uwwqev"
+            width="1.3em"
+            height="1.3em"
+            viewBox="0 0 36 36"
+            transition="all 0.3s"
+            [ngStyle]="{
+              color: currentView === 2 ? 'rgb(115, 202, 190)' : 'gray'
+            }"
+          >
+            <path
+              fill="currentColor"
+              d="M18 17a7 7 0 1 0-7-7a7 7 0 0 0 7 7m0-12a5 5 0 1 1-5 5a5 5 0 0 1 5-5"
+              class="clr-i-outline clr-i-outline-path-1"
+            ></path>
+            <path
+              fill="currentColor"
+              d="M30.47 24.37a17.16 17.16 0 0 0-24.93 0A2 2 0 0 0 5 25.74V31a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2v-5.26a2 2 0 0 0-.53-1.37M29 31H7v-5.27a15.17 15.17 0 0 1 22 0Z"
+              class="clr-i-outline clr-i-outline-path-2"
+            ></path>
+            <path fill="none" d="M0 0h36v36H0z"></path>
+          </svg>
+          <span [ngStyle]="{
+              color: currentView === 2 ? 'rgb(115, 202, 190)' : 'gray'
+            }" style="display: none;  transition: all 0.3s;">Profile</span>
+        </div>
+
+        <div class="MuiListItemIcon-root css-cr91lq multiToolIcon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--tabler MuiBox-root css-uwwqev"
+            width="1.3em"
+            height="1.3em"
+            viewBox="0 0 24 24"
+            color="gray"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path
+                d="M15 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2"
+              ></path>
+              <path d="M21 12H8l3-3m0 6l-3-3"></path>
+            </g>
+          </svg>
+          <span style="display: none;  transition: all 0.3s;">Logout</span>
+        </div>
+      </div>
+    </div>
+    <div class="headder">
+      <div (click)="isActive = !isActive">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
+          role="img"
+          class="iconify iconify--ri MuiBox-root css-16qv2i2 sidebarButton"
+          width="1.5em"
+          height="1.5em"
+          viewBox="0 0 24 24"
+          cursor="pointer"
+        >
+          <path
+            fill="white"
+            d="M17 4H3v2h14zm-4 7H3v2h10zm4 7H3v2h14zm-1.01-9.186L17.404 7.4L22 11.996l-4.596 4.596l-1.414-1.414l3.182-3.182z"
+          ></path>
+        </svg>
       </div>
     </div>
   </div>

@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
 export class MainDashboardComponent {
   constructor(private apiService: ApiServiceService, private router: Router) {}
 
-
   hasCompany = false;
+  companyCheckComplete = false;
 
   ngOnInit() {
     const token = localStorage.getItem('access_token');
@@ -26,16 +26,8 @@ export class MainDashboardComponent {
     }
 
     this.apiService.getInfo().subscribe((response: any) => {
-      console.log('Company Info:', response);
-      // this.showMessage('Company created successfully!');
-      if (response.current_company_id === null) {
-        // this.router.navigate(['/dashboard']);
-        console.log('User does not have a company, redirecting to signup...');
-      } else {
-        // this.router.navigate(['/signup']);
-        console.log('User has a company, redirecting to dashboard...');
-        this.hasCompany = true;
-      }
+      this.hasCompany = response.current_company_id !== null;
+      this.companyCheckComplete = true;
     });
 
     this.apiService.company(token).subscribe((countries: any) => {
@@ -53,7 +45,6 @@ export class MainDashboardComponent {
   }
 
   // ------------------------ company info
-
 
   loading = false;
   userMessageArray: string[] = [];
@@ -94,6 +85,24 @@ export class MainDashboardComponent {
 
   currentPage = 1;
   previousPage = 1;
+  currentMarginPx = 10;
+  currentView = 1;
+
+  isActive = false
+
+  currentviewCount(x: any) {
+    if (x === 1) {
+      this.currentMarginPx = 10;
+      this.currentView = 1;
+    } else if (x === 2) {
+      this.currentMarginPx = 66;
+      this.currentView = 2;
+    }
+    // this.currentview++;
+    console.log('Current View Count:', this.currentMarginPx);
+    console.log('Current View:', this.currentView);
+    console.log(this.isActive);
+  }
 
   // ------------------------ message handling
 

@@ -19,7 +19,7 @@ export class MainDashboardComponent {
   companyCheckComplete = false;
 
   ngOnInit() {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
     if (!token) {
       console.error('No access token found!');
       return;
@@ -474,6 +474,12 @@ export class MainDashboardComponent {
       console.log('Current Page:', this.currentPage);
       console.log('Previous Page:', this.previousPage);
     }
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('access_token');
+    this.router.navigate(['/login']);
   }
 
   changeInpLang(langId: any) {

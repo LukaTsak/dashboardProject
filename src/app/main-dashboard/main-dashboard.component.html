@@ -429,17 +429,23 @@
     </div>
   </div>
   <div *ngIf="companyCheckComplete && hasCompany" class="dashboardPage">
-    <div  class="sidebar" [class.active]="isActive">
+    <div class="sidebar" [class.active]="isActive">
       <div class="logo"></div>
       <div class="multiTool">
         <div
           class="sideLine"
-          [ngStyle]="{ 'margin-top.px': currentMarginPx }"
+          [ngStyle]="{
+            'margin-top.px': currentMarginPx,
+            display: isActive ? 'none' : 'flex'
+          }"
         ></div>
 
         <div
           (click)="currentviewCount(1)"
           class="MuiListItemIcon-root css-150er35 multiToolIcon"
+          [ngStyle]="{
+              backgroundColor: currentView === 1 && isActive === true ? 'rgb(115, 202, 190)' : 'transparent',
+            }"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -452,7 +458,10 @@
             viewBox="0 0 24 24"
             transition="all 0.3s"
             [ngStyle]="{
-              color: currentView === 1 ? 'rgb(115, 202, 190)' : 'gray'
+              color:
+                currentView === 1 && isActive === false
+                  ? 'rgb(115, 202, 190)'
+                  : 'gray'
             }"
           >
             <g fill="none" fill-rule="evenodd">
@@ -465,14 +474,22 @@
               ></path>
             </g>
           </svg>
-          <span [ngStyle]="{
-              color: currentView === 1 ? 'rgb(115, 202, 190)' : 'gray'
-            }" style="display: none;  transition: all 0.3s;">Home</span>
+          <span style="display: none; transition: all 0.3s">Home</span>
+
+          <!-- [ngStyle]="{
+              color: currentView === 1 && isActive === true ? 'rgb(115, 202, 190)' : 'gray'
+            }"  -->
         </div>
 
         <div
           (click)="currentviewCount(2)"
           class="MuiListItemIcon-root css-cr91lq multiToolIcon"
+          [ngStyle]="{
+            backgroundColor:
+              currentView === 2 && isActive === true
+                ? 'rgb(115, 202, 190)'
+                : 'transparent'
+          }"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -485,7 +502,10 @@
             viewBox="0 0 36 36"
             transition="all 0.3s"
             [ngStyle]="{
-              color: currentView === 2 ? 'rgb(115, 202, 190)' : 'gray'
+              color:
+                currentView === 2 && isActive === false
+                  ? 'rgb(115, 202, 190)'
+                  : 'gray'
             }"
           >
             <path
@@ -500,12 +520,17 @@
             ></path>
             <path fill="none" d="M0 0h36v36H0z"></path>
           </svg>
-          <span [ngStyle]="{
+          <span style="display: none; transition: all 0.3s">Profile</span>
+
+          <!-- [ngStyle]="{
               color: currentView === 2 ? 'rgb(115, 202, 190)' : 'gray'
-            }" style="display: none;  transition: all 0.3s;">Profile</span>
+            }" -->
         </div>
 
-        <div class="MuiListItemIcon-root css-cr91lq multiToolIcon">
+        <div
+          (click)="logout()"
+          class="MuiListItemIcon-root css-cr91lq multiToolIcon"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -530,13 +555,14 @@
               <path d="M21 12H8l3-3m0 6l-3-3"></path>
             </g>
           </svg>
-          <span style="display: none;  transition: all 0.3s;">Logout</span>
+          <span style="display: none; transition: all 0.3s">Logout</span>
         </div>
       </div>
     </div>
     <div class="headder">
       <div (click)="isActive = !isActive">
         <svg
+        *ngIf="!isActive"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           aria-hidden="true"
@@ -550,6 +576,24 @@
           <path
             fill="white"
             d="M17 4H3v2h14zm-4 7H3v2h10zm4 7H3v2h14zm-1.01-9.186L17.404 7.4L22 11.996l-4.596 4.596l-1.414-1.414l3.182-3.182z"
+          ></path>
+        </svg>
+
+        <svg
+        *ngIf="isActive"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
+          role="img"
+          class="iconify iconify--ri MuiBox-root css-16qv2i2 sidebarButton"
+          width="1.5em"
+          height="1.5em"
+          viewBox="0 0 24 24"
+          cursor="pointer"
+        >
+          <path
+            fill="white"
+            d="M17 4H3v2h14zm-4 7H3v2h10zm4 7H3v2h14zm5.01-9.186L20.596 7.4L16 11.996l4.596 4.596l1.414-1.414l-3.182-3.182z"
           ></path>
         </svg>
       </div>

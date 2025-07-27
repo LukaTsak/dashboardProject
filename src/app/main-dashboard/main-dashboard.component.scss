@@ -502,7 +502,7 @@ main {
       width: 110px;
       height: 100vh;
       border-right: 1px solid rgb(44, 45, 51);
-      transition: all 0.3s;
+      transition: all 0.5s;
 
       .logo {
         width: 100%;
@@ -521,7 +521,7 @@ main {
         width: 100%;
         height: fit-content;
         // background-color: blue;
-        padding: 10px 0px;
+        padding: 20px 0px;
         // border-right: 2px solid rgb(115, 202, 190);
 
         .sideLine {
@@ -540,7 +540,8 @@ main {
           align-items: center;
           justify-content: center;
           height: 40px;
-          width: 65%;
+          width: 75% !important;
+          min-width: fit-content;
           border-radius: 8px;
           // border: 1px solid yellow;
           transition: all 0.3s;
@@ -548,6 +549,7 @@ main {
           background: rgb(128, 128, 128, 0);
           cursor: pointer;
           // border-right: 2px solid red;
+          // transition: background-color 0.5s ease-in;
 
           &:hover {
             // background-color: red;
@@ -574,7 +576,7 @@ main {
     .active {
       width: 200px;
       color: red;
-      transition: all 0.3s;
+      transition: all 0.2s ease-out;
 
       & .multiTool {
         width: 100%;
@@ -583,12 +585,12 @@ main {
         transition: all 0.3s;
 
         .multiToolIcon {
-          min-width: 30%;
-          width: fit-content;
           margin-left: 20px;
           display: flex;
           padding: 5px 15px;
           transition: all 0.3s;
+          transition: background-color 0.3s ;
+
 
           span {
             display: flex !important;

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 import { animationFrameScheduler } from 'rxjs';
 import { Router } from '@angular/router';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -19,7 +20,9 @@ export class MainDashboardComponent {
   companyCheckComplete = false;
 
   ngOnInit() {
-    const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
+    const token =
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token');
     if (!token) {
       console.error('No access token found!');
       return;
@@ -54,6 +57,7 @@ export class MainDashboardComponent {
   // Step 1
   companyLogo?: string = '';
   companySubdomain?: string = '';
+  domainAvailable: boolean = true;
   companyZipCode?: string = '';
   companyPhone?: string = '';
   companyEmail?: string = '';
@@ -88,7 +92,7 @@ export class MainDashboardComponent {
   currentMarginPx = 10;
   currentView = 1;
 
-  isActive = false
+  isActive = false;
 
   currentviewCount(x: any) {
     if (x === 1) {
@@ -117,6 +121,33 @@ export class MainDashboardComponent {
       this.userMessageArray = this.userMessageArray.filter((m) => m !== msg);
     }, 3000);
   }
+  // ------------------------ doman handling
+
+  checkDomainAvailability() {
+  console.log('Checking domain:', this.companySubdomain);
+
+  this.apiService
+    .checkdomain({ sub_domain: this.companySubdomain })
+    .subscribe({
+      next: (response: any) => {
+        console.log('Domain check response:', response);
+
+        if (response.status === 'ok' || response.message?.toLowerCase().includes('available')) {
+          this.domainAvailable = true;
+        } else {
+          this.domainAvailable = false;
+        }
+      },
+      error: (error: any) => {
+        const errorMsg = error.error?.message || error.message || 'Something went wrong';
+        console.error('Error checking domain:', errorMsg);
+        this.showMessage(errorMsg);
+        if(this.companySubdomain)
+        this.domainAvailable = false;
+      }
+    });
+}
+
 
   // ------------------------ logo handling
 
@@ -200,61 +231,6 @@ export class MainDashboardComponent {
 
     this.selectedLanguage = ''; // Reset selection after removing
   }
-
-  // ------------------------ buttons
-
-  // sendEmail() {
-  //   console.log('email:', this.loginEmail);
-  //   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-  //   // ------------------------ input validation
-
-  //   if (!this.loginEmail) {
-  //     this.showMessage('Please fill in all fields.');
-  //   } else if (!emailRegex.test(this.loginEmail)) {
-  //     this.showMessage('Please enter a valid email address.');
-  //   } else {
-  //     const obj = {
-  //       email: this.loginEmail,
-  //     };
-
-  //     console.log('Sending email:', obj);
-
-  //     // ------------------------ api service call
-
-  //     this.apiService.forgotPassword(obj).subscribe(
-  //       (response: any) => {
-  //         console.log('Response:', response);
-  //         this.showMessage(response.status);
-  //       },
-  //       (error) => {
-  //         this.showMessage(error.error.message);
-  //         console.error('Error:', error);
-  //       }
-  //     );
-
-  //     // ------------------------ spinner functionality
-
-  //     const btn = document.getElementById(
-  //       'sendBtn'
-  //     ) as HTMLButtonElement | null;
-  //     if (!btn) return;
-
-  //     const text = btn.querySelector('.btn-text') as HTMLElement | null;
-  //     const spinner = btn.querySelector('.spinner') as HTMLElement | null;
-  //     if (!text || !spinner) return;
-
-  //     btn.disabled = true;
-  //     spinner.classList.remove('hidden');
-  //     text.textContent = '';
-
-  //     setTimeout(() => {
-  //       btn.disabled = false;
-  //       spinner.classList.add('hidden');
-  //       text.textContent = 'Send Email';
-  //     }, 3000);
-  //   }
-  // }
 
   get canGoNext() {
     return this.currentPage < 3;

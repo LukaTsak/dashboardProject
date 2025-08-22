@@ -63,9 +63,10 @@
           </div>
 
           <div class="textInputDiv company-subdomain">
-            <label for="companySubdomainStep1">Subdomain</label>
+            <label for="companySubdomainStep1">Subdomain <label *ngIf="domainAvailable == false" style="color: red; font-size: 12px;">Domain taken</label></label>
             <input
               [(ngModel)]="companySubdomain"
+              (input)="checkDomainAvailability()"
               type="text"
               class="emailInp"
               name="companySubdomainStep1"

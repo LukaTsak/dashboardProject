@@ -56,13 +56,15 @@ export class ApiServiceService {
       {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
+        }
       }
     );
   }
 
   createNewCompany(obj: any) {
-    const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
+    const token =
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -76,15 +78,29 @@ export class ApiServiceService {
   }
 
   getInfo() {
-    const token = localStorage.getItem('access_token') || sessionStorage.getItem('access_token');
+    const token =
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get('http://127.0.0.1:8000/api/me', { headers });
+  }
+
+  checkdomain(obj: any) {
+    const token =
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
 
     return this.http.get(
-      'http://127.0.0.1:8000/api/me',
-      { headers }
+      'http://127.0.0.1:8000/api/dashboard/check-company-sub-domain',
+      { headers, params: obj }
     );
   }
 }

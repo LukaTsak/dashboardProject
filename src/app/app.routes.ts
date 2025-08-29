@@ -6,6 +6,7 @@ import { MainDashboardComponent } from './main-dashboard/main-dashboard.componen
 import { AmbassadorSignUpComponent } from './ambassador-sign-up/ambassador-sign-up.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { CompanyAddComponent } from './company-add/company-add.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path: 'forgotPassword', component: ForgotPasswordComponent},
     {path: 'reset-password', component: ResetPasswordComponent},
     {path: 'checkPasswordToken', component: ResetPasswordComponent},
+    {path: 'companyadd', component: CompanyAddComponent},
 
 
     {path: '**', redirectTo: 'login'}

@@ -22,6 +22,9 @@ export class LoginComponent {
   }
 }
 
+hasCompany = false;
+  companyCheckComplete = false;
+
 
   // ------------------------ password visibility/functionality
 
@@ -89,9 +92,18 @@ export class LoginComponent {
               sessionStorage.setItem('access_token', token)
             }
 
+            this.apiService.getInfo().subscribe((response: any) => {
+      this.hasCompany = response.current_company_id !== null;
+      this.companyCheckComplete = true;
+    });
+
             this.showMessage('Login successful!');
             setTimeout(() => {
-              this.router.navigate(['/dashboard']);
+              if(this.hasCompany && this.companyCheckComplete){
+              this.router.navigate(['/dashboard']);}
+              else {
+                this.router.navigate(['/companyadd']);
+              }
             }, 3000);
           },
           error: (error) => {

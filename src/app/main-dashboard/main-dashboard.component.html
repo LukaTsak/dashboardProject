@@ -126,14 +126,16 @@
               <path d="M21 12H8l3-3m0 6l-3-3"></path>
             </g>
           </svg>
-          <span style="display: none; transition: all 0.3s; color: white;">Logout</span>
+          <span style="display: none; transition: all 0.3s; color: white"
+            >Logout</span
+          >
         </div>
       </div>
     </div>
     <div class="headder">
       <div (click)="isActive = !isActive">
         <svg
-        *ngIf="!isActive"
+          *ngIf="!isActive"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           aria-hidden="true"
@@ -151,7 +153,7 @@
         </svg>
 
         <svg
-        *ngIf="isActive"
+          *ngIf="isActive"
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
           aria-hidden="true"
@@ -167,6 +169,11 @@
             d="M17 4H3v2h14zm-4 7H3v2h10zm4 7H3v2h14zm5.01-9.186L20.596 7.4L16 11.996l4.596 4.596l1.414-1.414l-3.182-3.182z"
           ></path>
         </svg>
+      </div>
+
+      <div class="currentCompany">
+        <span class="companyName">{{ currentCompany?.name }}</span>
+        <span class="companyOwner">{{ currentCompany?.users[0].name }}</span>
       </div>
     </div>
   </div>

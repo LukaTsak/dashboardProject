@@ -22,7 +22,7 @@ export class MainDashboardComponent {
       return;
     }
     this.apiService.getCompany().subscribe((response: any) => {
-      // console.log('Current Company Info:', response.company);
+      console.log('Current Company Info:', response.company);
       this.currentCompany = response.company;
     });
   }

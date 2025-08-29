@@ -15,16 +15,15 @@ export class LoginComponent {
   constructor(private apiService: ApiServiceService, private router: Router) {}
 
   ngOnInit() {
-  const token = localStorage.getItem('access_token');
-  if (token) {
-    // Ideally verify token or call a /me or /profile endpoint
-    this.router.navigate(['/dashboard']);
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      // Ideally verify token or call a /me or /profile endpoint
+      this.router.navigate(['/dashboard']);
+    }
   }
-}
 
-hasCompany = false;
+  hasCompany = false;
   companyCheckComplete = false;
-
 
   // ------------------------ password visibility/functionality
 
@@ -50,7 +49,7 @@ hasCompany = false;
 
   email?: string = '';
   password?: string = '';
-  keepSignedIn :boolean = false
+  keepSignedIn: boolean = false;
 
   userMessageArray: string[] = [];
 
@@ -85,23 +84,30 @@ hasCompany = false;
             console.log('Response:', response);
 
             const token = response.access_token;
-            if (typeof window !== 'undefined' && token && this.keepSignedIn == true) {
+            if (
+              typeof window !== 'undefined' &&
+              token &&
+              this.keepSignedIn == true
+            ) {
               localStorage.setItem('access_token', token);
-            }
-            else if(typeof window !== 'undefined' && token && this.keepSignedIn == false){
-              sessionStorage.setItem('access_token', token)
+            } else if (
+              typeof window !== 'undefined' &&
+              token &&
+              this.keepSignedIn == false
+            ) {
+              sessionStorage.setItem('access_token', token);
             }
 
             this.apiService.getInfo().subscribe((response: any) => {
-      this.hasCompany = response.current_company_id !== null;
-      this.companyCheckComplete = true;
-    });
+              this.hasCompany = response.current_company_id !== null;
+              this.companyCheckComplete = true;
+            });
 
             this.showMessage('Login successful!');
             setTimeout(() => {
-              if(this.hasCompany && this.companyCheckComplete){
-              this.router.navigate(['/dashboard']);}
-              else {
+              if (this.hasCompany && this.companyCheckComplete) {
+                this.router.navigate(['/dashboard']);
+              } else {
                 this.router.navigate(['/companyadd']);
               }
             }, 3000);

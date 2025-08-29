@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+
+const baseurl = 'http://127.0.0.1:8000/api';
 
 @Injectable({
   providedIn: 'root',
@@ -7,100 +9,86 @@ import { Component, Injectable } from '@angular/core';
 export class ApiServiceService {
   constructor(private http: HttpClient) {}
 
+  // helpers
+  private getToken(): string | null {
+    return (
+      localStorage.getItem('access_token') ||
+      sessionStorage.getItem('access_token')
+    );
+  }
+
+  private getAuthHeaders(explicitToken?: string): HttpHeaders {
+    const token = explicitToken || this.getToken();
+    return new HttpHeaders(token ? { Authorization: `Bearer ${token}` } : {});
+  }
+
+  // Registration & Auth
   sendEmail(obj: any) {
-    return this.http.post('http://127.0.0.1:8000/api/registration', obj);
+    return this.http.post(`${baseurl}/registration`, obj);
   }
 
   getEmailByToken(token: any) {
-    return this.http.post(
-      'http://127.0.0.1:8000/api/checkRegistrationToken',
-      token
-    );
+    return this.http.post(`${baseurl}/checkRegistrationToken`, token);
   }
 
   createNewAccount(obj: any) {
-    return this.http.post(
-      'http://127.0.0.1:8000/api/complete-user-registration',
-      obj
-    );
+    return this.http.post(`${baseurl}/complete-user-registration`, obj);
   }
 
   createNewAmbassador(obj: any) {
-    return this.http.post(
-      'http://127.0.0.1:8000/api/complete-ambassador-registration',
-      obj
-    );
+    return this.http.post(`${baseurl}/complete-ambassador-registration`, obj);
   }
 
   Login(obj: any) {
-    return this.http.post('http://127.0.0.1:8000/api/login', obj);
-  }
-
-  getCountries() {
-    return this.http.get(
-      'http://127.0.0.1:8000/api/complete-ambassador-registration/formData'
-    );
+    return this.http.post(`${baseurl}/login`, obj);
   }
 
   forgotPassword(obj: any) {
-    return this.http.post('http://127.0.0.1:8000/api/forgot-password', obj);
+    return this.http.post(`${baseurl}/forgot-password`, obj);
   }
 
   resetPassword(obj: any) {
-    return this.http.post('http://127.0.0.1:8000/api/reset-password', obj);
+    return this.http.post(`${baseurl}/reset-password`, obj);
+  }
+
+  // User & Dashboard
+  getInfo() {
+    return this.http.get(`${baseurl}/me`, {
+      headers: this.getAuthHeaders(),
+    });
   }
 
   company(token: string) {
-    return this.http.get(
-      'http://127.0.0.1:8000/api/dashboard/companies/form-data',
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      }
-    );
+    return this.http.get(`${baseurl}/dashboard/companies/form-data`, {
+      headers: this.getAuthHeaders(token),
+    });
   }
 
   createNewCompany(obj: any) {
-    const token =
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token');
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+    return this.http.post(`${baseurl}/dashboard/companies`, obj, {
+      headers: this.getAuthHeaders(),
     });
-
-    return this.http.post(
-      'http://127.0.0.1:8000/api/dashboard/companies',
-      obj,
-      { headers }
-    );
-  }
-
-  getInfo() {
-    const token =
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token');
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.get('http://127.0.0.1:8000/api/me', { headers });
   }
 
   checkdomain(obj: any) {
-    const token =
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token');
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+    return this.http.get(`${baseurl}/dashboard/check-company-sub-domain`, {
+      headers: this.getAuthHeaders(),
+      params: obj,
     });
+  }
 
+  // Other
+  getCountries() {
     return this.http.get(
-      'http://127.0.0.1:8000/api/dashboard/check-company-sub-domain',
-      { headers, params: obj }
+      `${baseurl}/complete-ambassador-registration/formData`
+    );
+  }
+
+  getCompany() {
+    return this.http.get(
+      `${baseurl}/dashboard/profile/current-company`,{
+      headers: this.getAuthHeaders(),
+    }
     );
   }
 }

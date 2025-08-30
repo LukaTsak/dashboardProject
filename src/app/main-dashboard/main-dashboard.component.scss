@@ -4,12 +4,16 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  
 
   .dashboardPage {
+    position: relative;
     width: 100%;
     display: flex;
     align-items: start;
     justify-content: start;
+    height: fit-content;
+    
 
     .sidebar {
       width: 110px;
@@ -136,6 +140,24 @@ main {
             }
           }
         }
+      }
+    }
+
+    .mainContent {
+      position: absolute;
+      top: 130px;
+      left: 130px;
+      width: 84%;
+
+      .profile {
+        // position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        width: 100%;
+        height: 85.5vh;
+        margin-left: auto;
+        margin-right: 20px;
       }
     }
   }

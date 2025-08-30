@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 import { Router } from '@angular/router';
+import { ProfileComponent } from "./profile/profile.component";
 
 @Component({
   selector: 'app-main-dashboard',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ProfileComponent],
   templateUrl: './main-dashboard.component.html',
   styleUrl: './main-dashboard.component.scss',
 })
@@ -14,20 +15,21 @@ export class MainDashboardComponent {
   constructor(private apiService: ApiServiceService, private router: Router) {}
 
   ngOnInit() {
-    const token =
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token');
-    if (!token) {
-      console.error('No access token found!');
-      return;
-    }
     this.apiService.getCompany().subscribe((response: any) => {
       console.log('Current Company Info:', response.company);
       this.currentCompany = response.company;
     });
+
+    const token =
+      localStorage?.getItem('access_token') ||
+      sessionStorage?.getItem('access_token');
+    if (!token) {
+      console.error('No access token found!');
+      return;
+    }
   }
 
-  currentCompany: any ;
+  currentCompany: any;
   currentMarginPx = 20;
   currentView = 1;
   isActive = false;

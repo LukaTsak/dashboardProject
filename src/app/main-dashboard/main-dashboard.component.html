@@ -171,10 +171,14 @@
         </svg>
       </div>
 
-      <div class="currentCompany">
+      <div *ngIf="currentCompany" class="currentCompany">
         <span class="companyName">{{ currentCompany?.name }}</span>
         <span class="companyOwner">{{ currentCompany?.users[0].name }}</span>
       </div>
     </div>
-  </div>
+    <div class="mainContent">
+      <!-- <app-home *ngIf="currentView === 1">dasd</app-home> -->
+      <app-profile class="profile" *ngIf="currentView === 2"></app-profile>
+    </div>
+    </div>
 </main>

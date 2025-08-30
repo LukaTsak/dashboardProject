@@ -1,0 +1,56 @@
+@import "../../variables.scss";
+
+* {
+  border: 1px solid red;
+}
+main {
+  width: 100%;
+  height: 85.5vh;
+
+  .profineInfo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .top {
+      width: 100%;
+      height: 60px;
+      border-bottom: 1px solid lightgray;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+
+      span {
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+      }
+    }
+
+    .main {
+      display: flex;
+      gap: 15px;
+      flex-direction: column;
+      padding: 20px;
+
+      .nameSurname {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        flex-wrap: wrap;
+        input {
+          max-width: 49%;
+        }
+      }
+
+      .ProfileInp {
+        width: 100%;
+        background-color: $color-bg-input;
+        height: 30px;
+        border-radius: $border-radius-sm;
+      }
+    }
+  }
+}

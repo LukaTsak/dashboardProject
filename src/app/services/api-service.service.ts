@@ -91,4 +91,12 @@ export class ApiServiceService {
     }
     );
   }
+
+  getProfile() {
+    return this.http.get(
+      `${baseurl}/dashboard/profile/user`,{
+      headers: this.getAuthHeaders(),
+    }
+    );
+  }
 }

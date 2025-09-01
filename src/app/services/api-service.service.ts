@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 const baseurl = 'http://127.0.0.1:8000/api';
 
@@ -7,7 +9,14 @@ const baseurl = 'http://127.0.0.1:8000/api';
   providedIn: 'root',
 })
 export class ApiServiceService {
-  constructor(private http: HttpClient) {}
+  private isBrowser?: boolean;
+
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   // helpers
   private getToken(): string | null {
@@ -15,6 +24,8 @@ export class ApiServiceService {
       localStorage.getItem('access_token') ||
       sessionStorage.getItem('access_token')
     );
+
+    return null;
   }
 
   private getAuthHeaders(explicitToken?: string): HttpHeaders {
@@ -85,18 +96,14 @@ export class ApiServiceService {
   }
 
   getCompany() {
-    return this.http.get(
-      `${baseurl}/dashboard/profile/current-company`,{
+    return this.http.get(`${baseurl}/dashboard/profile/current-company`, {
       headers: this.getAuthHeaders(),
-    }
-    );
+    });
   }
 
   getProfile() {
-    return this.http.get(
-      `${baseurl}/dashboard/profile/user`,{
+    return this.http.get(`${baseurl}/dashboard/profile/user`, {
       headers: this.getAuthHeaders(),
-    }
-    );
+    });
   }
 }

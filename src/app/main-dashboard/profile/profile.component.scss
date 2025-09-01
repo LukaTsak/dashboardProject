@@ -34,23 +34,39 @@ main {
       flex-direction: column;
       padding: 20px;
 
-      .nameSurname {
-        width: 100%;
+      .profileInfo {
         display: flex;
-        flex-direction: row;
-        gap: 5px;
-        flex-wrap: wrap;
+        gap: 15px;
+        flex-direction: column;
+        padding: 20px;
+        .nameSurname {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+          // flex-wrap: wrap;
+          input {
+            max-width: 100%;
+          }
+        }
+
         input {
-          max-width: 49%;
+          color: white;
+          padding-left: 10px;
+          font-size: 15px;
+          width: 100%;
+          background-color: $color-bg-input;
+          height: 30px;
+          border-radius: $border-radius-sm;
         }
       }
 
-      .ProfileInp {
-        width: 100%;
-        background-color: $color-bg-input;
-        height: 30px;
-        border-radius: $border-radius-sm;
-      }
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        padding: 10px 20px;
     }
   }
+}
 }

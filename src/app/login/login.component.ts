@@ -89,13 +89,13 @@ export class LoginComponent {
               token &&
               this.keepSignedIn == true
             ) {
-              localStorage.setItem('access_token', token);
+              window.localStorage.setItem('access_token', token);
             } else if (
               typeof window !== 'undefined' &&
               token &&
               this.keepSignedIn == false
             ) {
-              sessionStorage.setItem('access_token', token);
+              window.sessionStorage.setItem('access_token', token);
             }
 
             this.apiService.getInfo().subscribe((response: any) => {

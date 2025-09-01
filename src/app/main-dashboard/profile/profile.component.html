@@ -5,20 +5,78 @@
     </div>
 
     <div class="main">
+      <div class="profileInfo">
         <div class="nameSurname">
-            <input class="ProfileInp" type="text">
-        <input class="ProfileInp" type="text">
+          <input
+            class="ProfileInp"
+            type="text"
+            placeholder="Name"
+            [(ngModel)]="profileData.name "
+          />
+          <input
+            class="ProfileInp"
+            type="text"
+            placeholder="Surname"
+            [(ngModel)]=" profileData.surname "
+          />
         </div>
-        
-        <input class="ProfileInp" type="text">
-        <input class="ProfileInp" type="text">
-        <input class="ProfileInp" type="text">
-        <input class="ProfileInp" type="text">
-        <input class="ProfileInp" type="text">
-        <input class="ProfileInp" type="text">
-        <input class="ProfileInp" type="text">
-        <input class="ProfileInp" type="text">
 
+        <input
+          class="ProfileInp"
+          type="text"
+          placeholder="Email"
+          [(ngModel)]=" profileData.email "
+        />
+        <input
+          class="ProfileInp"
+          type="text"
+          placeholder="Phone"
+          [(ngModel)]=" profileData.phone "
+        />
+        <input
+          class="ProfileInp"
+          type="text"
+          disabled
+          placeholder="Personal Number"
+          [(ngModel)]=" profileData.personal_number "
+        />
+        <input
+          class="ProfileInp"
+          type="text"
+          placeholder="Date of birth"
+          [(ngModel)]=" profileData.date_of_birth "
+        />
+        <input
+          class="ProfileInp"
+          type="text"
+          placeholder="Address"
+          [(ngModel)]=" profileData.address "
+        />
+        <input
+          class="ProfileInp"
+          type="text"
+          placeholder="City"
+          [(ngModel)]=" profileData.city "
+        />
+        <input
+          class="ProfileInp"
+          type="text"
+          disabled
+          placeholder="Name"
+          [(ngModel)]=" profileData.facebook_id "
+        />
+        <input
+          class="ProfileInp"
+          type="text"
+          disabled
+          placeholder="Name"
+          [(ngModel)]=" profileData.google_id "
+        />
+      </div>
+
+      <div class="button">
+        <button (click)="updateProfile()">Update</button>
+      </div>
     </div>
   </div>
 </main>

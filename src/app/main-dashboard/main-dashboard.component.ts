@@ -4,10 +4,10 @@ import { RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 import { Router } from '@angular/router';
 import { ProfileComponent } from "./profile/profile.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-main-dashboard',
-  imports: [CommonModule, RouterModule, ProfileComponent],
+  imports: [CommonModule, RouterModule, ProfileComponent, FormsModule],
   templateUrl: './main-dashboard.component.html',
   styleUrl: './main-dashboard.component.scss',
 })
@@ -21,8 +21,8 @@ export class MainDashboardComponent {
     });
 
     const token =
-      localStorage?.getItem('access_token') ||
-      sessionStorage?.getItem('access_token');
+      window.localStorage?.getItem('access_token') ||
+      window.sessionStorage?.getItem('access_token');
     if (!token) {
       console.error('No access token found!');
       return;
@@ -45,7 +45,7 @@ export class MainDashboardComponent {
     console.log('Current View Count:', this.currentMarginPx);
     console.log('Current View:', this.currentView);
     console.log(this.isActive);
-    console.log(this.currentCompany.name);
+    // console.log(this.currentCompany.name);
   }
 
   logout() {

@@ -35,24 +35,46 @@ export class ProfileComponent {
   profileData: any = {};
   mainData: any = {};
 
-  updatedName = this.profileData?.name;
-  updatedSurname: string = this.profileData?.surname || '';
-  updatedEmail: string = this.profileData?.email || '';
-  updatedPhone: string = this.profileData?.phone || '';
-  updatedAddress: string = this.profileData?.address || '';
-  updatedCity: string = this.profileData?.city || '';
-  updatedCountry: string = this.profileData?.country_id || '';
-  updatedDateOfBirth: string = this.profileData?.date_of_birth || '';
+  // updatedName = this.profileData?.name;
+  // updatedSurname: string = this.profileData?.surname || '';
+  // updatedEmail: string = this.profileData?.email || '';
+  // updatedPhone: string = this.profileData?.phone || '';
+  // updatedAddress: string = this.profileData?.address || '';
+  // updatedCity: string = this.profileData?.city || '';
+  // updatedCountry: string = this.profileData?.country_id || '';
+  // updatedDateOfBirth: string = this.profileData?.date_of_birth || '';
 
   updateProfile() {
-    // console.log('Updated Name:', this.mainData.updatedName);
-    // console.log('Updated Surname:', this.profileData.name);
-    if (this.mainData.updatedName === this.profileData.name) {
-      console.log('Name unchanged:', this.mainData.updatedName);
-    } else {
-      console.log('Name changed to:', this.profileData.name);
-    }
+  const changes: any = {};
 
-    // console.log('Profile update function called');
+  for (const key in this.mainData) {
+    if (this.mainData.hasOwnProperty(key)) {
+      // map mainData key to profileData key
+      const profileKey = key.replace(/^updated/, '').replace(/^\w/, c => c.toLowerCase());
+
+      const newValue = this.profileData[profileKey];
+
+      // ignore if new value is undefined
+      if (newValue === undefined) continue;
+
+      // check if value changed
+      if (newValue !== this.mainData[key]) {
+        changes[profileKey] = {
+          old: this.mainData[key],
+          new: newValue
+        };
+      }
+    }
   }
+
+  if (Object.keys(changes).length === 0) {
+    console.log('No changes detected');
+  } else {
+    console.log('Changed fields:', changes);
+
+    // call API here to update backend with `changes`
+    // this.apiService.updateProfile(changes).subscribe(...)
+  }
+}
+
 }

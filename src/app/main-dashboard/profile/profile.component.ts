@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { ApiServiceService } from '../../services/api-service.service';
 import { NgClass } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [NgClass, FormsModule],
+  imports: [NgClass, FormsModule, RouterModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
@@ -35,6 +36,9 @@ export class ProfileComponent {
   profileData: any = {};
   mainData: any = {};
 
+  userMessageArray: string[] = [];
+
+
   // updatedName = this.profileData?.name;
   // updatedSurname: string = this.profileData?.surname || '';
   // updatedEmail: string = this.profileData?.email || '';
@@ -43,6 +47,16 @@ export class ProfileComponent {
   // updatedCity: string = this.profileData?.city || '';
   // updatedCountry: string = this.profileData?.country_id || '';
   // updatedDateOfBirth: string = this.profileData?.date_of_birth || '';
+
+  showMessage(msg: string) {
+    if (this.userMessageArray.includes(msg)) return;
+
+    this.userMessageArray.push(msg);
+
+    setTimeout(() => {
+      this.userMessageArray = this.userMessageArray.filter((m) => m !== msg);
+    }, 3000);
+  }
 
   updateProfile() {
   const changes: any = {};
@@ -68,9 +82,9 @@ export class ProfileComponent {
   }
 
   if (Object.keys(changes).length === 0) {
-    console.log('No changes detected');
+    this.showMessage('No changes detected');
   } else {
-    console.log('Changed fields:', changes);
+    this.showMessage('Changed fields:' + changes);
 
     // call API here to update backend with `changes`
     // this.apiService.updateProfile(changes).subscribe(...)

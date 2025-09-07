@@ -3,6 +3,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Inter, sans-serif;
+    caret-color: transparent;
+}
+
+input, textarea {
+  caret-color: auto; /* restore caret only inside real inputs */
 }
 
 input:-webkit-autofill,

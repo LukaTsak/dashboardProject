@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { ApiServiceService } from '../../services/api-service.service';
 import { NgClass } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  constructor(private apiService: ApiServiceService) {}
+  constructor(private apiService: ApiServiceService,@Inject(PLATFORM_ID) private readonly platformId: Object) {}
   ngOnInit() {
     this.apiService.getProfile().subscribe((response: any) => {
       // console.log('Profile Info:', response);

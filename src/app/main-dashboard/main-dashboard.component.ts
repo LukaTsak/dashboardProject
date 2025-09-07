@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 import { Router } from '@angular/router';
-import { ProfileComponent } from "./profile/profile.component";
+import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,7 +12,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './main-dashboard.component.scss',
 })
 export class MainDashboardComponent {
-  constructor(private apiService: ApiServiceService, private router: Router) {}
+  constructor(
+    private apiService: ApiServiceService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private readonly platformId: Object
+  ) {}
 
   ngOnInit() {
     this.apiService.getCompany().subscribe((response: any) => {
@@ -20,12 +24,14 @@ export class MainDashboardComponent {
       this.currentCompany = response.company;
     });
 
-    const token =
-      window.localStorage?.getItem('access_token') ||
-      window.sessionStorage?.getItem('access_token');
-    if (!token) {
-      console.error('No access token found!');
-      return;
+    if (isPlatformBrowser(this.platformId)) {
+      const token =
+        window.localStorage?.getItem('access_token') ||
+        window.sessionStorage?.getItem('access_token');
+      if (!token) {
+        console.error('No access token found!');
+        return;
+      }
     }
   }
 
@@ -49,8 +55,10 @@ export class MainDashboardComponent {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
-    sessionStorage.removeItem('access_token');
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('access_token');
+      sessionStorage.removeItem('access_token');
+    }
     this.router.navigate(['/login']);
   }
 }

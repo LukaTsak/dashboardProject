@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, NgModule, PLATFORM_ID } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
@@ -12,15 +12,22 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  constructor(private apiService: ApiServiceService, private router: Router) {}
+  
+  constructor(
+    private apiService: ApiServiceService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private readonly platformId: Object
+  ) {}
 
   ngOnInit() {
+    if(isPlatformBrowser(this.platformId)){
     const token = localStorage.getItem('access_token');
     if (token) {
       // Ideally verify token or call a /me or /profile endpoint
       this.router.navigate(['/dashboard']);
     }
   }
+}
 
   hasCompany = false;
   companyCheckComplete = false;
@@ -89,13 +96,17 @@ export class LoginComponent {
               token &&
               this.keepSignedIn == true
             ) {
+              if(isPlatformBrowser(this.platformId)){
               window.localStorage.setItem('access_token', token);
+              }
             } else if (
               typeof window !== 'undefined' &&
               token &&
               this.keepSignedIn == false
             ) {
+              if(isPlatformBrowser(this.platformId)){
               window.sessionStorage.setItem('access_token', token);
+              }
             }
 
             this.apiService.getInfo().subscribe((response: any) => {
@@ -110,7 +121,7 @@ export class LoginComponent {
               } else {
                 this.router.navigate(['/companyadd']);
               }
-            }, 3000);
+            }, 1000);
           },
           error: (error) => {
             console.error('Login failed:', error);

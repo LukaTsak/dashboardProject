@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 const baseurl = 'http://127.0.0.1:8000/api';
@@ -9,7 +8,8 @@ const baseurl = 'http://127.0.0.1:8000/api';
   providedIn: 'root',
 })
 export class ApiServiceService {
-  private isBrowser?: boolean;
+  private isBrowser: boolean;
+  private token: string | null = null;
 
   constructor(
     private http: HttpClient,
@@ -18,19 +18,23 @@ export class ApiServiceService {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  // helpers
   private getToken(): string | null {
-    return (
-      localStorage.getItem('access_token') ||
-      sessionStorage.getItem('access_token')
-    );
-
+    if (this.isBrowser) {
+      return (
+        localStorage.getItem('access_token') ||
+        sessionStorage.getItem('access_token')
+      );
+    }
     return null;
   }
 
   private getAuthHeaders(explicitToken?: string): HttpHeaders {
-    const token = explicitToken || this.getToken();
-    return new HttpHeaders(token ? { Authorization: `Bearer ${token}` } : {});
+    this.token = explicitToken || this.getToken();
+    const bearer = this.token ? `Bearer ${this.token}` : '';
+    console.log('Authorization Header:', bearer);
+    return new HttpHeaders(
+      bearer ? { Authorization: bearer } : {}
+    );
   }
 
   // Registration & Auth
@@ -69,7 +73,7 @@ export class ApiServiceService {
     });
   }
 
-  company(token: string) {
+  company(token?: string) {
     return this.http.get(`${baseurl}/dashboard/companies/form-data`, {
       headers: this.getAuthHeaders(token),
     });

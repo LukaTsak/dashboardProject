@@ -1,5 +1,5 @@
-@import "../../variables.scss";
 @import "../../common-styles";
+
 
 
 main {
@@ -60,9 +60,9 @@ main {
           padding-left: 10px;
           font-size: 15px;
           width: 100%;
-          background-color: $color-bg-input;
+          background-color: #1d1e26;
           height: 35px;
-          border-radius: $border-radius-sm;
+          border-radius: 4px;
           border: none;
           // border: 1px solid rgba(128, 128, 128, 0.5);
           box-shadow: rgba(128, 128, 128, 0.5) 0px 3px 8px;
@@ -79,14 +79,14 @@ main {
           width: 100px;
           height: 35px;
           border: none;
-          border-radius: $border-radius-sm;
-          background-color: $color-primary;
+          border-radius: 4px;
+          background-color: rgb(115, 202, 190);
           color: white;
           font-weight: bold;
           cursor: pointer;
 
           &:hover {
-            background-color: darken($color-primary, 10%);
+            background-color: darken(rgb(115, 202, 190), 10%);
           }
         }
       }
